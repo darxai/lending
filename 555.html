@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Тест</title>
+    <style>
+        .card { border: 1px solid #ccc; padding: 20px; margin: 10px; cursor: pointer; }
+        .card.active { border-color: red; background: #ffeeee; }
+        .card-content { display: none; }
+        .card.active .card-content { display: block; }
+    </style>
+</head>
+<body>
+
+    <div class="card" onclick="toggleCard(this)">
+        <h3>Карточка 1</h3>
+        <div class="card-content">Текст 1</div>
+    </div>
+
+    <div class="card" onclick="toggleCard(this)">
+        <h3>Карточка 2</h3>
+        <div class="card-content">Текст 2</div>
+    </div>
+
+    <div class="card" onclick="toggleCard(this)">
+        <h3>Карточка 3</h3>
+        <div class="card-content">Текст 3</div>
+    </div>
+
+    <script>
+        function toggleCard(card) {
+            document.querySelectorAll('.card').forEach(otherCard => {
+                if (otherCard !== card) {
+                    otherCard.classList.remove('active');
+                }
+            });
+            card.classList.toggle('active');
+        }
+    </script>
+
+</body>
+</html>
