@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Мета-теги для редактирования -->
+    <!-- Мета-теги -->
     <meta name="description" content="Эксклюзивный лендинг с золотыми и серебряными акцентами">
     <meta name="keywords" content="премиум, золото, серебро, лендинг">
     <meta name="author" content="AURUM">
@@ -38,7 +38,6 @@
             --border-silver: rgba(192, 192, 192, 0.1);
             --glow-gold: rgba(212, 175, 55, 0.3);
             --glow-silver: rgba(192, 192, 192, 0.2);
-            /* Переменные для логотипа */
             --logo-width: 40px;
             --logo-height: 40px;
         }
@@ -90,7 +89,6 @@
             gap: 20px;
         }
 
-        /* ========== ЛОГОТИП ========== */
         .logo-container {
             display: flex;
             align-items: center;
@@ -104,7 +102,6 @@
             object-fit: contain;
             border-radius: 4px;
             display: none;
-            transition: all 0.3s;
         }
 
         .logo-img.active {
@@ -223,6 +220,196 @@
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 30px var(--glow-gold);
+        }
+
+        /* ========== ГАЛЕРЕЯ ========== */
+        .gallery-section {
+            padding: 100px 0;
+        }
+
+        .gallery-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            touch-action: pan-y;
+            cursor: grab;
+        }
+
+        .gallery-slider:active {
+            cursor: grabbing;
+        }
+
+        .gallery-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .gallery-slide {
+            min-width: 100%;
+            position: relative;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+        }
+
+        .gallery-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-slide::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(10,10,15,0.95), transparent);
+            pointer-events: none;
+        }
+
+        .slide-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px;
+            z-index: 2;
+        }
+
+        .slide-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--silver));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .slide-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        .slide-counter {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 2;
+            color: var(--silver);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            background: rgba(10,10,15,0.7);
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .gallery-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(10,10,15,0.7);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            color: var(--gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .gallery-arrow:hover {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: var(--gold);
+            box-shadow: 0 0 20px var(--glow-gold);
+        }
+
+        .gallery-arrow.prev {
+            left: 15px;
+        }
+
+        .gallery-arrow.next {
+            right: 15px;
+        }
+
+        .gallery-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .gallery-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--silver);
+            opacity: 0.3;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid var(--silver);
+        }
+
+        .gallery-dot.active {
+            opacity: 1;
+            background: var(--gold);
+            border-color: var(--gold);
+            box-shadow: 0 0 15px var(--glow-gold);
+            transform: scale(1.3);
+        }
+
+        .gallery-thumbnails {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .gallery-thumb {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            opacity: 0.5;
+        }
+
+        .gallery-thumb:hover {
+            opacity: 0.8;
+        }
+
+        .gallery-thumb.active {
+            border-color: var(--gold);
+            opacity: 1;
+            box-shadow: 0 0 15px var(--glow-gold);
+        }
+
+        .swipe-hint {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            margin-top: 15px;
+            animation: hintPulse 2s ease-in-out infinite;
+            display: none;
+        }
+
+        @keyframes hintPulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
         }
 
         /* ========== СЕКЦИИ ========== */
@@ -520,7 +707,6 @@
             display: block;
         }
 
-        /* Превью логотипа в админке */
         .logo-preview {
             object-fit: contain;
             border: 1px solid var(--border);
@@ -533,7 +719,6 @@
             display: block;
         }
 
-        /* Подсказка для размера */
         .size-hint {
             font-size: 0.65rem;
             color: var(--text-secondary);
@@ -556,13 +741,25 @@
             .logo-text {
                 font-size: 1rem;
             }
+
+            .gallery-arrow {
+                display: none;
+            }
+
+            .gallery-thumbnails {
+                display: none;
+            }
+
+            .swipe-hint {
+                display: block;
+            }
         }
     </style>
 </head>
 <body>
 
     <!-- Админ-оверлей -->
-    <div class="admin-overlay" id="adminOverlay"></div>
+    <div class="admin-overlay" id="adminOverlay" onclick="closeAdmin()"></div>
 
     <!-- Админ-панель -->
     <div class="admin-panel" id="adminPanel">
@@ -571,21 +768,21 @@
             <button class="admin-close" onclick="closeAdmin()">✕</button>
         </div>
         
-        <!-- Вкладки -->
         <div class="admin-tabs">
-            <button class="admin-tab active" onclick="switchTab('metadata')">Метаданные</button>
-            <button class="admin-tab" onclick="switchTab('hero')">Главный экран</button>
-            <button class="admin-tab" onclick="switchTab('navigation')">Навигация</button>
-            <button class="admin-tab" onclick="switchTab('video')">Видео</button>
-            <button class="admin-tab" onclick="switchTab('cards')">Карточки</button>
-            <button class="admin-tab" onclick="switchTab('contacts')">Контакты</button>
-            <button class="admin-tab" onclick="switchTab('footer')">Подвал</button>
+            <button class="admin-tab active" onclick="switchTab(event, 'metadata')">Метаданные</button>
+            <button class="admin-tab" onclick="switchTab(event, 'hero')">Главный экран</button>
+            <button class="admin-tab" onclick="switchTab(event, 'navigation')">Навигация</button>
+            <button class="admin-tab" onclick="switchTab(event, 'gallery')">Галерея</button>
+            <button class="admin-tab" onclick="switchTab(event, 'video')">Видео</button>
+            <button class="admin-tab" onclick="switchTab(event, 'cards')">Карточки</button>
+            <button class="admin-tab" onclick="switchTab(event, 'contacts')">Контакты</button>
+            <button class="admin-tab" onclick="switchTab(event, 'footer')">Подвал</button>
         </div>
         
         <!-- Метаданные -->
         <div class="admin-section active" id="tab-metadata">
             <div class="admin-form-group">
-                <label class="admin-label">Title (заголовок вкладки)</label>
+                <label class="admin-label">Title</label>
                 <input type="text" class="admin-input" id="editMetaTitle">
             </div>
             <div class="admin-form-group">
@@ -637,19 +834,19 @@
                 <input type="text" class="admin-input" id="editLogoText">
             </div>
             <div class="admin-form-group">
-                <label class="admin-label">Ссылка на фото логотипа (URL)</label>
+                <label class="admin-label">Ссылка на фото логотипа</label>
                 <input type="text" class="admin-input" id="editLogoImg" placeholder="https://example.com/logo.png" oninput="previewLogo(this.value)">
-                <img class="logo-preview" id="logoPreview" alt="Превью логотипа">
+                <img class="logo-preview" id="logoPreview" alt="Превью">
             </div>
             <div class="admin-form-group">
                 <label class="admin-label">Ширина логотипа (px)</label>
-                <input type="number" class="admin-input" id="editLogoWidth" min="10" max="200" placeholder="40" oninput="updateLogoPreviewSize()">
-                <div class="size-hint">Диапазон: 10-200 px</div>
+                <input type="number" class="admin-input" id="editLogoWidth" min="10" max="200" placeholder="40">
+                <div class="size-hint">10-200 px</div>
             </div>
             <div class="admin-form-group">
                 <label class="admin-label">Высота логотипа (px)</label>
-                <input type="number" class="admin-input" id="editLogoHeight" min="10" max="200" placeholder="40" oninput="updateLogoPreviewSize()">
-                <div class="size-hint">Диапазон: 10-200 px</div>
+                <input type="number" class="admin-input" id="editLogoHeight" min="10" max="200" placeholder="40">
+                <div class="size-hint">10-200 px</div>
             </div>
             <div class="admin-form-group">
                 <label class="admin-label">Ссылка 1</label>
@@ -669,6 +866,108 @@
             </div>
         </div>
         
+        <!-- Галерея -->
+        <div class="admin-section" id="tab-gallery">
+            <div class="admin-form-group">
+                <label class="admin-label">Заголовок секции</label>
+                <input type="text" class="admin-input" id="editGalleryTitle">
+            </div>
+            <div class="admin-form-group">
+                <label class="admin-label">Подзаголовок секции</label>
+                <input type="text" class="admin-input" id="editGallerySubtitle">
+            </div>
+            
+            <hr style="border-color: var(--border); margin: 20px 0;">
+            
+            <div class="admin-form-group">
+                <label class="admin-label">Фото 1 - Ссылка</label>
+                <input type="text" class="admin-input" id="editGallery1Src">
+            </div>
+            <div class="admin-form-group">
+                <label class="admin-label">Фото 1 - Название</label>
+                <input type="text" class="admin-input" id="editGallery1Title">
+            </div>
+            <div class="admin-form-group">
+                <label class="admin-label">Фото 1 - Описание</label>
+                <textarea class="admin-textarea" id="editGallery1Desc"></textarea>
+            </div>
+            
+            <hr style="border-color: var(--border); margin: 20px 0;">
+            
+            <div class="admin-form-group">
+                <label class="admin-label">Фото 2 - Ссылка</label>
+                <input type="text" class="admin-input" id="editGallery2Src">
+            </div>
+            <div class="admin-form-group">
+                <label class="admin-label">Фото 2 - Название</label>
+                <input type="text" class="admin-input" id="editGallery2Title">
+            </div>
+            <div class="admin-form-group">
+                <label class="admin-label">Фото 2 - Описание</label>
+                <textarea class="admin-textarea" id="editGallery2Desc"></textarea>
+            </div>
+            
+            <hr style="border-color: var(--border); margin: 20px 0;">
+            
+            <div class="admin-form-group">
+                <label class="admin-label">Фото 3 - Ссылка</label>
+                <input type="text" class="admin-input" id="editGallery3Src">
+            </div>
+            <div class="admin-form-group">
+                <label class="admin-label">Фото 3 - Название</label>
+                <input type="text" class="admin-input" id="editGallery3Title">
+            </div>
+            <div class="admin-form-group">
+                <label class="admin-label">Фото 3 - Описание</label>
+                <textarea class="admin-textarea" id="editGallery3Desc"></textarea>
+            </div>
+            
+            <hr style="border-color: var(--border); margin: 20px 0;">
+            
+            <div class="admin-form-group">
+                <label class="admin-label">Фото 4 - Ссылка</label>
+                <input type="text" class="admin-input" id="editGallery4Src">
+            </div>
+            <div class="admin-form-group">
+                <label class="admin-label">Фото 4 - Название</label>
+                <input type="text" class="admin-input" id="editGallery4Title">
+            </div>
+            <div class="admin-form-group">
+                <label class="admin-label">Фото 4 - Описание</label>
+                <textarea class="admin-textarea" id="editGallery4Desc"></textarea>
+            </div>
+            
+            <hr style="border-color: var(--border); margin: 20px 0;">
+            
+            <div class="admin-form-group">
+                <label class="admin-label">Фото 5 - Ссылка</label>
+                <input type="text" class="admin-input" id="editGallery5Src">
+            </div>
+            <div class="admin-form-group">
+                <label class="admin-label">Фото 5 - Название</label>
+                <input type="text" class="admin-input" id="editGallery5Title">
+            </div>
+            <div class="admin-form-group">
+                <label class="admin-label">Фото 5 - Описание</label>
+                <textarea class="admin-textarea" id="editGallery5Desc"></textarea>
+            </div>
+            
+            <hr style="border-color: var(--border); margin: 20px 0;">
+            
+            <div class="admin-form-group">
+                <label class="admin-label">Фото 6 - Ссылка</label>
+                <input type="text" class="admin-input" id="editGallery6Src">
+            </div>
+            <div class="admin-form-group">
+                <label class="admin-label">Фото 6 - Название</label>
+                <input type="text" class="admin-input" id="editGallery6Title">
+            </div>
+            <div class="admin-form-group">
+                <label class="admin-label">Фото 6 - Описание</label>
+                <textarea class="admin-textarea" id="editGallery6Desc"></textarea>
+            </div>
+        </div>
+        
         <!-- Видео -->
         <div class="admin-section" id="tab-video">
             <div class="admin-form-group">
@@ -680,8 +979,8 @@
                 <input type="text" class="admin-input" id="editVideoSectionSubtitle">
             </div>
             <div class="admin-form-group">
-                <label class="admin-label">Ссылка на YouTube видео</label>
-                <input type="text" class="admin-input" id="editVideoUrl" placeholder="https://www.youtube.com/embed/...">
+                <label class="admin-label">Ссылка на YouTube</label>
+                <input type="text" class="admin-input" id="editVideoUrl">
             </div>
         </div>
         
@@ -695,9 +994,7 @@
                 <label class="admin-label">Подзаголовок секции</label>
                 <input type="text" class="admin-input" id="editCardsSectionSubtitle">
             </div>
-            
             <hr style="border-color: var(--border); margin: 20px 0;">
-            
             <div class="admin-form-group">
                 <label class="admin-label">Карточка 1 - Номер</label>
                 <input type="text" class="admin-input" id="editCard1Number">
@@ -711,12 +1008,10 @@
                 <textarea class="admin-textarea" id="editCard1Text"></textarea>
             </div>
             <div class="admin-form-group">
-                <label class="admin-label">Карточка 1 - Список (каждый пункт с новой строки)</label>
+                <label class="admin-label">Карточка 1 - Список</label>
                 <textarea class="admin-textarea" id="editCard1List"></textarea>
             </div>
-            
             <hr style="border-color: var(--border); margin: 20px 0;">
-            
             <div class="admin-form-group">
                 <label class="admin-label">Карточка 2 - Номер</label>
                 <input type="text" class="admin-input" id="editCard2Number">
@@ -730,12 +1025,10 @@
                 <textarea class="admin-textarea" id="editCard2Text"></textarea>
             </div>
             <div class="admin-form-group">
-                <label class="admin-label">Карточка 2 - Список (каждый пункт с новой строки)</label>
+                <label class="admin-label">Карточка 2 - Список</label>
                 <textarea class="admin-textarea" id="editCard2List"></textarea>
             </div>
-            
             <hr style="border-color: var(--border); margin: 20px 0;">
-            
             <div class="admin-form-group">
                 <label class="admin-label">Карточка 3 - Номер</label>
                 <input type="text" class="admin-input" id="editCard3Number">
@@ -749,7 +1042,7 @@
                 <textarea class="admin-textarea" id="editCard3Text"></textarea>
             </div>
             <div class="admin-form-group">
-                <label class="admin-label">Карточка 3 - Список (каждый пункт с новой строки)</label>
+                <label class="admin-label">Карточка 3 - Список</label>
                 <textarea class="admin-textarea" id="editCard3List"></textarea>
             </div>
         </div>
@@ -777,7 +1070,7 @@
                 <input type="text" class="admin-input" id="editAddress">
             </div>
             <div class="admin-form-group">
-                <label class="admin-label">Соцсети (через |)</label>
+                <label class="admin-label">Соцсети</label>
                 <input type="text" class="admin-input" id="editSocial">
             </div>
         </div>
@@ -790,7 +1083,7 @@
             </div>
         </div>
         
-        <button type="button" class="admin-save-btn" onclick="saveChanges()">💾 Сохранить все изменения</button>
+        <button type="button" class="admin-save-btn" onclick="saveChanges()">💾 Сохранить</button>
     </div>
 
     <!-- Шапка -->
@@ -803,9 +1096,10 @@
                 </div>
                 <div class="nav-links">
                     <a href="#home" id="navLink1">Главная</a>
-                    <a href="#video" id="navLink2">Видео</a>
-                    <a href="#features" id="navLink3">Преимущества</a>
-                    <a href="#contacts" id="navLink4">Контакты</a>
+                    <a href="#gallery" id="navLink2">Галерея</a>
+                    <a href="#video" id="navLink3">Видео</a>
+                    <a href="#features" id="navLink4">Преимущества</a>
+                    <a href="#contacts">Контакты</a>
                 </div>
                 <button class="admin-btn" onclick="openAdmin()">⚙ Админка</button>
             </nav>
@@ -815,7 +1109,7 @@
     <!-- Главный экран -->
     <section class="hero" id="home">
         <div class="container">
-            <div class="hero-text" data-aos="fade-up">
+            <div class="hero-text">
                 <div class="hero-badge" id="heroBadge">✦ Премиум качество</div>
                 <h1 id="heroTitle">Искусство<br>Совершенства</h1>
                 <p id="heroDescription">Эксклюзивный лендинг с золотыми и серебряными акцентами, созданный для тех, кто ценит роскошь и качество.</p>
@@ -824,7 +1118,26 @@
         </div>
     </section>
 
-    <!-- Секция с видео -->
+    <!-- Галерея -->
+    <section class="gallery-section" id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" id="gallerySectionTitle">Галерея</h2>
+                <div class="section-subtitle" id="gallerySectionSubtitle">Наши работы</div>
+            </div>
+            <div class="gallery-slider" id="gallerySlider">
+                <div class="gallery-track" id="galleryTrack"></div>
+                <div class="slide-counter" id="slideCounter">1 / 6</div>
+                <button class="gallery-arrow prev" onclick="prevSlide()">←</button>
+                <button class="gallery-arrow next" onclick="nextSlide()">→</button>
+            </div>
+            <div class="gallery-dots" id="galleryDots"></div>
+            <div class="gallery-thumbnails" id="galleryThumbnails"></div>
+            <div class="swipe-hint">← Свайпайте для перелистывания →</div>
+        </div>
+    </section>
+
+    <!-- Видео -->
     <section class="video-section" id="video">
         <div class="container">
             <div class="section-header">
@@ -837,7 +1150,7 @@
         </div>
     </section>
 
-    <!-- Секция с карточками -->
+    <!-- Карточки -->
     <section class="features" id="features">
         <div class="container">
             <div class="section-header">
@@ -860,7 +1173,6 @@
                         </ul>
                     </div>
                 </div>
-                
                 <div class="card" onclick="toggleCard(this)">
                     <div class="card-header">
                         <span class="card-number" id="card2Number">II / Качество</span>
@@ -876,7 +1188,6 @@
                         </ul>
                     </div>
                 </div>
-                
                 <div class="card" onclick="toggleCard(this)">
                     <div class="card-header">
                         <span class="card-number" id="card3Number">III / Статус</span>
@@ -896,7 +1207,7 @@
         </div>
     </section>
 
-    <!-- Секция контактов -->
+    <!-- Контакты -->
     <section class="contacts" id="contacts">
         <div class="container">
             <div class="section-header">
@@ -931,56 +1242,117 @@
         </div>
     </footer>
 
-    <!-- Скрипты -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <!-- Скрипты (все inline для GitHub Pages) -->
     <script>
-        AOS.init({
-            duration: 800,
-            offset: 100
+        // ========== ГАЛЕРЕЯ ==========
+        const galleryPhotos = [
+            { src: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=2070&auto=format&fit=crop', title: 'Золотые украшения', description: 'Эксклюзивная коллекция ювелирных изделий' },
+            { src: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=2070&auto=format&fit=crop', title: 'Серебряные аксессуары', description: 'Изысканные предметы интерьера' },
+            { src: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=2080&auto=format&fit=crop', title: 'Премиум часы', description: 'Швейцарское качество' },
+            { src: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop', title: 'Элитный автомобиль', description: 'Совершенство инженерной мысли' },
+            { src: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop', title: 'Роскошный интерьер', description: 'Дизайн премиум-класса' },
+            { src: 'https://images.unsplash.com/photo-1610375461246-83df859d849d?q=80&w=2070&auto=format&fit=crop', title: 'Золотые монеты', description: 'Инвестиции в вечные ценности' }
+        ];
+
+        let currentSlide = 0;
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function initGallery() {
+            const track = document.getElementById('galleryTrack');
+            const dots = document.getElementById('galleryDots');
+            const thumbnails = document.getElementById('galleryThumbnails');
+
+            galleryPhotos.forEach(photo => {
+                const slide = document.createElement('div');
+                slide.className = 'gallery-slide';
+                slide.innerHTML = '<img src="' + photo.src + '" alt="' + photo.title + '">' +
+                    '<div class="slide-info">' +
+                    '<div class="slide-title">' + photo.title + '</div>' +
+                    '<div class="slide-description">' + photo.description + '</div>' +
+                    '</div>';
+                track.appendChild(slide);
+            });
+
+            galleryPhotos.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'gallery-dot';
+                dot.onclick = function() { goToSlide(index); };
+                dots.appendChild(dot);
+            });
+
+            galleryPhotos.forEach((photo, index) => {
+                const thumb = document.createElement('img');
+                thumb.className = 'gallery-thumb';
+                thumb.src = photo.src;
+                thumb.alt = photo.title;
+                thumb.onclick = function() { goToSlide(index); };
+                thumbnails.appendChild(thumb);
+            });
+
+            updateGallery();
+        }
+
+        function updateGallery() {
+            const track = document.getElementById('galleryTrack');
+            track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+            document.getElementById('slideCounter').textContent = (currentSlide + 1) + ' / ' + galleryPhotos.length;
+
+            document.querySelectorAll('.gallery-dot').forEach(function(dot, index) {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+
+            document.querySelectorAll('.gallery-thumb').forEach(function(thumb, index) {
+                thumb.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % galleryPhotos.length;
+            updateGallery();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + galleryPhotos.length) % galleryPhotos.length;
+            updateGallery();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateGallery();
+        }
+
+        // Свайп
+        const slider = document.getElementById('gallerySlider');
+        slider.addEventListener('touchstart', function(e) {
+            touchStartX = e.touches[0].clientX;
+        });
+        slider.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].clientX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) { nextSlide(); } else { prevSlide(); }
+            }
         });
 
-        // ========== ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК ==========
-        function switchTab(tabName) {
-            document.querySelectorAll('.admin-tab').forEach(tab => {
+        // Клавиатура
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') { prevSlide(); }
+            if (e.key === 'ArrowRight') { nextSlide(); }
+        });
+
+        // ========== АДМИНКА ==========
+        function switchTab(event, tabName) {
+            document.querySelectorAll('.admin-tab').forEach(function(tab) {
                 tab.classList.remove('active');
             });
             event.target.classList.add('active');
-            
-            document.querySelectorAll('.admin-section').forEach(section => {
+            document.querySelectorAll('.admin-section').forEach(function(section) {
                 section.classList.remove('active');
             });
             document.getElementById('tab-' + tabName).classList.add('active');
         }
 
-        // ========== ПРЕВЬЮ ЛОГОТИПА ==========
-        function previewLogo(url) {
-            const preview = document.getElementById('logoPreview');
-            if (url.trim() !== '') {
-                preview.src = url;
-                preview.onerror = function() {
-                    preview.classList.remove('active');
-                };
-                preview.onload = function() {
-                    preview.classList.add('active');
-                    updateLogoPreviewSize();
-                };
-            } else {
-                preview.classList.remove('active');
-                preview.src = '';
-            }
-        }
-
-        // ========== ОБНОВЛЕНИЕ РАЗМЕРА ПРЕВЬЮ ==========
-        function updateLogoPreviewSize() {
-            const preview = document.getElementById('logoPreview');
-            const width = document.getElementById('editLogoWidth').value || 40;
-            const height = document.getElementById('editLogoHeight').value || 40;
-            
-            preview.style.width = width + 'px';
-            preview.style.height = height + 'px';
-        }
-
-        // ========== ОТКРЫТИЕ/ЗАКРЫТИЕ АДМИНКИ ==========
         function openAdmin() {
             document.getElementById('adminPanel').classList.add('active');
             document.getElementById('adminOverlay').classList.add('active');
@@ -992,298 +1364,213 @@
             document.getElementById('adminOverlay').classList.remove('active');
         }
 
-        // ========== ЗАГРУЗКА ТЕКУЩЕГО КОНТЕНТА ==========
+        function previewLogo(url) {
+            const preview = document.getElementById('logoPreview');
+            if (url.trim() !== '') {
+                preview.src = url;
+                preview.classList.add('active');
+            } else {
+                preview.classList.remove('active');
+                preview.src = '';
+            }
+        }
+
         function loadCurrentContent() {
+            // Загружаем текущие значения в админку
             document.getElementById('editMetaTitle').value = document.title;
-            document.getElementById('editMetaDescription').value = document.querySelector('meta[name="description"]').content;
-            document.getElementById('editMetaKeywords').value = document.querySelector('meta[name="keywords"]').content;
-            document.getElementById('editMetaAuthor').value = document.querySelector('meta[name="author"]').content;
-            document.getElementById('editOgTitle').value = document.querySelector('meta[property="og:title"]').content;
-            document.getElementById('editOgDescription').value = document.querySelector('meta[property="og:description"]').content;
-            
             document.getElementById('editHeroBadge').value = document.getElementById('heroBadge').textContent;
             document.getElementById('editHeroTitle').value = document.getElementById('heroTitle').innerHTML;
             document.getElementById('editHeroDescription').value = document.getElementById('heroDescription').textContent;
             document.getElementById('editHeroButton').value = document.getElementById('heroButton').textContent;
-            
             document.getElementById('editLogoText').value = document.getElementById('logoText').textContent;
             document.getElementById('editLogoImg').value = document.getElementById('logoImg').src;
-            
-            // Загружаем текущие размеры
-            const logoImg = document.getElementById('logoImg');
-            const currentWidth = logoImg.style.width || getComputedStyle(document.documentElement).getPropertyValue('--logo-width').trim() || '40';
-            const currentHeight = logoImg.style.height || getComputedStyle(document.documentElement).getPropertyValue('--logo-height').trim() || '40';
-            
-            document.getElementById('editLogoWidth').value = parseInt(currentWidth);
-            document.getElementById('editLogoHeight').value = parseInt(currentHeight);
-            
-            previewLogo(document.getElementById('logoImg').src);
-            
-            document.getElementById('editNav1').value = document.getElementById('navLink1').textContent;
-            document.getElementById('editNav2').value = document.getElementById('navLink2').textContent;
-            document.getElementById('editNav3').value = document.getElementById('navLink3').textContent;
-            document.getElementById('editNav4').value = document.getElementById('navLink4').textContent;
-            
+            document.getElementById('editLogoWidth').value = parseInt(document.getElementById('logoImg').style.width) || 40;
+            document.getElementById('editLogoHeight').value = parseInt(document.getElementById('logoImg').style.height) || 40;
+            document.getElementById('editGalleryTitle').value = document.getElementById('gallerySectionTitle').textContent;
+            document.getElementById('editGallerySubtitle').value = document.getElementById('gallerySectionSubtitle').textContent;
             document.getElementById('editVideoSectionTitle').value = document.getElementById('videoSectionTitle').textContent;
-            document.getElementById('editVideoSectionSubtitle').value = document.getElementById('videoSectionSubtitle').textContent;
             document.getElementById('editVideoUrl').value = document.getElementById('mainVideo').src;
-            
             document.getElementById('editCardsSectionTitle').value = document.getElementById('cardsSectionTitle').textContent;
-            document.getElementById('editCardsSectionSubtitle').value = document.getElementById('cardsSectionSubtitle').textContent;
-            
             document.getElementById('editCard1Number').value = document.getElementById('card1Number').textContent;
             document.getElementById('editCard1Title').value = document.getElementById('card1Title').textContent;
             document.getElementById('editCard1Text').value = document.getElementById('card1Text').textContent;
-            document.getElementById('editCard1List').value = getListItems('card1List');
-            
             document.getElementById('editCard2Number').value = document.getElementById('card2Number').textContent;
             document.getElementById('editCard2Title').value = document.getElementById('card2Title').textContent;
             document.getElementById('editCard2Text').value = document.getElementById('card2Text').textContent;
-            document.getElementById('editCard2List').value = getListItems('card2List');
-            
             document.getElementById('editCard3Number').value = document.getElementById('card3Number').textContent;
             document.getElementById('editCard3Title').value = document.getElementById('card3Title').textContent;
             document.getElementById('editCard3Text').value = document.getElementById('card3Text').textContent;
-            document.getElementById('editCard3List').value = getListItems('card3List');
-            
             document.getElementById('editContactsSectionTitle').value = document.getElementById('contactsSectionTitle').textContent;
-            document.getElementById('editContactsSectionSubtitle').value = document.getElementById('contactsSectionSubtitle').textContent;
             document.getElementById('editPhone').value = document.getElementById('contactPhone').textContent;
             document.getElementById('editEmail').value = document.getElementById('contactEmail').textContent;
             document.getElementById('editAddress').value = document.getElementById('contactAddress').textContent;
             document.getElementById('editSocial').value = document.getElementById('contactSocial').textContent;
-            
             document.getElementById('editFooterText').value = document.getElementById('footerText').textContent;
+            
+            // Галерея
+            document.getElementById('editGallery1Src').value = galleryPhotos[0].src;
+            document.getElementById('editGallery1Title').value = galleryPhotos[0].title;
+            document.getElementById('editGallery1Desc').value = galleryPhotos[0].description;
+            document.getElementById('editGallery2Src').value = galleryPhotos[1].src;
+            document.getElementById('editGallery2Title').value = galleryPhotos[1].title;
+            document.getElementById('editGallery2Desc').value = galleryPhotos[1].description;
+            document.getElementById('editGallery3Src').value = galleryPhotos[2].src;
+            document.getElementById('editGallery3Title').value = galleryPhotos[2].title;
+            document.getElementById('editGallery3Desc').value = galleryPhotos[2].description;
+            document.getElementById('editGallery4Src').value = galleryPhotos[3].src;
+            document.getElementById('editGallery4Title').value = galleryPhotos[3].title;
+            document.getElementById('editGallery4Desc').value = galleryPhotos[3].description;
+            document.getElementById('editGallery5Src').value = galleryPhotos[4].src;
+            document.getElementById('editGallery5Title').value = galleryPhotos[4].title;
+            document.getElementById('editGallery5Desc').value = galleryPhotos[4].description;
+            document.getElementById('editGallery6Src').value = galleryPhotos[5].src;
+            document.getElementById('editGallery6Title').value = galleryPhotos[5].title;
+            document.getElementById('editGallery6Desc').value = galleryPhotos[5].description;
         }
 
-        // ========== ПОЛУЧЕНИЕ СПИСКА ==========
-        function getListItems(listId) {
-            const items = document.querySelectorAll('#' + listId + ' li');
-            return Array.from(items).map(li => li.textContent).join('\n');
-        }
-
-        // ========== УСТАНОВКА СПИСКА ==========
-        function setListItems(listId, text) {
-            const items = text.split('\n').filter(item => item.trim() !== '');
-            const ul = document.getElementById(listId);
-            ul.innerHTML = '';
-            items.forEach(item => {
-                const li = document.createElement('li');
-                li.textContent = item.trim();
-                ul.appendChild(li);
-            });
-        }
-
-        // ========== СОХРАНЕНИЕ ИЗМЕНЕНИЙ ==========
         function saveChanges() {
             document.title = document.getElementById('editMetaTitle').value;
-            document.querySelector('meta[name="description"]').content = document.getElementById('editMetaDescription').value;
-            document.querySelector('meta[name="keywords"]').content = document.getElementById('editMetaKeywords').value;
-            document.querySelector('meta[name="author"]').content = document.getElementById('editMetaAuthor').value;
-            document.querySelector('meta[property="og:title"]').content = document.getElementById('editOgTitle').value;
-            document.querySelector('meta[property="og:description"]').content = document.getElementById('editOgDescription').value;
-            
             document.getElementById('heroBadge').textContent = document.getElementById('editHeroBadge').value;
             document.getElementById('heroTitle').innerHTML = document.getElementById('editHeroTitle').value;
             document.getElementById('heroDescription').textContent = document.getElementById('editHeroDescription').value;
             document.getElementById('heroButton').textContent = document.getElementById('editHeroButton').value;
-            
-            // Логотип
             document.getElementById('logoText').textContent = document.getElementById('editLogoText').value;
-            const logoImgUrl = document.getElementById('editLogoImg').value;
+            
             const logoImg = document.getElementById('logoImg');
-            
-            // Устанавливаем размеры
-            const logoWidth = document.getElementById('editLogoWidth').value || 40;
-            const logoHeight = document.getElementById('editLogoHeight').value || 40;
-            
-            logoImg.style.width = logoWidth + 'px';
-            logoImg.style.height = logoHeight + 'px';
-            
-            if (logoImgUrl.trim() !== '') {
-                logoImg.src = logoImgUrl;
+            const logoUrl = document.getElementById('editLogoImg').value;
+            if (logoUrl.trim() !== '') {
+                logoImg.src = logoUrl;
                 logoImg.classList.add('active');
             } else {
                 logoImg.src = '';
                 logoImg.classList.remove('active');
             }
+            logoImg.style.width = document.getElementById('editLogoWidth').value + 'px';
+            logoImg.style.height = document.getElementById('editLogoHeight').value + 'px';
             
-            document.getElementById('navLink1').textContent = document.getElementById('editNav1').value;
-            document.getElementById('navLink2').textContent = document.getElementById('editNav2').value;
-            document.getElementById('navLink3').textContent = document.getElementById('editNav3').value;
-            document.getElementById('navLink4').textContent = document.getElementById('editNav4').value;
-            
+            document.getElementById('gallerySectionTitle').textContent = document.getElementById('editGalleryTitle').value;
+            document.getElementById('gallerySectionSubtitle').textContent = document.getElementById('editGallerySubtitle').value;
             document.getElementById('videoSectionTitle').textContent = document.getElementById('editVideoSectionTitle').value;
-            document.getElementById('videoSectionSubtitle').textContent = document.getElementById('editVideoSectionSubtitle').value;
             document.getElementById('mainVideo').src = document.getElementById('editVideoUrl').value;
-            
             document.getElementById('cardsSectionTitle').textContent = document.getElementById('editCardsSectionTitle').value;
-            document.getElementById('cardsSectionSubtitle').textContent = document.getElementById('editCardsSectionSubtitle').value;
-            
             document.getElementById('card1Number').textContent = document.getElementById('editCard1Number').value;
             document.getElementById('card1Title').textContent = document.getElementById('editCard1Title').value;
             document.getElementById('card1Text').textContent = document.getElementById('editCard1Text').value;
-            setListItems('card1List', document.getElementById('editCard1List').value);
-            
             document.getElementById('card2Number').textContent = document.getElementById('editCard2Number').value;
             document.getElementById('card2Title').textContent = document.getElementById('editCard2Title').value;
             document.getElementById('card2Text').textContent = document.getElementById('editCard2Text').value;
-            setListItems('card2List', document.getElementById('editCard2List').value);
-            
             document.getElementById('card3Number').textContent = document.getElementById('editCard3Number').value;
             document.getElementById('card3Title').textContent = document.getElementById('editCard3Title').value;
             document.getElementById('card3Text').textContent = document.getElementById('editCard3Text').value;
-            setListItems('card3List', document.getElementById('editCard3List').value);
-            
             document.getElementById('contactsSectionTitle').textContent = document.getElementById('editContactsSectionTitle').value;
-            document.getElementById('contactsSectionSubtitle').textContent = document.getElementById('editContactsSectionSubtitle').value;
             document.getElementById('contactPhone').textContent = document.getElementById('editPhone').value;
             document.getElementById('contactEmail').textContent = document.getElementById('editEmail').value;
             document.getElementById('contactAddress').textContent = document.getElementById('editAddress').value;
             document.getElementById('contactSocial').textContent = document.getElementById('editSocial').value;
-            
             document.getElementById('footerText').textContent = document.getElementById('editFooterText').value;
             
-            saveToLocalStorage();
+            // Обновляем галерею
+            galleryPhotos[0] = { src: document.getElementById('editGallery1Src').value, title: document.getElementById('editGallery1Title').value, description: document.getElementById('editGallery1Desc').value };
+            galleryPhotos[1] = { src: document.getElementById('editGallery2Src').value, title: document.getElementById('editGallery2Title').value, description: document.getElementById('editGallery2Desc').value };
+            galleryPhotos[2] = { src: document.getElementById('editGallery3Src').value, title: document.getElementById('editGallery3Title').value, description: document.getElementById('editGallery3Desc').value };
+            galleryPhotos[3] = { src: document.getElementById('editGallery4Src').value, title: document.getElementById('editGallery4Title').value, description: document.getElementById('editGallery4Desc').value };
+            galleryPhotos[4] = { src: document.getElementById('editGallery5Src').value, title: document.getElementById('editGallery5Title').value, description: document.getElementById('editGallery5Desc').value };
+            galleryPhotos[5] = { src: document.getElementById('editGallery6Src').value, title: document.getElementById('editGallery6Title').value, description: document.getElementById('editGallery6Desc').value };
             
+            // Пересоздаем галерею
+            document.getElementById('galleryTrack').innerHTML = '';
+            document.getElementById('galleryDots').innerHTML = '';
+            document.getElementById('galleryThumbnails').innerHTML = '';
+            initGallery();
+            
+            saveToLocalStorage();
             closeAdmin();
-            alert('✅ Все изменения сохранены!');
+            alert('✅ Сохранено!');
         }
 
-        // ========== СОХРАНЕНИЕ В LOCALSTORAGE ==========
         function saveToLocalStorage() {
             const data = {
-                metaTitle: document.title,
-                metaDescription: document.querySelector('meta[name="description"]').content,
-                metaKeywords: document.querySelector('meta[name="keywords"]').content,
-                metaAuthor: document.querySelector('meta[name="author"]').content,
-                ogTitle: document.querySelector('meta[property="og:title"]').content,
-                ogDescription: document.querySelector('meta[property="og:description"]').content,
-                
+                title: document.title,
                 heroBadge: document.getElementById('heroBadge').textContent,
                 heroTitle: document.getElementById('heroTitle').innerHTML,
                 heroDescription: document.getElementById('heroDescription').textContent,
                 heroButton: document.getElementById('heroButton').textContent,
-                
                 logoText: document.getElementById('logoText').textContent,
                 logoImg: document.getElementById('logoImg').src,
                 logoWidth: document.getElementById('logoImg').style.width,
                 logoHeight: document.getElementById('logoImg').style.height,
-                
-                nav1: document.getElementById('navLink1').textContent,
-                nav2: document.getElementById('navLink2').textContent,
-                nav3: document.getElementById('navLink3').textContent,
-                nav4: document.getElementById('navLink4').textContent,
-                
-                videoSectionTitle: document.getElementById('videoSectionTitle').textContent,
-                videoSectionSubtitle: document.getElementById('videoSectionSubtitle').textContent,
+                galleryTitle: document.getElementById('gallerySectionTitle').textContent,
+                gallerySubtitle: document.getElementById('gallerySectionSubtitle').textContent,
+                galleryPhotos: galleryPhotos,
+                videoTitle: document.getElementById('videoSectionTitle').textContent,
                 videoUrl: document.getElementById('mainVideo').src,
-                
-                cardsSectionTitle: document.getElementById('cardsSectionTitle').textContent,
-                cardsSectionSubtitle: document.getElementById('cardsSectionSubtitle').textContent,
-                
+                cardsTitle: document.getElementById('cardsSectionTitle').textContent,
                 card1Number: document.getElementById('card1Number').textContent,
                 card1Title: document.getElementById('card1Title').textContent,
                 card1Text: document.getElementById('card1Text').textContent,
-                card1List: getListItems('card1List'),
-                
                 card2Number: document.getElementById('card2Number').textContent,
                 card2Title: document.getElementById('card2Title').textContent,
                 card2Text: document.getElementById('card2Text').textContent,
-                card2List: getListItems('card2List'),
-                
                 card3Number: document.getElementById('card3Number').textContent,
                 card3Title: document.getElementById('card3Title').textContent,
                 card3Text: document.getElementById('card3Text').textContent,
-                card3List: getListItems('card3List'),
-                
-                contactsSectionTitle: document.getElementById('contactsSectionTitle').textContent,
-                contactsSectionSubtitle: document.getElementById('contactsSectionSubtitle').textContent,
+                contactsTitle: document.getElementById('contactsSectionTitle').textContent,
                 phone: document.getElementById('contactPhone').textContent,
                 email: document.getElementById('contactEmail').textContent,
                 address: document.getElementById('contactAddress').textContent,
                 social: document.getElementById('contactSocial').textContent,
-                
                 footerText: document.getElementById('footerText').textContent
             };
-            
             localStorage.setItem('aurumContent', JSON.stringify(data));
         }
 
-        // ========== ЗАГРУЗКА ИЗ LOCALSTORAGE ==========
         function loadFromLocalStorage() {
             const saved = localStorage.getItem('aurumContent');
             if (saved) {
                 const data = JSON.parse(saved);
-                
-                document.title = data.metaTitle;
-                document.querySelector('meta[name="description"]').content = data.metaDescription;
-                document.querySelector('meta[name="keywords"]').content = data.metaKeywords;
-                document.querySelector('meta[name="author"]').content = data.metaAuthor;
-                document.querySelector('meta[property="og:title"]').content = data.ogTitle;
-                document.querySelector('meta[property="og:description"]').content = data.ogDescription;
-                
+                // Применяем сохраненные данные
+                document.title = data.title;
                 document.getElementById('heroBadge').textContent = data.heroBadge;
                 document.getElementById('heroTitle').innerHTML = data.heroTitle;
                 document.getElementById('heroDescription').textContent = data.heroDescription;
                 document.getElementById('heroButton').textContent = data.heroButton;
-                
                 document.getElementById('logoText').textContent = data.logoText;
-                const logoImg = document.getElementById('logoImg');
                 if (data.logoImg) {
-                    logoImg.src = data.logoImg;
-                    logoImg.classList.add('active');
+                    document.getElementById('logoImg').src = data.logoImg;
+                    document.getElementById('logoImg').classList.add('active');
                 }
-                
-                // Устанавливаем размеры
-                if (data.logoWidth) {
-                    logoImg.style.width = data.logoWidth;
+                if (data.logoWidth) document.getElementById('logoImg').style.width = data.logoWidth;
+                if (data.logoHeight) document.getElementById('logoImg').style.height = data.logoHeight;
+                document.getElementById('gallerySectionTitle').textContent = data.galleryTitle;
+                document.getElementById('gallerySectionSubtitle').textContent = data.gallerySubtitle;
+                if (data.galleryPhotos) {
+                    galleryPhotos.length = 0;
+                    data.galleryPhotos.forEach(function(p) { galleryPhotos.push(p); });
                 }
-                if (data.logoHeight) {
-                    logoImg.style.height = data.logoHeight;
-                }
-                
-                document.getElementById('navLink1').textContent = data.nav1;
-                document.getElementById('navLink2').textContent = data.nav2;
-                document.getElementById('navLink3').textContent = data.nav3;
-                document.getElementById('navLink4').textContent = data.nav4;
-                
-                document.getElementById('videoSectionTitle').textContent = data.videoSectionTitle;
-                document.getElementById('videoSectionSubtitle').textContent = data.videoSectionSubtitle;
+                document.getElementById('videoSectionTitle').textContent = data.videoTitle;
                 document.getElementById('mainVideo').src = data.videoUrl;
-                
-                document.getElementById('cardsSectionTitle').textContent = data.cardsSectionTitle;
-                document.getElementById('cardsSectionSubtitle').textContent = data.cardsSectionSubtitle;
-                
+                document.getElementById('cardsSectionTitle').textContent = data.cardsTitle;
                 document.getElementById('card1Number').textContent = data.card1Number;
                 document.getElementById('card1Title').textContent = data.card1Title;
                 document.getElementById('card1Text').textContent = data.card1Text;
-                setListItems('card1List', data.card1List);
-                
                 document.getElementById('card2Number').textContent = data.card2Number;
                 document.getElementById('card2Title').textContent = data.card2Title;
                 document.getElementById('card2Text').textContent = data.card2Text;
-                setListItems('card2List', data.card2List);
-                
                 document.getElementById('card3Number').textContent = data.card3Number;
                 document.getElementById('card3Title').textContent = data.card3Title;
                 document.getElementById('card3Text').textContent = data.card3Text;
-                setListItems('card3List', data.card3List);
-                
-                document.getElementById('contactsSectionTitle').textContent = data.contactsSectionTitle;
-                document.getElementById('contactsSectionSubtitle').textContent = data.contactsSectionSubtitle;
+                document.getElementById('contactsSectionTitle').textContent = data.contactsTitle;
                 document.getElementById('contactPhone').textContent = data.phone;
                 document.getElementById('contactEmail').textContent = data.email;
                 document.getElementById('contactAddress').textContent = data.address;
                 document.getElementById('contactSocial').textContent = data.social;
-                
                 document.getElementById('footerText').textContent = data.footerText;
             }
         }
 
-        // ========== ФУНКЦИЯ КАРТОЧЕК ==========
+        // ========== КАРТОЧКИ ==========
         function toggleCard(card) {
-            document.querySelectorAll('.card').forEach(otherCard => {
+            document.querySelectorAll('.card').forEach(function(otherCard) {
                 if (otherCard !== card && otherCard.classList.contains('active')) {
                     otherCard.classList.remove('active');
                 }
@@ -1291,8 +1578,9 @@
             card.classList.toggle('active');
         }
 
-        // Загрузка сохраненного контента при старте
+        // Запуск
         loadFromLocalStorage();
+        initGallery();
     </script>
 
 </body>
