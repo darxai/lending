@@ -912,7 +912,7 @@
             </div>
             <div class="cards-grid">
                 <!-- Карточка 1 -->
-                <div class="card" data-aos="fade-up">
+				<div class="card" data-aos="fade-up" onclick="toggleCard(this)">
                     <div class="card-header">
                         <span class="card-number">I / Элегантность</span>
                         <h3>Изысканность</h3>
@@ -932,7 +932,7 @@
                 </div>
                 
                 <!-- Карточка 2 -->
-                <div class="card" data-aos="fade-up" data-aos-delay="100">
+				<div class="card" data-aos="fade-up" data-aos-delay="100" onclick="toggleCard(this)">
                     <div class="card-header">
                         <span class="card-number">II / Качество</span>
                         <h3>Совершенство</h3>
@@ -952,7 +952,7 @@
                 </div>
                 
                 <!-- Карточка 3 -->
-                <div class="card" data-aos="fade-up" data-aos-delay="200">
+              <div class="card" data-aos="fade-up" data-aos-delay="200" onclick="toggleCard(this)">
                     <div class="card-header">
                         <span class="card-number">III / Статус</span>
                         <h3>Престиж</h3>
@@ -1116,23 +1116,18 @@ document.addEventListener('keydown', function(e) {
 
 // ========== КАРТОЧКИ (ИСПРАВЛЕНО ДЛЯ ДЕСКТОПА) ==========
 // Удаляем все предыдущие обработчики и добавляем новые
-document.querySelectorAll('.card').forEach(function(card) {
-    card.addEventListener('click', function() {
-        // Проверяем, была ли эта карточка уже открыта
-        const isActive = this.classList.contains('active');
-        
-        // Закрываем ВСЕ карточки
-        document.querySelectorAll('.card').forEach(function(c) {
-            c.classList.remove('active');
-        });
-        
-        // Если карточка НЕ была открыта - открываем её
-        // Если была открыта - оставляем закрытой
-        if (!isActive) {
-            this.classList.add('active');
+// ========== ФУНКЦИЯ КАРТОЧЕК ==========
+function toggleCard(card) {
+    // Закрываем все остальные карточки
+    document.querySelectorAll('.card').forEach(otherCard => {
+        if (otherCard !== card && otherCard.classList.contains('active')) {
+            otherCard.classList.remove('active');
         }
     });
-});
+    
+    // Переключаем текущую карточку
+    card.classList.toggle('active');
+}
 
 // ========== АДМИНКА ==========
 function switchTab(event, tabName) {
