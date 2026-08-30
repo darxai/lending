@@ -1012,151 +1012,311 @@
     <!-- ========== СКРИПТЫ ========== -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        // Инициализация анимаций при скролле
-        AOS.init({
-            duration: 800,
-            offset: 100,
-            once: false
+// ========== ИНИЦИАЛИЗАЦИЯ AOS ==========
+AOS.init({
+    duration: 800,
+    offset: 100,
+    once: false
+});
+
+// ========== ГАЛЕРЕЯ ==========
+const galleryPhotos = [
+    { src: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=2070&auto=format&fit=crop', title: 'Золотые украшения', description: 'Эксклюзивная коллекция' },
+    { src: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=2070&auto=format&fit=crop', title: 'Серебряные аксессуары', description: 'Изысканные предметы' },
+    { src: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=2080&auto=format&fit=crop', title: 'Премиум часы', description: 'Швейцарское качество' },
+    { src: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop', title: 'Элитный автомобиль', description: 'Совершенство' },
+    { src: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop', title: 'Роскошный интерьер', description: 'Дизайн премиум-класса' },
+    { src: 'https://images.unsplash.com/photo-1610375461246-83df859d849d?q=80&w=2070&auto=format&fit=crop', title: 'Золотые монеты', description: 'Вечные ценности' }
+];
+
+let currentSlide = 0;
+let touchStartX = 0;
+let touchEndX = 0;
+
+// Функция создания галереи
+function initGallery() {
+    const track = document.getElementById('galleryTrack');
+    const dots = document.getElementById('galleryDots');
+    const thumbnails = document.getElementById('galleryThumbnails');
+    
+    // Очищаем контейнеры
+    track.innerHTML = '';
+    dots.innerHTML = '';
+    thumbnails.innerHTML = '';
+
+    // Создаем слайды
+    galleryPhotos.forEach(function(photo) {
+        const slide = document.createElement('div');
+        slide.className = 'gallery-slide';
+        slide.innerHTML = '<img src="' + photo.src + '" alt="' + photo.title + '">' +
+            '<div class="slide-info">' +
+            '<div class="slide-title">' + photo.title + '</div>' +
+            '<div class="slide-description">' + photo.description + '</div>' +
+            '</div>';
+        track.appendChild(slide);
+    });
+
+    // Создаем точки
+    galleryPhotos.forEach(function(_, index) {
+        const dot = document.createElement('div');
+        dot.className = 'gallery-dot';
+        dot.onclick = function() { goToSlide(index); };
+        dots.appendChild(dot);
+    });
+
+    // Создаем миниатюры
+    galleryPhotos.forEach(function(photo, index) {
+        const thumb = document.createElement('img');
+        thumb.className = 'gallery-thumb';
+        thumb.src = photo.src;
+        thumb.onclick = function() { goToSlide(index); };
+        thumbnails.appendChild(thumb);
+    });
+
+    updateGallery();
+}
+
+// Обновление галереи
+function updateGallery() {
+    const track = document.getElementById('galleryTrack');
+    track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+    document.getElementById('slideCounter').textContent = (currentSlide + 1) + ' / ' + galleryPhotos.length;
+
+    document.querySelectorAll('.gallery-dot').forEach(function(dot, index) {
+        dot.classList.toggle('active', index === currentSlide);
+    });
+
+    document.querySelectorAll('.gallery-thumb').forEach(function(thumb, index) {
+        thumb.classList.toggle('active', index === currentSlide);
+    });
+}
+
+// Навигация галереи
+function nextSlide() { currentSlide = (currentSlide + 1) % galleryPhotos.length; updateGallery(); }
+function prevSlide() { currentSlide = (currentSlide - 1 + galleryPhotos.length) % galleryPhotos.length; updateGallery(); }
+function goToSlide(index) { currentSlide = index; updateGallery(); }
+
+// Свайп для мобильных
+document.getElementById('gallerySlider').addEventListener('touchstart', function(e) {
+    touchStartX = e.touches[0].clientX;
+});
+document.getElementById('gallerySlider').addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+        if (diff > 0) { nextSlide(); } else { prevSlide(); }
+    }
+});
+
+// Клавиатура
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft') { prevSlide(); }
+    if (e.key === 'ArrowRight') { nextSlide(); }
+});
+
+// ========== КАРТОЧКИ (ИСПРАВЛЕНО) ==========
+// Назначаем обработчик клика на каждую карточку
+document.querySelectorAll('.card').forEach(function(card) {
+    card.addEventListener('click', function(e) {
+        // Проверяем, открыта ли уже эта карточка
+        const isActive = this.classList.contains('active');
+        
+        // Закрываем ВСЕ карточки
+        document.querySelectorAll('.card').forEach(function(c) {
+            c.classList.remove('active');
         });
-
-        // ========== ГАЛЕРЕЯ ==========
-        // Массив с данными фото
-        const galleryPhotos = [
-            { src: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=2070&auto=format&fit=crop', title: 'Золотые украшения', description: 'Эксклюзивная коллекция' },
-            { src: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=2070&auto=format&fit=crop', title: 'Серебряные аксессуары', description: 'Изысканные предметы' },
-            { src: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=2080&auto=format&fit=crop', title: 'Премиум часы', description: 'Швейцарское качество' },
-            { src: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop', title: 'Элитный автомобиль', description: 'Совершенство' },
-            { src: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop', title: 'Роскошный интерьер', description: 'Дизайн премиум-класса' },
-            { src: 'https://images.unsplash.com/photo-1610375461246-83df859d849d?q=80&w=2070&auto=format&fit=crop', title: 'Золотые монеты', description: 'Вечные ценности' }
-        ];
-
-        let currentSlide = 0;
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        // Функция создания галереи
-        function initGallery() {
-            const track = document.getElementById('galleryTrack');
-            const dots = document.getElementById('galleryDots');
-            const thumbnails = document.getElementById('galleryThumbnails');
-            
-            // Очищаем контейнеры
-            track.innerHTML = '';
-            dots.innerHTML = '';
-            thumbnails.innerHTML = '';
-
-            // Создаем слайды
-            galleryPhotos.forEach(function(photo) {
-                const slide = document.createElement('div');
-                slide.className = 'gallery-slide';
-                slide.innerHTML = '<img src="' + photo.src + '" alt="' + photo.title + '">' +
-                    '<div class="slide-info">' +
-                    '<div class="slide-title">' + photo.title + '</div>' +
-                    '<div class="slide-description">' + photo.description + '</div>' +
-                    '</div>';
-                track.appendChild(slide);
-            });
-
-            // Создаем точки
-            galleryPhotos.forEach(function(_, index) {
-                const dot = document.createElement('div');
-                dot.className = 'gallery-dot';
-                dot.onclick = function() { goToSlide(index); };
-                dots.appendChild(dot);
-            });
-
-            // Создаем миниатюры
-            galleryPhotos.forEach(function(photo, index) {
-                const thumb = document.createElement('img');
-                thumb.className = 'gallery-thumb';
-                thumb.src = photo.src;
-                thumb.onclick = function() { goToSlide(index); };
-                thumbnails.appendChild(thumb);
-            });
-
-            updateGallery();
+        
+        // Если карточка НЕ была открыта - открываем её
+        if (!isActive) {
+            this.classList.add('active');
         }
+        // Если была открыта - оставляем закрытой
+    });
+});
 
-        // Обновление галереи
-        function updateGallery() {
-            const track = document.getElementById('galleryTrack');
-            track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
-            document.getElementById('slideCounter').textContent = (currentSlide + 1) + ' / ' + galleryPhotos.length;
+// ========== АДМИНКА ==========
+function switchTab(event, tabName) {
+    document.querySelectorAll('.admin-tab').forEach(function(tab) { tab.classList.remove('active'); });
+    event.target.classList.add('active');
+    document.querySelectorAll('.admin-section').forEach(function(section) { section.classList.remove('active'); });
+    document.getElementById('tab-' + tabName).classList.add('active');
+}
 
-            document.querySelectorAll('.gallery-dot').forEach(function(dot, index) {
-                dot.classList.toggle('active', index === currentSlide);
-            });
+function openAdmin() {
+    document.getElementById('adminPanel').classList.add('active');
+    document.getElementById('adminOverlay').classList.add('active');
+    
+    // Загружаем текущие значения в поля админки
+    document.getElementById('editMetaTitle').value = document.title;
+    document.getElementById('editHeroBadge').value = document.getElementById('heroBadge').textContent;
+    document.getElementById('editHeroTitle').value = document.getElementById('heroTitle').innerHTML;
+    document.getElementById('editHeroDescription').value = document.getElementById('heroDescription').textContent;
+    document.getElementById('editLogoText').value = document.getElementById('logoText').textContent;
+    document.getElementById('editLogoImg').value = document.getElementById('logoImg').src;
+    document.getElementById('editGalleryTitle').value = document.getElementById('gallerySectionTitle').textContent;
+    document.getElementById('editVideoSectionTitle').value = document.getElementById('videoSectionTitle').textContent;
+    document.getElementById('editVideoUrl').value = document.getElementById('mainVideo').src;
+    document.getElementById('editCardsSectionTitle').value = document.getElementById('cardsSectionTitle').textContent;
+    document.getElementById('editPhone').value = document.getElementById('contactPhone').textContent;
+    document.getElementById('editEmail').value = document.getElementById('contactEmail').textContent;
+    document.getElementById('editFooterText').value = document.getElementById('footerText').textContent;
+}
 
-            document.querySelectorAll('.gallery-thumb').forEach(function(thumb, index) {
-                thumb.classList.toggle('active', index === currentSlide);
-            });
+function closeAdmin() {
+    document.getElementById('adminPanel').classList.remove('active');
+    document.getElementById('adminOverlay').classList.remove('active');
+}
+
+// Функция предпросмотра логотипа
+function previewLogo(url) {
+    const preview = document.getElementById('logoPreview');
+    if (preview) {
+        if (url && url.trim() !== '') {
+            preview.src = url;
+            preview.style.display = 'block';
+            preview.onerror = function() {
+                preview.style.display = 'none';
+                alert('Не удалось загрузить изображение. Проверьте ссылку.');
+            };
+            preview.onload = function() {
+                preview.style.display = 'block';
+            };
+        } else {
+            preview.style.display = 'none';
+            preview.src = '';
         }
+    }
+}
 
-        // Навигация галереи
-        function nextSlide() { currentSlide = (currentSlide + 1) % galleryPhotos.length; updateGallery(); }
-        function prevSlide() { currentSlide = (currentSlide - 1 + galleryPhotos.length) % galleryPhotos.length; updateGallery(); }
-        function goToSlide(index) { currentSlide = index; updateGallery(); }
-
-        // Свайп для мобильных
-        document.getElementById('gallerySlider').addEventListener('touchstart', function(e) {
-            touchStartX = e.touches[0].clientX;
-        });
-        document.getElementById('gallerySlider').addEventListener('touchend', function(e) {
-            touchEndX = e.changedTouches[0].clientX;
-            const diff = touchStartX - touchEndX;
-            if (Math.abs(diff) > 50) {
-                if (diff > 0) { nextSlide(); } else { prevSlide(); }
-            }
-        });
-
-        // Клавиатура
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowLeft') { prevSlide(); }
-            if (e.key === 'ArrowRight') { nextSlide(); }
-        });
-
-        // ========== КАРТОЧКИ (открытие/закрытие) ==========
-        document.querySelectorAll('.card').forEach(function(card) {
-            card.addEventListener('click', function() {
-                // Если карточка уже открыта - закрываем её
-                if (this.classList.contains('active')) {
-                    this.classList.remove('active');
-                } else {
-                    // Закрываем все карточки
-                    document.querySelectorAll('.card').forEach(function(otherCard) {
-                        otherCard.classList.remove('active');
-                    });
-                    // Открываем кликнутую
-                    this.classList.add('active');
-                }
-            });
-        });
-
-        // ========== АДМИНКА ==========
-        function switchTab(event, tabName) {
-            document.querySelectorAll('.admin-tab').forEach(function(tab) { tab.classList.remove('active'); });
-            event.target.classList.add('active');
-            document.querySelectorAll('.admin-section').forEach(function(section) { section.classList.remove('active'); });
-            document.getElementById('tab-' + tabName).classList.add('active');
+// Функция сохранения изменений
+function saveChanges() {
+    // Сохраняем заголовок
+    if (document.getElementById('editMetaTitle').value) {
+        document.title = document.getElementById('editMetaTitle').value;
+    }
+    
+    // Сохраняем главный экран
+    if (document.getElementById('editHeroBadge')) {
+        document.getElementById('heroBadge').textContent = document.getElementById('editHeroBadge').value;
+        document.getElementById('heroTitle').innerHTML = document.getElementById('editHeroTitle').value;
+        document.getElementById('heroDescription').textContent = document.getElementById('editHeroDescription').value;
+    }
+    
+    // Сохраняем логотип
+    if (document.getElementById('editLogoText')) {
+        document.getElementById('logoText').textContent = document.getElementById('editLogoText').value;
+        
+        const logoImg = document.getElementById('logoImg');
+        const logoUrl = document.getElementById('editLogoImg').value;
+        
+        if (logoUrl && logoUrl.trim() !== '') {
+            logoImg.src = logoUrl;
+            logoImg.style.display = 'block';
+            logoImg.classList.add('active');
+            // Обработка ошибки загрузки
+            logoImg.onerror = function() {
+                logoImg.style.display = 'none';
+                logoImg.classList.remove('active');
+                alert('Не удалось загрузить логотип. Проверьте ссылку.');
+            };
+            logoImg.onload = function() {
+                logoImg.style.display = 'block';
+                logoImg.classList.add('active');
+            };
+        } else {
+            logoImg.src = '';
+            logoImg.style.display = 'none';
+            logoImg.classList.remove('active');
         }
+    }
+    
+    // Сохраняем галерею
+    if (document.getElementById('editGalleryTitle')) {
+        document.getElementById('gallerySectionTitle').textContent = document.getElementById('editGalleryTitle').value;
+    }
+    
+    // Сохраняем видео
+    if (document.getElementById('editVideoSectionTitle')) {
+        document.getElementById('videoSectionTitle').textContent = document.getElementById('editVideoSectionTitle').value;
+        document.getElementById('mainVideo').src = document.getElementById('editVideoUrl').value;
+    }
+    
+    // Сохраняем карточки
+    if (document.getElementById('editCardsSectionTitle')) {
+        document.getElementById('cardsSectionTitle').textContent = document.getElementById('editCardsSectionTitle').value;
+    }
+    
+    // Сохраняем контакты
+    if (document.getElementById('editPhone')) {
+        document.getElementById('contactPhone').textContent = document.getElementById('editPhone').value;
+        document.getElementById('contactEmail').textContent = document.getElementById('editEmail').value;
+    }
+    
+    // Сохраняем подвал
+    if (document.getElementById('editFooterText')) {
+        document.getElementById('footerText').textContent = document.getElementById('editFooterText').value;
+    }
+    
+    // Сохраняем в localStorage
+    const data = {
+        title: document.title,
+        heroBadge: document.getElementById('heroBadge').textContent,
+        heroTitle: document.getElementById('heroTitle').innerHTML,
+        heroDescription: document.getElementById('heroDescription').textContent,
+        logoText: document.getElementById('logoText').textContent,
+        logoImg: document.getElementById('logoImg').src,
+        galleryTitle: document.getElementById('gallerySectionTitle').textContent,
+        videoTitle: document.getElementById('videoSectionTitle').textContent,
+        videoUrl: document.getElementById('mainVideo').src,
+        cardsTitle: document.getElementById('cardsSectionTitle').textContent,
+        phone: document.getElementById('contactPhone').textContent,
+        email: document.getElementById('contactEmail').textContent,
+        footerText: document.getElementById('footerText').textContent
+    };
+    
+    localStorage.setItem('aurumContent', JSON.stringify(data));
+    
+    closeAdmin();
+    alert('✅ Сохранено!');
+}
 
-        function openAdmin() {
-            document.getElementById('adminPanel').classList.add('active');
-            document.getElementById('adminOverlay').classList.add('active');
+// Загрузка из localStorage при старте
+function loadFromLocalStorage() {
+    const saved = localStorage.getItem('aurumContent');
+    if (saved) {
+        const data = JSON.parse(saved);
+        
+        if (data.title) document.title = data.title;
+        if (data.heroBadge) document.getElementById('heroBadge').textContent = data.heroBadge;
+        if (data.heroTitle) document.getElementById('heroTitle').innerHTML = data.heroTitle;
+        if (data.heroDescription) document.getElementById('heroDescription').textContent = data.heroDescription;
+        if (data.logoText) document.getElementById('logoText').textContent = data.logoText;
+        
+        // Загрузка логотипа
+        if (data.logoImg) {
+            const logoImg = document.getElementById('logoImg');
+            logoImg.src = data.logoImg;
+            logoImg.style.display = 'block';
+            logoImg.classList.add('active');
+            logoImg.onerror = function() {
+                logoImg.style.display = 'none';
+                logoImg.classList.remove('active');
+            };
         }
+        
+        if (data.galleryTitle) document.getElementById('gallerySectionTitle').textContent = data.galleryTitle;
+        if (data.videoTitle) document.getElementById('videoSectionTitle').textContent = data.videoTitle;
+        if (data.videoUrl) document.getElementById('mainVideo').src = data.videoUrl;
+        if (data.cardsTitle) document.getElementById('cardsSectionTitle').textContent = data.cardsTitle;
+        if (data.phone) document.getElementById('contactPhone').textContent = data.phone;
+        if (data.email) document.getElementById('contactEmail').textContent = data.email;
+        if (data.footerText) document.getElementById('footerText').textContent = data.footerText;
+    }
+}
 
-        function closeAdmin() {
-            document.getElementById('adminPanel').classList.remove('active');
-            document.getElementById('adminOverlay').classList.remove('active');
-        }
-
-        function saveChanges() {
-            closeAdmin();
-            alert('✅ Сохранено!');
-        }
-
-        // ========== ЗАПУСК ==========
-        initGallery();
+// ========== ЗАПУСК ==========
+loadFromLocalStorage();
+initGallery();
     </script>
 
 </body>
