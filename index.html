@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Тест карточек</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
     <style>
         :root {
             --bg: #0a0a0f;
@@ -15,10 +12,7 @@
             --text: #f5f5f5;
             --text-secondary: #a0a0b0;
             --gold: #d4af37;
-            --gold-light: #f0d060;
-            --silver: #c0c0c0;
             --border: rgba(212, 175, 55, 0.15);
-            --glow-gold: rgba(212, 175, 55, 0.3);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,15 +28,11 @@
             padding: 20px;
         }
 
-        .container {
-            max-width: 1100px;
-            width: 100%;
-        }
-
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 25px;
+            max-width: 1100px;
         }
 
         .card {
@@ -50,188 +40,86 @@
             border: 1px solid var(--border);
             border-radius: 4px;
             cursor: pointer;
-            transition: all 0.4s;
+            padding: 35px;
         }
 
-        .card:hover {
+        .card.open {
             background: var(--surface-hover);
-            border-color: rgba(212, 175, 55, 0.3);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px var(--glow-gold);
+            border-color: var(--gold);
         }
 
-        .card.active {
-            background: var(--surface-hover);
-            border-color: rgba(212, 175, 55, 0.3);
-            box-shadow: 0 15px 40px var(--glow-gold);
-        }
+        .card h3 { margin-bottom: 15px; font-size: 1.3rem; }
+        .card-toggle { color: var(--gold); font-size: 0.8rem; }
 
-        .card-header { padding: 35px; }
+        .card-content { display: none; margin-top: 20px; }
+        .card.open .card-content { display: block; }
 
-        .card-number {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
-            background: linear-gradient(135deg, var(--gold), var(--silver));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 600;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .card h3 {
-            font-family: 'Cormorant Garamond', serif;
-            margin-bottom: 10px;
-            font-size: 1.5rem;
-            color: var(--text);
-        }
-
-        .card-toggle {
-            color: var(--gold);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .toggle-icon {
-            display: inline-block;
-            transition: transform 0.3s;
-            font-size: 1.2rem;
-        }
-
-        .card.active .toggle-icon {
-            transform: rotate(45deg);
-        }
-
-        .card-content {
-            display: none;
-            padding: 0 35px 35px;
-        }
-
-        .card.active .card-content {
-            display: block;
-        }
-
-        .card-content p {
-            color: var(--text-secondary);
-            font-weight: 300;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-        }
-
+        .card-content p { color: var(--text-secondary); margin-bottom: 15px; }
         .card-content ul { list-style: none; }
-
-        .card-content ul li {
-            padding: 12px 0;
-            color: var(--text-secondary);
-            border-bottom: 1px solid var(--border);
-        }
+        .card-content ul li { padding: 10px 0; color: var(--text-secondary); border-bottom: 1px solid var(--border); }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="cards-grid">
-            <!-- Карточка 1 -->
-            <div class="card" id="card1">
-                <div class="card-header">
-                    <span class="card-number">I / Элегантность</span>
-                    <h3>Изысканность</h3>
-                    <div class="card-toggle">
-                        <span>Подробнее</span>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <p>Каждый элемент дизайна продуман до мелочей.</p>
-                    <ul>
-                        <li>Уникальный стиль</li>
-                        <li>Внимание к деталям</li>
-                        <li>Гармоничные пропорции</li>
-                    </ul>
-                </div>
+    <div class="cards-grid">
+        <!-- Карточка 1 -->
+        <div class="card" onclick="toggleCard(0)">
+            <h3>Изысканность</h3>
+            <div class="card-toggle">Подробнее +</div>
+            <div class="card-content">
+                <p>Каждый элемент дизайна продуман до мелочей.</p>
+                <ul>
+                    <li>Уникальный стиль</li>
+                    <li>Внимание к деталям</li>
+                </ul>
             </div>
-            
-            <!-- Карточка 2 -->
-            <div class="card" id="card2">
-                <div class="card-header">
-                    <span class="card-number">II / Качество</span>
-                    <h3>Совершенство</h3>
-                    <div class="card-toggle">
-                        <span>Подробнее</span>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <p>Мы используем только лучшие технологии.</p>
-                    <ul>
-                        <li>Премиум материалы</li>
-                        <li>Тестирование</li>
-                        <li>Гарантия качества</li>
-                    </ul>
-                </div>
+        </div>
+
+        <!-- Карточка 2 -->
+        <div class="card" onclick="toggleCard(1)">
+            <h3>Совершенство</h3>
+            <div class="card-toggle">Подробнее +</div>
+            <div class="card-content">
+                <p>Мы используем только лучшие технологии.</p>
+                <ul>
+                    <li>Премиум материалы</li>
+                    <li>Тестирование</li>
+                </ul>
             </div>
-            
-            <!-- Карточка 3 -->
-            <div class="card" id="card3">
-                <div class="card-header">
-                    <span class="card-number">III / Статус</span>
-                    <h3>Престиж</h3>
-                    <div class="card-toggle">
-                        <span>Подробнее</span>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <p>Наши продукты подчеркивают статус владельца.</p>
-                    <ul>
-                        <li>Ограниченные серии</li>
-                        <li>Персонализация</li>
-                        <li>VIP обслуживание</li>
-                    </ul>
-                </div>
+        </div>
+
+        <!-- Карточка 3 -->
+        <div class="card" onclick="toggleCard(2)">
+            <h3>Престиж</h3>
+            <div class="card-toggle">Подробнее +</div>
+            <div class="card-content">
+                <p>Наши продукты подчеркивают статус.</p>
+                <ul>
+                    <li>Ограниченные серии</li>
+                    <li>VIP обслуживание</li>
+                </ul>
             </div>
         </div>
     </div>
 
     <script>
-        // ========== КАРТОЧКИ ==========
-        function closeAllCards() {
-            document.getElementById('card1').classList.remove('active');
-            document.getElementById('card2').classList.remove('active');
-            document.getElementById('card3').classList.remove('active');
+        function toggleCard(index) {
+            var cards = document.querySelectorAll('.card');
+            
+            for (var i = 0; i < cards.length; i++) {
+                if (i === index) {
+                    // Если открыта - закрываем, если закрыта - открываем
+                    if (cards[i].classList.contains('open')) {
+                        cards[i].classList.remove('open');
+                    } else {
+                        cards[i].classList.add('open');
+                    }
+                } else {
+                    // Все остальные закрываем
+                    cards[i].classList.remove('open');
+                }
+            }
         }
-
-        document.getElementById('card1').onclick = function() {
-            if (this.classList.contains('active')) {
-                this.classList.remove('active');
-            } else {
-                closeAllCards();
-                this.classList.add('active');
-            }
-        };
-
-        document.getElementById('card2').onclick = function() {
-            if (this.classList.contains('active')) {
-                this.classList.remove('active');
-            } else {
-                closeAllCards();
-                this.classList.add('active');
-            }
-        };
-
-        document.getElementById('card3').onclick = function() {
-            if (this.classList.contains('active')) {
-                this.classList.remove('active');
-            } else {
-                closeAllCards();
-                this.classList.add('active');
-            }
-        };
     </script>
 
 </body>
