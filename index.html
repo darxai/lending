@@ -3,62 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Современный Лендинг | 2024</title>
+    <meta name="description" content="Эксклюзивный лендинг с золотыми и серебряными акцентами">
+    <title>AURUM - Искусство Совершенства</title>
 
-    <!-- Подключение шрифтов -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     
-    <!-- AOS Animation Library -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <style>
         :root {
-            --bg: #0a0a0a;
-            --surface: #141414;
-            --surface-hover: #1e1e1e;
-            --text: #ffffff;
-            --text-secondary: #a0a0a0;
-            --accent: #00ff88;
-            --accent2: #00cc6a;
-            --border: rgba(255, 255, 255, 0.1);
-            --glow: rgba(0, 255, 136, 0.3);
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --surface-hover: #1a1a25;
+            --text: #f5f5f5;
+            --text-secondary: #a0a0b0;
+            --gold: #d4af37;
+            --gold-light: #f0d060;
+            --gold-dark: #a08020;
+            --silver: #c0c0c0;
+            --silver-dark: #808080;
+            --border: rgba(212, 175, 55, 0.15);
+            --border-silver: rgba(192, 192, 192, 0.1);
+            --glow-gold: rgba(212, 175, 55, 0.3);
+            --glow-silver: rgba(192, 192, 192, 0.2);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             background-color: var(--bg);
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             color: var(--text);
             overflow-x: hidden;
-            line-height: 1.6;
-            position: relative;
+            line-height: 1.7;
             min-height: 100vh;
-        }
-
-        /* ========== СОВРЕМЕННЫЙ ФОН С ГРАДИЕНТАМИ ========== */
-        .modern-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(0, 255, 136, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 255, 136, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 50% 80%, rgba(0, 255, 136, 0.06) 0%, transparent 50%);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(192, 192, 192, 0.04) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0a0f 0%, #0f0f15 50%, #0a0a0f 100%);
         }
 
         .container {
@@ -67,18 +52,17 @@
             padding: 0 24px;
             position: relative;
             z-index: 2;
+            overflow: hidden;
         }
 
-        /* ========== НАВИГАЦИЯ ========== */
         header {
-            padding: 20px 0;
+            padding: 15px 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 100;
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(10, 10, 15, 0.9);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
         }
 
@@ -86,172 +70,213 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 20px;
         }
 
-        .logo {
+        .logo-container { display: flex; align-items: center; gap: 10px; }
+        .logo-img { width: 40px; height: 40px; object-fit: contain; border-radius: 4px; display: none; }
+        .logo-img.active { display: block; }
+
+        .logo-text {
+            font-family: 'Cormorant Garamond', serif;
             font-weight: 700;
-            letter-spacing: 1px;
-            font-size: 1.1rem;
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            letter-spacing: 4px;
+            font-size: 1.4rem;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            white-space: nowrap;
         }
 
-        .logo::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: var(--accent);
-            border-radius: 50%;
-            box-shadow: 0 0 20px var(--glow);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
+        .nav-links { display: flex; gap: 35px; }
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             transition: all 0.3s;
-            position: relative;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 500;
+            white-space: nowrap;
         }
+        .nav-links a:hover { color: var(--gold-light); }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--accent);
-            transition: width 0.3s;
+        .admin-btn {
+            background: none;
+            border: 1px solid var(--silver-dark);
+            color: var(--silver);
+            padding: 8px 15px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 2px;
+            transition: all 0.3s;
+            white-space: nowrap;
         }
+        .admin-btn:hover { border-color: var(--gold); color: var(--gold); }
 
-        .nav-links a:hover {
-            color: var(--text);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* ========== ГЛАВНЫЙ ЭКРАН ========== */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             padding-top: 100px;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 800px;
         }
 
         .hero-badge {
             display: inline-block;
-            padding: 8px 16px;
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid rgba(0, 255, 136, 0.2);
+            padding: 10px 20px;
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid var(--border);
             border-radius: 50px;
-            font-size: 0.8rem;
-            color: var(--accent);
-            margin-bottom: 30px;
-            letter-spacing: 1px;
+            font-size: 0.75rem;
+            color: var(--gold);
+            margin-bottom: 35px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .hero-text h1 {
-            font-size: 4rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
             font-weight: 700;
             line-height: 1.1;
             margin-bottom: 25px;
-            letter-spacing: -1px;
-        }
-
-        .hero-text h1 span {
-            color: var(--accent);
-            position: relative;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--silver));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero-text p {
             color: var(--text-secondary);
             margin-bottom: 40px;
             font-weight: 300;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            max-width: 600px;
+            font-size: 1rem;
+            max-width: 550px;
         }
 
         .btn {
             display: inline-block;
             padding: 16px 35px;
-            background: var(--accent);
-            color: #000;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: #0a0a0f;
             text-decoration: none;
-            border-radius: 4px;
+            border-radius: 2px;
             font-weight: 600;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
             transition: all 0.3s;
-            border: none;
+            border: 1px solid var(--gold);
             cursor: pointer;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.95rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
         }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px var(--glow-gold); }
 
-        .btn:hover {
-            background: var(--accent2);
-            box-shadow: 0 0 40px var(--glow);
-            transform: translateY(-2px);
-        }
-
-        .btn-outline {
-            display: inline-block;
-            padding: 16px 35px;
-            background: transparent;
-            color: var(--text);
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            transition: all 0.3s;
-            border: 1px solid var(--border);
-            cursor: pointer;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.95rem;
-            margin-left: 15px;
-        }
-
-        .btn-outline:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        /* ========== СЕКЦИЯ ВИДЕО ========== */
-        .video-section {
-            padding: 100px 0;
-            position: relative;
-        }
+        .gallery-section, .video-section, .features, .contacts { padding: 100px 0; }
 
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
             margin-bottom: 50px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-silver);
         }
 
         .section-title {
+            font-family: 'Cormorant Garamond', serif;
             font-size: 2.5rem;
-            font-weight: 700;
-            letter-spacing: -1px;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--gold), var(--silver));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .section-subtitle {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .gallery-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            touch-action: pan-y;
+            cursor: grab;
+        }
+        .gallery-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
+        .gallery-slide { min-width: 100%; position: relative; aspect-ratio: 16/10; overflow: hidden; }
+        .gallery-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .gallery-slide::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(10,10,15,0.95), transparent);
+            pointer-events: none;
+        }
+        .slide-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 30px; z-index: 2; }
+        .slide-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--silver));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+        .slide-description { color: var(--text-secondary); font-size: 0.9rem; font-weight: 300; }
+        .gallery-counter { text-align: center; color: var(--silver); font-size: 0.9rem; letter-spacing: 2px; margin-top: 20px; }
+        .gallery-arrow {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 50px; height: 50px;
+            background: rgba(10,10,15,0.7);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            color: var(--gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s;
+        }
+        .gallery-arrow:hover { background: rgba(212, 175, 55, 0.2); border-color: var(--gold); }
+        .gallery-arrow.prev { left: 15px; }
+        .gallery-arrow.next { right: 15px; }
+        .gallery-dots { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
+        .gallery-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--silver);
+            opacity: 0.3;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid var(--silver);
+        }
+        .gallery-dot.active { opacity: 1; background: var(--gold); border-color: var(--gold); transform: scale(1.3); }
+        .gallery-thumbnails { display: flex; gap: 10px; margin-top: 15px; justify-content: center; flex-wrap: wrap; }
+        .gallery-thumb {
+            width: 80px; height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            opacity: 0.5;
+        }
+        .gallery-thumb.active { border-color: var(--gold); opacity: 1; }
+        .swipe-hint {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            margin-top: 10px;
+            display: none;
         }
 
         .video-wrapper {
@@ -259,402 +284,193 @@
             width: 100%;
             padding-top: 56.25%;
             overflow: hidden;
-            border-radius: 8px;
+            border-radius: 4px;
             border: 1px solid var(--border);
             background: #000;
-            transition: all 0.3s;
         }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-        .video-wrapper:hover {
-            border-color: rgba(0, 255, 136, 0.3);
-            box-shadow: 0 0 60px rgba(0, 255, 136, 0.1);
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        /* ========== КАРТОЧКИ ========== */
-        .features {
-            padding: 100px 0;
-            position: relative;
-        }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-            align-items: start;
-        }
-
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
         .card {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.4s;
         }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .card:hover {
-            border-color: rgba(0, 255, 136, 0.3);
-            background: var(--surface-hover);
-            transform: translateY(-2px);
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .card.active {
-            border-color: rgba(0, 255, 136, 0.3);
-            background: var(--surface-hover);
-        }
-
-        .card.active::before {
-            opacity: 1;
-        }
-
-        .card-header {
-            padding: 30px;
-            position: relative;
-        }
-
+        .card:hover { background: var(--surface-hover); border-color: rgba(212, 175, 55, 0.3); transform: translateY(-3px); box-shadow: 0 15px 40px var(--glow-gold); }
+        .card.active { background: var(--surface-hover); border-color: rgba(212, 175, 55, 0.3); box-shadow: 0 15px 40px var(--glow-gold); }
+        .card-header { padding: 35px; }
         .card-number {
-            font-size: 0.8rem;
-            color: var(--accent);
-            font-weight: 500;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .card h3 {
-            margin-bottom: 10px;
-            font-size: 1.3rem;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-        }
-
-        .card-toggle {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--accent);
-            font-size: 0.85rem;
-            margin-top: 15px;
-            transition: all 0.3s;
-        }
-
-        .toggle-icon {
-            display: inline-block;
-            transition: transform 0.3s;
+            font-family: 'Cormorant Garamond', serif;
             font-size: 1rem;
-        }
-
-        .card.active .toggle-icon {
-            transform: rotate(45deg);
-        }
-
-        .card-content {
-            display: none;
-            padding: 0 30px 30px;
-        }
-
-        .card.active .card-content {
-            display: block;
-            animation: fadeIn 0.4s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .card-content p {
-            color: var(--text-secondary);
-            font-weight: 300;
-            font-size: 0.9rem;
-            line-height: 1.7;
+            background: linear-gradient(135deg, var(--gold), var(--silver));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+            letter-spacing: 2px;
             margin-bottom: 20px;
+            display: block;
         }
+        .card h3 { font-family: 'Cormorant Garamond', serif; margin-bottom: 10px; font-size: 1.5rem; color: var(--text); }
+        .card-toggle { color: var(--gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; display: inline-flex; align-items: center; gap: 8px; }
+        .toggle-icon { display: inline-block; transition: transform 0.3s; font-size: 1.2rem; }
+        .card.active .toggle-icon { transform: rotate(45deg); }
+        .card-content { display: none; padding: 0 35px 35px; }
+        .card.active .card-content { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .card-content p { color: var(--text-secondary); font-weight: 300; font-size: 0.9rem; margin-bottom: 20px; }
+        .card-content ul { list-style: none; }
+        .card-content ul li { padding: 12px 0; color: var(--text-secondary); border-bottom: 1px solid var(--border-silver); }
 
-        .card-content ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .card-content ul li {
-            padding: 12px 0;
-            color: var(--text-secondary);
-            font-weight: 300;
-            font-size: 0.9rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .card-content ul li::before {
-            content: '';
-            width: 4px;
-            height: 4px;
-            background: var(--accent);
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        /* ========== КОНТАКТЫ ========== */
-        .contacts {
-            padding: 100px 0;
-            position: relative;
-        }
-
-        .contacts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
+        .contacts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
         .contact-card {
             background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
+            border: 1px solid var(--border-silver);
+            border-radius: 4px;
             padding: 30px;
-            text-align: left;
-            cursor: pointer;
             transition: all 0.3s;
         }
+        .contact-card:hover { border-color: var(--silver); transform: translateY(-2px); }
+        .contact-label { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
 
-        .contact-card:hover {
-            border-color: rgba(0, 255, 136, 0.3);
-            transform: translateY(-2px);
-        }
+        footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--border-silver); font-size: 0.8rem; color: var(--text-secondary); }
 
-        .contact-label {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-        }
-
-        .contact-value {
-            font-size: 1rem;
-            color: var(--text);
-            text-decoration: none;
-        }
-
-        .contact-card a {
-            color: var(--accent);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .contact-card a:hover {
-            color: var(--accent2);
-        }
-
-        /* ========== ФУТЕР ========== */
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            border-top: 1px solid var(--border);
-            margin-top: 100px;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-
-        /* ========== АДАПТИВНОСТЬ ========== */
         @media (max-width: 768px) {
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .btn-outline {
-                margin-left: 0;
-                margin-top: 15px;
-            }
-            
-            .card-header {
-                padding: 25px;
-            }
-            
-            .card-content {
-                padding: 0 25px 25px;
-            }
+            .hero-text h1 { font-size: 3rem; }
+            .nav-links { display: none; }
+            .logo-text { font-size: 1rem; }
+            .gallery-arrow { display: none; }
+            .gallery-thumbnails { display: none; }
+            .swipe-hint { display: block; }
+            .slide-info { padding: 20px; }
+            .slide-title { font-size: 1.4rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .gallery-section, .video-section, .features, .contacts { padding: 60px 0; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Современный фон -->
-    <div class="modern-bg"></div>
-
-    <!-- Шапка -->
     <header>
         <div class="container">
             <nav>
-                <div class="logo">NOVA</div>
+                <div class="logo-container">
+                    <img class="logo-img" id="logoImg" src="" alt="Логотип">
+                    <span class="logo-text">AURUM</span>
+                </div>
                 <div class="nav-links">
                     <a href="#home">Главная</a>
+                    <a href="#gallery">Галерея</a>
                     <a href="#video">Видео</a>
-                    <a href="#features">Возможности</a>
+                    <a href="#features">Преимущества</a>
                     <a href="#contacts">Контакты</a>
                 </div>
             </nav>
         </div>
     </header>
 
-    <!-- Главный экран -->
     <section class="hero" id="home">
         <div class="container">
-            <div class="hero-content">
-                <div class="hero-text" data-aos="fade-up">
-                    <div class="hero-badge">● Доступно сейчас</div>
-                    <h1>Создавай<br><span>Будущее</span></h1>
-                    <p>Минималистичный лендинг с современным дизайном, плавными анимациями и продуманной структурой.</p>
-                    <div>
-                        <a href="#contacts" class="btn">Начать проект</a>
-                        <a href="#video" class="btn-outline">Смотреть видео</a>
-                    </div>
-                </div>
+            <div class="hero-text" data-aos="fade-up">
+                <div class="hero-badge">✦ Премиум качество</div>
+                <h1>Искусство<br>Совершенства</h1>
+                <p>Эксклюзивный лендинг с золотыми и серебряными акцентами, созданный для тех, кто ценит роскошь и качество.</p>
+                <a href="#contacts" class="btn">Начать проект</a>
             </div>
         </div>
     </section>
 
-    <!-- Секция с видео -->
+    <section class="gallery-section" id="gallery">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Галерея</h2>
+                <div class="section-subtitle">Наши работы</div>
+            </div>
+            <div class="gallery-slider" id="gallerySlider" data-aos="zoom-in-up">
+                <div class="gallery-track" id="galleryTrack"></div>
+                <button class="gallery-arrow prev" onclick="prevSlide()">←</button>
+                <button class="gallery-arrow next" onclick="nextSlide()">→</button>
+            </div>
+            <div class="gallery-counter" id="slideCounter">1 / 6</div>
+            <div class="gallery-dots" id="galleryDots"></div>
+            <div class="gallery-thumbnails" id="galleryThumbnails"></div>
+            <div class="swipe-hint">← Свайпайте для перелистывания →</div>
+        </div>
+    </section>
+
     <section class="video-section" id="video">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
-                <div>
-                    <h2 class="section-title">Видео</h2>
-                </div>
-                <div class="section-subtitle">01 / Презентация</div>
+                <h2 class="section-title">Видео</h2>
+                <div class="section-subtitle">Презентация</div>
             </div>
-            <div class="video-wrapper" data-aos="fade-up" data-aos-delay="100">
-                <!-- ЗАМЕНИТЕ ЗДЕСЬ ССЫЛКУ НА ВАШЕ ВИДЕО -->
-                <iframe 
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
+            <div class="video-wrapper" data-aos="zoom-in-up">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
     </section>
 
-    <!-- Секция с карточками -->
     <section class="features" id="features">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
-                <div>
-                    <h2 class="section-title">Возможности</h2>
-                </div>
-                <div class="section-subtitle">02 / Преимущества</div>
+                <h2 class="section-title">Преимущества</h2>
+                <div class="section-subtitle">Достоинства</div>
             </div>
             <div class="cards-grid">
-                <!-- Карточка 1 -->
-                <div class="card" data-aos="fade-up">
+                <div class="card" data-aos="fade-up" onclick="toggleCard(this)">
                     <div class="card-header">
-                        <span class="card-number">01</span>
-                        <h3>Дизайн</h3>
+                        <span class="card-number">I / Элегантность</span>
+                        <h3>Изысканность</h3>
                         <div class="card-toggle">
                             <span>Подробнее</span>
                             <span class="toggle-icon">+</span>
                         </div>
                     </div>
                     <div class="card-content">
-                        <p>Минималистичный подход с вниманием к деталям и современным трендам.</p>
+                        <p>Каждый элемент дизайна продуман до мелочей.</p>
                         <ul>
-                            <li>Современная типографика</li>
-                            <li>Продуманные отступы</li>
-                            <li>Адаптивные сетки</li>
-                            <li>Кроссбраузерность</li>
-                            <li>Оптимизация</li>
+                            <li>Уникальный стиль</li>
+                            <li>Внимание к деталям</li>
+                            <li>Гармоничные пропорции</li>
                         </ul>
                     </div>
                 </div>
                 
-                <!-- Карточка 2 -->
-                <div class="card" data-aos="fade-up" data-aos-delay="100">
+                <div class="card" data-aos="fade-up" data-aos-delay="100" onclick="toggleCard(this)">
                     <div class="card-header">
-                        <span class="card-number">02</span>
-                        <h3>Технологии</h3>
+                        <span class="card-number">II / Качество</span>
+                        <h3>Совершенство</h3>
                         <div class="card-toggle">
                             <span>Подробнее</span>
                             <span class="toggle-icon">+</span>
                         </div>
                     </div>
                     <div class="card-content">
-                        <p>Используем передовые инструменты и технологии для создания быстрых и надежных продуктов.</p>
+                        <p>Мы используем только лучшие технологии.</p>
                         <ul>
-                            <li>Современные фреймворки</li>
-                            <li>Оптимизация производительности</li>
-                            <li>Безопасность</li>
-                            <li>Масштабируемость</li>
-                            <li>Поддержка</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Карточка 3 -->
-                <div class="card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card-header">
-                        <span class="card-number">03</span>
-                        <h3>Подход</h3>
-                        <div class="card-toggle">
-                            <span>Подробнее</span>
-                            <span class="toggle-icon">+</span>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <p>Индивидуальный подход к каждому проекту с фокусом на результат.</p>
-                        <ul>
-                            <li>Анализ потребностей</li>
-                            <li>Прототипирование</li>
-                            <li>Итеративная разработка</li>
+                            <li>Премиум материалы</li>
                             <li>Тестирование</li>
-                            <li>Запуск и поддержка</li>
+                            <li>Гарантия качества</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card" data-aos="fade-up" data-aos-delay="200" onclick="toggleCard(this)">
+                    <div class="card-header">
+                        <span class="card-number">III / Статус</span>
+                        <h3>Престиж</h3>
+                        <div class="card-toggle">
+                            <span>Подробнее</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>Наши продукты подчеркивают статус владельца.</p>
+                        <ul>
+                            <li>Ограниченные серии</li>
+                            <li>Персонализация</li>
+                            <li>VIP обслуживание</li>
                         </ul>
                     </div>
                 </div>
@@ -662,77 +478,121 @@
         </div>
     </section>
 
-    <!-- Секция контактов -->
     <section class="contacts" id="contacts">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
-                <div>
-                    <h2 class="section-title">Контакты</h2>
-                </div>
-                <div class="section-subtitle">03 / Связь</div>
+                <h2 class="section-title">Контакты</h2>
+                <div class="section-subtitle">Связь</div>
             </div>
             <div class="contacts-grid">
-                <!-- Телефон -->
                 <div class="contact-card" data-aos="fade-up">
                     <div class="contact-label">Телефон</div>
-                    <a href="tel:+79001234567" class="contact-value">+7 (900) 123-45-67</a>
+                    <div>+7 (900) 123-45-67</div>
                 </div>
-                
-                <!-- Email -->
                 <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="contact-label">Email</div>
-                    <a href="mailto:info@nova.space" class="contact-value">info@nova.space</a>
+                    <div>info@aurum.space</div>
                 </div>
-                
-                <!-- Адрес -->
                 <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="contact-label">Адрес</div>
-                    <div class="contact-value">г. Москва, ул. Инноваций, 1</div>
+                    <div>г. Москва, ул. Золотая, 1</div>
                 </div>
-                
-                <!-- Соцсети -->
                 <div class="contact-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="contact-label">Соцсети</div>
-                    <div class="contact-value">
-                        <a href="#" target="_blank">TG</a> | 
-                        <a href="#" target="_blank">VK</a> | 
-                        <a href="#" target="_blank">WA</a>
-                    </div>
+                    <div>TG | VK | WA</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Подвал -->
     <footer>
         <div class="container">
-            <p>© 2024 NOVA. Все права защищены.</p>
+            <p>© 2024 AURUM. Все права защищены.</p>
         </div>
     </footer>
 
-    <!-- Скрипты -->
-    <!-- AOS Library -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        AOS.init({
-            duration: 800,
-            once: false,
-            offset: 100
-        });
-    </script>
+        AOS.init({ duration: 800, offset: 100, once: false });
 
-    <!-- Скрипт для раскрывающихся карточек -->
-    <script>
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('click', function() {
-                document.querySelectorAll('.card').forEach(otherCard => {
-                    if (otherCard !== this && otherCard.classList.contains('active')) {
-                        otherCard.classList.remove('active');
-                    }
-                });
-                this.classList.toggle('active');
+        const galleryPhotos = [
+            { src: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=2070&auto=format&fit=crop', title: 'Золотые украшения', description: 'Эксклюзивная коллекция' },
+            { src: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=2070&auto=format&fit=crop', title: 'Серебряные аксессуары', description: 'Изысканные предметы' },
+            { src: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=2080&auto=format&fit=crop', title: 'Премиум часы', description: 'Швейцарское качество' },
+            { src: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop', title: 'Элитный автомобиль', description: 'Совершенство' },
+            { src: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop', title: 'Роскошный интерьер', description: 'Дизайн премиум-класса' },
+            { src: 'https://images.unsplash.com/photo-1610375461246-83df859d849d?q=80&w=2070&auto=format&fit=crop', title: 'Золотые монеты', description: 'Вечные ценности' }
+        ];
+
+        let currentSlide = 0;
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function initGallery() {
+            const track = document.getElementById('galleryTrack');
+            const dots = document.getElementById('galleryDots');
+            const thumbnails = document.getElementById('galleryThumbnails');
+            track.innerHTML = '';
+            dots.innerHTML = '';
+            thumbnails.innerHTML = '';
+
+            galleryPhotos.forEach(function(photo) {
+                const slide = document.createElement('div');
+                slide.className = 'gallery-slide';
+                slide.innerHTML = '<img src="' + photo.src + '" alt="' + photo.title + '">' +
+                    '<div class="slide-info"><div class="slide-title">' + photo.title + '</div>' +
+                    '<div class="slide-description">' + photo.description + '</div></div>';
+                track.appendChild(slide);
             });
+
+            galleryPhotos.forEach(function(_, index) {
+                const dot = document.createElement('div');
+                dot.className = 'gallery-dot';
+                dot.onclick = function() { goToSlide(index); };
+                dots.appendChild(dot);
+            });
+
+            galleryPhotos.forEach(function(photo, index) {
+                const thumb = document.createElement('img');
+                thumb.className = 'gallery-thumb';
+                thumb.src = photo.src;
+                thumb.onclick = function() { goToSlide(index); };
+                thumbnails.appendChild(thumb);
+            });
+
+            updateGallery();
+        }
+
+        function updateGallery() {
+            document.getElementById('galleryTrack').style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+            document.getElementById('slideCounter').textContent = (currentSlide + 1) + ' / ' + galleryPhotos.length;
+            document.querySelectorAll('.gallery-dot').forEach(function(dot, index) { dot.classList.toggle('active', index === currentSlide); });
+            document.querySelectorAll('.gallery-thumb').forEach(function(thumb, index) { thumb.classList.toggle('active', index === currentSlide); });
+        }
+
+        function nextSlide() { currentSlide = (currentSlide + 1) % galleryPhotos.length; updateGallery(); }
+        function prevSlide() { currentSlide = (currentSlide - 1 + galleryPhotos.length) % galleryPhotos.length; updateGallery(); }
+        function goToSlide(index) { currentSlide = index; updateGallery(); }
+
+        document.getElementById('gallerySlider').addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; });
+        document.getElementById('gallerySlider').addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].clientX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) { if (diff > 0) { nextSlide(); } else { prevSlide(); } }
         });
+        document.addEventListener('keydown', function(e) { if (e.key === 'ArrowLeft') { prevSlide(); } if (e.key === 'ArrowRight') { nextSlide(); } });
+
+        // ========== ФУНКЦИЯ КАРТОЧЕК (ИЗ ЗЕЛЁНОГО САЙТА) ==========
+        function toggleCard(card) {
+            document.querySelectorAll('.card').forEach(otherCard => {
+                if (otherCard !== card && otherCard.classList.contains('active')) {
+                    otherCard.classList.remove('active');
+                }
+            });
+            card.classList.toggle('active');
+        }
+
+        initGallery();
     </script>
 
 </body>
