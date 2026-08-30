@@ -947,16 +947,16 @@
                             <li>Премиум материалы</li>
                             <li>Тестирование</li>
                             <li>Гарантия качества</li>
-							 <li>Премиум материалы 1 </li>
+							 <li>Премиум материалы 7 </li>
                             <li>Тестирование</li>
                             <li>Гарантия качества</li>
-							 <li>Премиум материалы 2</li>
+							 <li>Премиум материалы 7</li>
                             <li>Тестирование</li>
                             <li>Гарантия качества</li>
-							 <li>Премиум материалы 3</li>
+							 <li>Премиум материалы 7</li>
                             <li>Тестирование</li>
                             <li>Гарантия качества</li>
-							 <li>Премиум материалы 4</li>
+							 <li>Премиум материалы 7</li>
                             <li>Тестирование</li>
                             <li>Гарантия качества</li>
                         </ul>
@@ -1126,20 +1126,17 @@ document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowRight') { nextSlide(); }
 });
 
-// ========== КАРТОЧКИ (ИСПРАВЛЕНО ДЛЯ ДЕСКТОПА) ==========
-// Удаляем все предыдущие обработчики и добавляем новые
 // ========== ФУНКЦИЯ КАРТОЧЕК ==========
 
+// ========== КАРТОЧКИ ==========
 function toggleCard(card) {
-    // Закрываем все остальные карточки
-    document.querySelectorAll('.card').forEach(otherCard => {
-        if (otherCard !== card && otherCard.classList.contains('active')) {
-            otherCard.classList.remove('active');
-        }
+    // Закрываем все карточки
+    document.querySelectorAll('.card').forEach(function(c) {
+        c.classList.remove('active');
     });
     
-    // Переключаем текущую карточку (открывает если закрыта, закрывает если открыта)
-    card.classList.toggle('active');
+    // Открываем кликнутую
+    card.classList.add('active');
 }
 
 // ========== АДМИНКА ==========
