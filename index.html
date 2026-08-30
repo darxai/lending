@@ -1129,7 +1129,7 @@ document.addEventListener('keydown', function(e) {
 // ========== ФУНКЦИЯ КАРТОЧЕК ==========
 
 // ========== КАРТОЧКИ ==========
-function toggleCard(card) {
+window.toggleCard = function(card) {
     // Закрываем все карточки
     document.querySelectorAll('.card').forEach(function(c) {
         c.classList.remove('active');
@@ -1137,7 +1137,7 @@ function toggleCard(card) {
     
     // Открываем кликнутую
     card.classList.add('active');
-}
+};
 
 // ========== АДМИНКА ==========
 function switchTab(event, tabName) {
