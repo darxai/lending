@@ -3,25 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Зелёный лендинг</title>
-    
+    <title>Современный Лендинг | 2024</title>
+
+    <!-- Подключение шрифтов -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- AOS Animation Library -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <style>
         :root {
-            --bg: #ffffff;
-            --text: #1a2e1a;
-            --accent: #2e7d32;
-            --accent2: #4caf50;
-            --accent3: #81c784;
-            --light-green: #e8f5e9;
-            --glass-bg: rgba(255, 255, 255, 0.85);
-            --border-glass: rgba(46, 125, 50, 0.2);
-            --card-shadow: rgba(46, 125, 50, 0.1);
+            --bg: #0a0a0a;
+            --surface: #141414;
+            --surface-hover: #1e1e1e;
+            --text: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent: #00ff88;
+            --accent2: #00cc6a;
+            --border: rgba(255, 255, 255, 0.1);
+            --glow: rgba(0, 255, 136, 0.3);
         }
 
         * {
@@ -36,12 +38,27 @@
 
         body {
             background-color: var(--bg);
-            font-family: 'Unbounded', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
             color: var(--text);
             overflow-x: hidden;
-            line-height: 1.7;
+            line-height: 1.6;
             position: relative;
             min-height: 100vh;
+        }
+
+        /* ========== СОВРЕМЕННЫЙ ФОН С ГРАДИЕНТАМИ ========== */
+        .modern-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 136, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 136, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 50% 80%, rgba(0, 255, 136, 0.06) 0%, transparent 50%);
         }
 
         .container {
@@ -52,15 +69,17 @@
             z-index: 2;
         }
 
+        /* ========== НАВИГАЦИЯ ========== */
         header {
             padding: 20px 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 100;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(10, 10, 10, 0.8);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-glass);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
         }
 
         nav {
@@ -71,9 +90,21 @@
 
         .logo {
             font-weight: 700;
-            letter-spacing: 2px;
-            font-size: 1.2rem;
+            letter-spacing: 1px;
+            font-size: 1.1rem;
             color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--glow);
         }
 
         .nav-links {
@@ -82,150 +113,261 @@
         }
 
         .nav-links a {
-            color: var(--text);
+            color: var(--text-secondary);
             text-decoration: none;
             font-size: 0.9rem;
             transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s;
         }
 
         .nav-links a:hover {
-            color: var(--accent);
+            color: var(--text);
         }
 
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ========== ГЛАВНЫЙ ЭКРАН ========== */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             padding-top: 100px;
+            position: relative;
         }
 
         .hero-content {
             max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--accent);
+            margin-bottom: 30px;
+            letter-spacing: 1px;
         }
 
         .hero-text h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            color: var(--accent);
+            line-height: 1.1;
+            margin-bottom: 25px;
+            letter-spacing: -1px;
         }
 
         .hero-text h1 span {
-            color: var(--accent2);
+            color: var(--accent);
             position: relative;
         }
 
         .hero-text p {
-            color: #555;
-            margin-bottom: 30px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
             font-weight: 300;
             font-size: 1.1rem;
             line-height: 1.8;
+            max-width: 600px;
         }
 
         .btn {
             display: inline-block;
-            padding: 18px 45px;
+            padding: 16px 35px;
             background: var(--accent);
-            color: #ffffff;
+            color: #000;
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 4px;
             font-weight: 600;
-            letter-spacing: 1px;
-            transition: all 0.4s;
-            box-shadow: 0 15px 30px rgba(46, 125, 50, 0.3);
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
             border: none;
             cursor: pointer;
-            font-family: 'Unbounded', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.95rem;
         }
 
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 40px rgba(46, 125, 50, 0.4);
             background: var(--accent2);
+            box-shadow: 0 0 40px var(--glow);
+            transform: translateY(-2px);
         }
 
-        .features {
-            padding: 80px 0;
+        .btn-outline {
+            display: inline-block;
+            padding: 16px 35px;
+            background: transparent;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.95rem;
+            margin-left: 15px;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ========== СЕКЦИЯ ВИДЕО ========== */
+        .video-section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 50px;
         }
 
         .section-title {
-            text-align: center;
             font-size: 2.5rem;
-            margin-bottom: 60px;
-            font-weight: 600;
-            color: var(--accent);
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: #000;
+            transition: all 0.3s;
+        }
+
+        .video-wrapper:hover {
+            border-color: rgba(0, 255, 136, 0.3);
+            box-shadow: 0 0 60px rgba(0, 255, 136, 0.1);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* ========== КАРТОЧКИ ========== */
+        .features {
+            padding: 100px 0;
+            position: relative;
         }
 
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            align-items: start;
         }
 
         .card {
-            background: var(--glass-bg);
-            border: 2px solid var(--border-glass);
-            border-radius: 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
         .card:hover {
-            border-color: var(--accent2);
-            box-shadow: 0 20px 40px var(--card-shadow);
-            transform: translateY(-5px);
+            border-color: rgba(0, 255, 136, 0.3);
+            background: var(--surface-hover);
+            transform: translateY(-2px);
+        }
+
+        .card:hover::before {
+            opacity: 1;
         }
 
         .card.active {
-            border-color: var(--accent2);
-            box-shadow: 0 20px 40px rgba(46, 125, 50, 0.2);
-            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(0, 255, 136, 0.3);
+            background: var(--surface-hover);
+        }
+
+        .card.active::before {
+            opacity: 1;
         }
 
         .card-header {
-            padding: 40px 35px 20px;
+            padding: 30px;
+            position: relative;
         }
 
-        .card-icon {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 25px;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            color: #ffffff;
-            box-shadow: 0 10px 25px rgba(46, 125, 50, 0.3);
+        .card-number {
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            display: block;
         }
 
         .card h3 {
-            margin-bottom: 15px;
-            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
             font-weight: 600;
-            font-size: 1.2rem;
+            letter-spacing: -0.5px;
         }
 
         .card-toggle {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            color: var(--accent2);
-            font-weight: 400;
-            font-size: 0.9rem;
-            margin-top: 10px;
+            gap: 8px;
+            color: var(--accent);
+            font-size: 0.85rem;
+            margin-top: 15px;
+            transition: all 0.3s;
         }
 
         .toggle-icon {
             display: inline-block;
             transition: transform 0.3s;
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
 
         .card.active .toggle-icon {
@@ -234,156 +376,285 @@
 
         .card-content {
             display: none;
-            padding: 0 35px 40px;
+            padding: 0 30px 30px;
         }
 
         .card.active .card-content {
             display: block;
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 0.4s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .card-content p {
+            color: var(--text-secondary);
             font-weight: 300;
-            font-size: 0.95rem;
-            color: #555;
+            font-size: 0.9rem;
             line-height: 1.7;
-            text-align: left;
             margin-bottom: 20px;
         }
 
         .card-content ul {
             list-style: none;
             padding: 0;
-            margin-top: 20px;
-            text-align: left;
         }
 
         .card-content ul li {
-            padding: 10px 0;
-            color: #555;
+            padding: 12px 0;
+            color: var(--text-secondary);
             font-weight: 300;
             font-size: 0.9rem;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
         .card-content ul li::before {
-            content: '→';
-            color: var(--accent2);
-            font-weight: 600;
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+            flex-shrink: 0;
         }
 
+        /* ========== КОНТАКТЫ ========== */
+        .contacts {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .contact-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            border-color: rgba(0, 255, 136, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .contact-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .contact-value {
+            font-size: 1rem;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .contact-card a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-card a:hover {
+            color: var(--accent2);
+        }
+
+        /* ========== ФУТЕР ========== */
         footer {
             text-align: center;
             padding: 40px 0;
-            border-top: 1px solid var(--border-glass);
-            margin-top: 80px;
+            border-top: 1px solid var(--border);
+            margin-top: 100px;
             font-size: 0.8rem;
-            color: #999;
+            color: var(--text-secondary);
         }
 
+        /* ========== АДАПТИВНОСТЬ ========== */
         @media (max-width: 768px) {
-            .hero-text h1 { font-size: 2.5rem; }
-            .nav-links { display: none; }
-            .cards-grid { grid-template-columns: 1fr; gap: 20px; }
-            .section-title { font-size: 2rem; }
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 15px;
+            }
+            
+            .card-header {
+                padding: 25px;
+            }
+            
+            .card-content {
+                padding: 0 25px 25px;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- Современный фон -->
+    <div class="modern-bg"></div>
+
+    <!-- Шапка -->
     <header>
         <div class="container">
             <nav>
-                <div class="logo">ECO.SPACE</div>
+                <div class="logo">NOVA</div>
                 <div class="nav-links">
                     <a href="#home">Главная</a>
-                    <a href="#features">Преимущества-0</a>
-                    <a href="#contacts">Контакты-0</a>
+                    <a href="#video">Видео</a>
+                    <a href="#features">Возможности</a>
+                    <a href="#contacts">Контакты</a>
                 </div>
             </nav>
         </div>
     </header>
 
+    <!-- Главный экран -->
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
-                <div class="hero-text" data-aos="fade-right">
-                    <h1>Создавай <span>Зеленое Будущее</span></h1>
-                    <p>Экологичный лендинг с современным дизайном, плавными анимациями и продуманной структурой.</p>
-                    <a href="#contacts" class="btn">Начать проект</a>
+                <div class="hero-text" data-aos="fade-up">
+                    <div class="hero-badge">● Доступно сейчас</div>
+                    <h1>Создавай<br><span>Будущее</span></h1>
+                    <p>Минималистичный лендинг с современным дизайном, плавными анимациями и продуманной структурой.</p>
+                    <div>
+                        <a href="#contacts" class="btn">Начать проект</a>
+                        <a href="#video" class="btn-outline">Смотреть видео</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Секция с видео -->
+    <section class="video-section" id="video">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div>
+                    <h2 class="section-title">Видео</h2>
+                </div>
+                <div class="section-subtitle">01 / Презентация</div>
+            </div>
+            <div class="video-wrapper" data-aos="fade-up" data-aos-delay="100">
+                <!-- ЗАМЕНИТЕ ЗДЕСЬ ССЫЛКУ НА ВАШЕ ВИДЕО -->
+                <iframe 
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция с карточками -->
     <section class="features" id="features">
         <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Наши преимущества</h2>
+            <div class="section-header" data-aos="fade-up">
+                <div>
+                    <h2 class="section-title">Возможности</h2>
+                </div>
+                <div class="section-subtitle">02 / Преимущества</div>
+            </div>
             <div class="cards-grid">
                 <!-- Карточка 1 -->
-                <div class="card" onclick="toggleCard(this)">
+                <div class="card" data-aos="fade-up">
                     <div class="card-header">
-                        <div class="card-icon">🌿</div>
-                        <h3>Эко дизайн</h3>
+                        <span class="card-number">01</span>
+                        <h3>Дизайн</h3>
                         <div class="card-toggle">
                             <span>Подробнее</span>
                             <span class="toggle-icon">+</span>
                         </div>
                     </div>
                     <div class="card-content">
-                        <p>Мы создаем экологичные и современные дизайны.</p>
+                        <p>Минималистичный подход с вниманием к деталям и современным трендам.</p>
                         <ul>
-                            <li>Природные мотивы</li>
-                            <li>Экологичные палитры</li>
-                            <li>Минимализм</li>
+                            <li>Современная типографика</li>
+                            <li>Продуманные отступы</li>
+                            <li>Адаптивные сетки</li>
+                            <li>Кроссбраузерность</li>
+                            <li>Оптимизация</li>
                         </ul>
                     </div>
                 </div>
                 
                 <!-- Карточка 2 -->
-                <div class="card" onclick="toggleCard(this)">
+                <div class="card" data-aos="fade-up" data-aos-delay="100">
                     <div class="card-header">
-                        <div class="card-icon">🍃</div>
-                        <h3>Устойчивость</h3>
+                        <span class="card-number">02</span>
+                        <h3>Технологии</h3>
                         <div class="card-toggle">
                             <span>Подробнее</span>
                             <span class="toggle-icon">+</span>
                         </div>
                     </div>
                     <div class="card-content">
-                        <p>Наши решения направлены на долгосрочное развитие.</p>
+                        <p>Используем передовые инструменты и технологии для создания быстрых и надежных продуктов.</p>
                         <ul>
-                            <li>Энергоэффективность</li>
-                            <li>Переработка</li>
-                            <li>Ответственность</li>
+                            <li>Современные фреймворки</li>
+                            <li>Оптимизация производительности</li>
+                            <li>Безопасность</li>
+                            <li>Масштабируемость</li>
+                            <li>Поддержка</li>
                         </ul>
                     </div>
                 </div>
                 
                 <!-- Карточка 3 -->
-                <div class="card" onclick="toggleCard(this)">
+                <div class="card" data-aos="fade-up" data-aos-delay="200">
                     <div class="card-header">
-                        <div class="card-icon">🌱</div>
-                        <h3>Инновации</h3>
+                        <span class="card-number">03</span>
+                        <h3>Подход</h3>
                         <div class="card-toggle">
                             <span>Подробнее</span>
                             <span class="toggle-icon">+</span>
                         </div>
                     </div>
                     <div class="card-content">
-                        <p>Мы используем передовые технологии.</p>
+                        <p>Индивидуальный подход к каждому проекту с фокусом на результат.</p>
                         <ul>
-                            <li>ИИ</li>
-                            <li>Большие данные</li>
-                            <li>Интернет вещей</li>
+                            <li>Анализ потребностей</li>
+                            <li>Прототипирование</li>
+                            <li>Итеративная разработка</li>
+                            <li>Тестирование</li>
+                            <li>Запуск и поддержка</li>
                         </ul>
                     </div>
                 </div>
@@ -391,29 +662,77 @@
         </div>
     </section>
 
+    <!-- Секция контактов -->
+    <section class="contacts" id="contacts">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div>
+                    <h2 class="section-title">Контакты</h2>
+                </div>
+                <div class="section-subtitle">03 / Связь</div>
+            </div>
+            <div class="contacts-grid">
+                <!-- Телефон -->
+                <div class="contact-card" data-aos="fade-up">
+                    <div class="contact-label">Телефон</div>
+                    <a href="tel:+79001234567" class="contact-value">+7 (900) 123-45-67</a>
+                </div>
+                
+                <!-- Email -->
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="contact-label">Email</div>
+                    <a href="mailto:info@nova.space" class="contact-value">info@nova.space</a>
+                </div>
+                
+                <!-- Адрес -->
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="contact-label">Адрес</div>
+                    <div class="contact-value">г. Москва, ул. Инноваций, 1</div>
+                </div>
+                
+                <!-- Соцсети -->
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="contact-label">Соцсети</div>
+                    <div class="contact-value">
+                        <a href="#" target="_blank">TG</a> | 
+                        <a href="#" target="_blank">VK</a> | 
+                        <a href="#" target="_blank">WA</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
     <footer>
         <div class="container">
-            <p>© 2023 Eco.Space. Все права защищены.</p>
+            <p>© 2024 NOVA. Все права защищены.</p>
         </div>
     </footer>
 
+    <!-- Скрипты -->
+    <!-- AOS Library -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         AOS.init({
-            duration: 1000,
+            duration: 800,
             once: false,
             offset: 100
         });
+    </script>
 
-        // ========== ФУНКЦИЯ КАРТОЧЕК ==========
-        function toggleCard(card) {
-            document.querySelectorAll('.card').forEach(otherCard => {
-                if (otherCard !== card && otherCard.classList.contains('active')) {
-                    otherCard.classList.remove('active');
-                }
+    <!-- Скрипт для раскрывающихся карточек -->
+    <script>
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.card').forEach(otherCard => {
+                    if (otherCard !== this && otherCard.classList.contains('active')) {
+                        otherCard.classList.remove('active');
+                    }
+                });
+                this.classList.toggle('active');
             });
-            card.classList.toggle('active');
-        }
+        });
     </script>
 
 </body>
