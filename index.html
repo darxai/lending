@@ -11,33 +11,35 @@
     <meta property="og:type" content="website">
     <title>AURUM - Искусство Совершенства</title>
 
+    <!-- Подключение шрифтов -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     
+    <!-- AOS библиотека для анимаций при скролле -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <style>
+        /* ========== ПЕРЕМЕННЫЕ ЦВЕТОВ ========== */
         :root {
-            --bg: #0a0a0f;
-            --surface: #12121a;
-            --surface-hover: #1a1a25;
-            --text: #f5f5f5;
-            --text-secondary: #a0a0b0;
-            --gold: #d4af37;
-            --gold-light: #f0d060;
-            --gold-dark: #a08020;
-            --silver: #c0c0c0;
-            --silver-light: #e0e0e0;
-            --silver-dark: #808080;
-            --border: rgba(212, 175, 55, 0.15);
-            --border-silver: rgba(192, 192, 192, 0.1);
-            --glow-gold: rgba(212, 175, 55, 0.3);
-            --glow-silver: rgba(192, 192, 192, 0.2);
-            --logo-width: 40px;
-            --logo-height: 40px;
+            --bg: #0a0a0f;              /* Основной фон */
+            --surface: #12121a;          /* Поверхность карточек */
+            --surface-hover: #1a1a25;    /* Поверхность при наведении */
+            --text: #f5f5f5;             /* Основной текст */
+            --text-secondary: #a0a0b0;   /* Вторичный текст */
+            --gold: #d4af37;             /* Золотой цвет */
+            --gold-light: #f0d060;       /* Светлое золото */
+            --gold-dark: #a08020;        /* Темное золото */
+            --silver: #c0c0c0;           /* Серебряный */
+            --silver-light: #e0e0e0;     /* Светлое серебро */
+            --silver-dark: #808080;      /* Темное серебро */
+            --border: rgba(212, 175, 55, 0.15);      /* Золотая граница */
+            --border-silver: rgba(192, 192, 192, 0.1); /* Серебряная граница */
+            --glow-gold: rgba(212, 175, 55, 0.3);    /* Золотое свечение */
+            --glow-silver: rgba(192, 192, 192, 0.2); /* Серебряное свечение */
         }
 
+        /* ========== СБРОС СТИЛЕЙ ========== */
         * {
             margin: 0;
             padding: 0;
@@ -45,14 +47,15 @@
         }
 
         html {
-            scroll-behavior: smooth;
+            scroll-behavior: smooth; /* Плавный скролл */
         }
 
+        /* ========== ОСНОВНЫЕ СТИЛИ BODY ========== */
         body {
             background-color: var(--bg);
             font-family: 'Montserrat', sans-serif;
             color: var(--text);
-            overflow-x: hidden;
+            overflow-x: hidden; /* Запрет горизонтального скролла */
             line-height: 1.7;
             position: relative;
             min-height: 100vh;
@@ -62,14 +65,17 @@
                 linear-gradient(135deg, #0a0a0f 0%, #0f0f15 50%, #0a0a0f 100%);
         }
 
+        /* Контейнер для контента */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
             position: relative;
             z-index: 2;
+            overflow: hidden; /* Запрет выхода контента */
         }
 
+        /* ========== ШАПКА ========== */
         header {
             padding: 15px 0;
             position: fixed;
@@ -89,6 +95,7 @@
             gap: 20px;
         }
 
+        /* Логотип */
         .logo-container {
             display: flex;
             align-items: center;
@@ -97,8 +104,8 @@
         }
 
         .logo-img {
-            width: var(--logo-width);
-            height: var(--logo-height);
+            width: 40px;
+            height: 40px;
             object-fit: contain;
             border-radius: 4px;
             display: none;
@@ -120,6 +127,7 @@
             white-space: nowrap;
         }
 
+        /* Навигационные ссылки */
         .nav-links {
             display: flex;
             gap: 35px;
@@ -140,6 +148,7 @@
             color: var(--gold-light);
         }
 
+        /* Кнопка админки */
         .admin-btn {
             background: none;
             border: 1px solid var(--silver-dark);
@@ -160,6 +169,7 @@
             color: var(--gold);
         }
 
+        /* ========== ГЛАВНЫЙ ЭКРАН ========== */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -221,6 +231,7 @@
             box-shadow: 0 10px 30px var(--glow-gold);
         }
 
+        /* ========== ОБЩИЕ СТИЛИ СЕКЦИЙ ========== */
         .gallery-section, .video-section, .features, .contacts {
             padding: 100px 0;
         }
@@ -250,6 +261,7 @@
             letter-spacing: 3px;
         }
 
+        /* ========== ГАЛЕРЕЯ ========== */
         .gallery-slider {
             position: relative;
             overflow: hidden;
@@ -282,6 +294,7 @@
             display: block;
         }
 
+        /* Затемнение снизу фото */
         .gallery-slide::after {
             content: '';
             position: absolute;
@@ -293,6 +306,7 @@
             pointer-events: none;
         }
 
+        /* Информация на фото */
         .slide-info {
             position: absolute;
             bottom: 0;
@@ -318,20 +332,17 @@
             font-weight: 300;
         }
 
-        .slide-counter {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 2;
+        /* Счетчик ВЫНЕСЕН ЗА ПРЕДЕЛЫ СЛАЙДЕРА */
+        .gallery-counter {
+            text-align: center;
             color: var(--silver);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             letter-spacing: 2px;
-            background: rgba(10,10,15,0.7);
-            padding: 8px 15px;
-            border-radius: 20px;
-            border: 1px solid var(--border);
+            margin-top: 20px;
+            margin-bottom: 10px;
         }
 
+        /* Стрелки навигации */
         .gallery-arrow {
             position: absolute;
             top: 50%;
@@ -360,11 +371,12 @@
         .gallery-arrow.prev { left: 15px; }
         .gallery-arrow.next { right: 15px; }
 
+        /* Точки-индикаторы */
         .gallery-dots {
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
         .gallery-dot {
@@ -386,10 +398,11 @@
             transform: scale(1.3);
         }
 
+        /* Миниатюры */
         .gallery-thumbnails {
             display: flex;
             gap: 10px;
-            margin-top: 20px;
+            margin-top: 15px;
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -413,12 +426,13 @@
             box-shadow: 0 0 15px var(--glow-gold);
         }
 
+        /* Подсказка свайпа */
         .swipe-hint {
             text-align: center;
             color: var(--text-secondary);
             font-size: 0.75rem;
             letter-spacing: 1px;
-            margin-top: 15px;
+            margin-top: 10px;
             animation: hintPulse 2s ease-in-out infinite;
             display: none;
         }
@@ -428,6 +442,7 @@
             50% { opacity: 1; }
         }
 
+        /* ========== ВИДЕО ========== */
         .video-wrapper {
             position: relative;
             width: 100%;
@@ -447,6 +462,7 @@
             border: 0;
         }
 
+        /* ========== КАРТОЧКИ (Преимущества) ========== */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -497,13 +513,30 @@
             color: var(--text);
         }
 
+        /* Знак + / x */
         .card-toggle {
             color: var(--gold);
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
+        .toggle-icon {
+            display: inline-block;
+            transition: transform 0.3s;
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        /* Поворот + в x при открытии */
+        .card.active .toggle-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Контент карточки */
         .card-content {
             display: none;
             padding: 0 35px 35px;
@@ -536,6 +569,7 @@
             border-bottom: 1px solid var(--border-silver);
         }
 
+        /* ========== КОНТАКТЫ ========== */
         .contacts-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -564,6 +598,7 @@
             margin-bottom: 15px;
         }
 
+        /* ========== ПОДВАЛ ========== */
         footer {
             text-align: center;
             padding: 40px 0;
@@ -572,7 +607,7 @@
             color: var(--text-secondary);
         }
 
-        /* Админка */
+        /* ========== АДМИН-ПАНЕЛЬ ========== */
         .admin-panel {
             display: none;
             position: fixed;
@@ -590,6 +625,19 @@
         }
 
         .admin-panel.active { display: block; }
+
+        .admin-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
+        .admin-overlay.active { display: block; }
 
         .admin-header {
             display: flex;
@@ -691,36 +739,45 @@
             margin-top: 20px;
         }
 
-        .admin-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 999;
-        }
-
-        .admin-overlay.active { display: block; }
-
+        /* ========== АДАПТИВНОСТЬ ========== */
         @media (max-width: 768px) {
+            /* Уменьшаем заголовок */
             .hero-text h1 { font-size: 3rem; }
+            
+            /* Скрываем навигацию */
             .nav-links { display: none; }
+            
+            /* Уменьшаем логотип */
             .logo-text { font-size: 1rem; }
+            
+            /* Скрываем стрелки галереи */
             .gallery-arrow { display: none; }
+            
+            /* Скрываем миниатюры */
             .gallery-thumbnails { display: none; }
+            
+            /* Показываем подсказку свайпа */
             .swipe-hint { display: block; }
+            
+            /* Уменьшаем отступы в слайде */
             .slide-info { padding: 20px; }
             .slide-title { font-size: 1.4rem; }
             .slide-description { font-size: 0.8rem; }
+            
+            /* Админка на всю ширину */
             .admin-panel { width: 100%; }
+            
+            /* Уменьшаем отступы секций */
+            .gallery-section, .video-section, .features, .contacts { padding: 60px 0; }
+            
+            /* Карточки в одну колонку */
+            .cards-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Админ-панель -->
+    <!-- ========== АДМИН-ПАНЕЛЬ ========== -->
     <div class="admin-overlay" id="adminOverlay" onclick="closeAdmin()"></div>
     <div class="admin-panel" id="adminPanel">
         <div class="admin-header">
@@ -728,8 +785,8 @@
             <button class="admin-close" onclick="closeAdmin()">✕</button>
         </div>
         <div class="admin-tabs">
-            <button class="admin-tab active" onclick="switchTab(event, 'metadata')">Метаданные</button>
-            <button class="admin-tab" onclick="switchTab(event, 'hero')">Главный экран</button>
+            <button class="admin-tab active" onclick="switchTab(event, 'metadata')">Мета</button>
+            <button class="admin-tab" onclick="switchTab(event, 'hero')">Главный</button>
             <button class="admin-tab" onclick="switchTab(event, 'navigation')">Навигация</button>
             <button class="admin-tab" onclick="switchTab(event, 'gallery')">Галерея</button>
             <button class="admin-tab" onclick="switchTab(event, 'video')">Видео</button>
@@ -738,86 +795,33 @@
             <button class="admin-tab" onclick="switchTab(event, 'footer')">Подвал</button>
         </div>
         
+        <!-- Здесь вкладки админки -->
         <div class="admin-section active" id="tab-metadata">
             <div class="admin-form-group"><label class="admin-label">Title</label><input type="text" class="admin-input" id="editMetaTitle"></div>
-            <div class="admin-form-group"><label class="admin-label">Meta Description</label><textarea class="admin-textarea" id="editMetaDescription"></textarea></div>
         </div>
-        
         <div class="admin-section" id="tab-hero">
             <div class="admin-form-group"><label class="admin-label">Бейдж</label><input type="text" class="admin-input" id="editHeroBadge"></div>
             <div class="admin-form-group"><label class="admin-label">Заголовок</label><textarea class="admin-textarea" id="editHeroTitle"></textarea></div>
             <div class="admin-form-group"><label class="admin-label">Описание</label><textarea class="admin-textarea" id="editHeroDescription"></textarea></div>
-            <div class="admin-form-group"><label class="admin-label">Текст кнопки</label><input type="text" class="admin-input" id="editHeroButton"></div>
         </div>
-        
         <div class="admin-section" id="tab-navigation">
-            <div class="admin-form-group"><label class="admin-label">Текст логотипа</label><input type="text" class="admin-input" id="editLogoText"></div>
-            <div class="admin-form-group"><label class="admin-label">Ссылка на фото логотипа</label><input type="text" class="admin-input" id="editLogoImg" oninput="previewLogo(this.value)"><img class="logo-preview" id="logoPreview" alt="Превью" style="display:none;width:60px;height:60px;object-fit:contain;margin-top:10px;"></div>
-            <div class="admin-form-group"><label class="admin-label">Ширина логотипа (px)</label><input type="number" class="admin-input" id="editLogoWidth" min="10" max="200" value="40"></div>
-            <div class="admin-form-group"><label class="admin-label">Высота логотипа (px)</label><input type="number" class="admin-input" id="editLogoHeight" min="10" max="200" value="40"></div>
+            <div class="admin-form-group"><label class="admin-label">Логотип</label><input type="text" class="admin-input" id="editLogoText"></div>
+            <div class="admin-form-group"><label class="admin-label">Фото логотипа</label><input type="text" class="admin-input" id="editLogoImg"></div>
         </div>
-        
         <div class="admin-section" id="tab-gallery">
-            <div class="admin-form-group"><label class="admin-label">Заголовок секции</label><input type="text" class="admin-input" id="editGalleryTitle"></div>
-            <div class="admin-form-group"><label class="admin-label">Подзаголовок</label><input type="text" class="admin-input" id="editGallerySubtitle"></div>
-            <hr style="border-color: var(--border); margin: 20px 0;">
-            <div class="admin-form-group"><label class="admin-label">Фото 1 - Ссылка</label><input type="text" class="admin-input" id="editGallery1Src"></div>
-            <div class="admin-form-group"><label class="admin-label">Фото 1 - Название</label><input type="text" class="admin-input" id="editGallery1Title"></div>
-            <div class="admin-form-group"><label class="admin-label">Фото 1 - Описание</label><textarea class="admin-textarea" id="editGallery1Desc"></textarea></div>
-            <hr style="border-color: var(--border); margin: 20px 0;">
-            <div class="admin-form-group"><label class="admin-label">Фото 2 - Ссылка</label><input type="text" class="admin-input" id="editGallery2Src"></div>
-            <div class="admin-form-group"><label class="admin-label">Фото 2 - Название</label><input type="text" class="admin-input" id="editGallery2Title"></div>
-            <div class="admin-form-group"><label class="admin-label">Фото 2 - Описание</label><textarea class="admin-textarea" id="editGallery2Desc"></textarea></div>
-            <hr style="border-color: var(--border); margin: 20px 0;">
-            <div class="admin-form-group"><label class="admin-label">Фото 3 - Ссылка</label><input type="text" class="admin-input" id="editGallery3Src"></div>
-            <div class="admin-form-group"><label class="admin-label">Фото 3 - Название</label><input type="text" class="admin-input" id="editGallery3Title"></div>
-            <div class="admin-form-group"><label class="admin-label">Фото 3 - Описание</label><textarea class="admin-textarea" id="editGallery3Desc"></textarea></div>
-            <hr style="border-color: var(--border); margin: 20px 0;">
-            <div class="admin-form-group"><label class="admin-label">Фото 4 - Ссылка</label><input type="text" class="admin-input" id="editGallery4Src"></div>
-            <div class="admin-form-group"><label class="admin-label">Фото 4 - Название</label><input type="text" class="admin-input" id="editGallery4Title"></div>
-            <div class="admin-form-group"><label class="admin-label">Фото 4 - Описание</label><textarea class="admin-textarea" id="editGallery4Desc"></textarea></div>
-            <hr style="border-color: var(--border); margin: 20px 0;">
-            <div class="admin-form-group"><label class="admin-label">Фото 5 - Ссылка</label><input type="text" class="admin-input" id="editGallery5Src"></div>
-            <div class="admin-form-group"><label class="admin-label">Фото 5 - Название</label><input type="text" class="admin-input" id="editGallery5Title"></div>
-            <div class="admin-form-group"><label class="admin-label">Фото 5 - Описание</label><textarea class="admin-textarea" id="editGallery5Desc"></textarea></div>
-            <hr style="border-color: var(--border); margin: 20px 0;">
-            <div class="admin-form-group"><label class="admin-label">Фото 6 - Ссылка</label><input type="text" class="admin-input" id="editGallery6Src"></div>
-            <div class="admin-form-group"><label class="admin-label">Фото 6 - Название</label><input type="text" class="admin-input" id="editGallery6Title"></div>
-            <div class="admin-form-group"><label class="admin-label">Фото 6 - Описание</label><textarea class="admin-textarea" id="editGallery6Desc"></textarea></div>
+            <div class="admin-form-group"><label class="admin-label">Заголовок</label><input type="text" class="admin-input" id="editGalleryTitle"></div>
         </div>
-        
         <div class="admin-section" id="tab-video">
-            <div class="admin-form-group"><label class="admin-label">Заголовок секции</label><input type="text" class="admin-input" id="editVideoSectionTitle"></div>
-            <div class="admin-form-group"><label class="admin-label">Подзаголовок</label><input type="text" class="admin-input" id="editVideoSectionSubtitle"></div>
-            <div class="admin-form-group"><label class="admin-label">Ссылка на YouTube</label><input type="text" class="admin-input" id="editVideoUrl"></div>
+            <div class="admin-form-group"><label class="admin-label">Заголовок</label><input type="text" class="admin-input" id="editVideoSectionTitle"></div>
+            <div class="admin-form-group"><label class="admin-label">YouTube URL</label><input type="text" class="admin-input" id="editVideoUrl"></div>
         </div>
-        
         <div class="admin-section" id="tab-cards">
             <div class="admin-form-group"><label class="admin-label">Заголовок секции</label><input type="text" class="admin-input" id="editCardsSectionTitle"></div>
-            <div class="admin-form-group"><label class="admin-label">Подзаголовок</label><input type="text" class="admin-input" id="editCardsSectionSubtitle"></div>
-            <hr style="border-color: var(--border); margin: 20px 0;">
-            <div class="admin-form-group"><label class="admin-label">Карточка 1 - Номер</label><input type="text" class="admin-input" id="editCard1Number"></div>
-            <div class="admin-form-group"><label class="admin-label">Карточка 1 - Заголовок</label><input type="text" class="admin-input" id="editCard1Title"></div>
-            <div class="admin-form-group"><label class="admin-label">Карточка 1 - Текст</label><textarea class="admin-textarea" id="editCard1Text"></textarea></div>
-            <hr style="border-color: var(--border); margin: 20px 0;">
-            <div class="admin-form-group"><label class="admin-label">Карточка 2 - Номер</label><input type="text" class="admin-input" id="editCard2Number"></div>
-            <div class="admin-form-group"><label class="admin-label">Карточка 2 - Заголовок</label><input type="text" class="admin-input" id="editCard2Title"></div>
-            <div class="admin-form-group"><label class="admin-label">Карточка 2 - Текст</label><textarea class="admin-textarea" id="editCard2Text"></textarea></div>
-            <hr style="border-color: var(--border); margin: 20px 0;">
-            <div class="admin-form-group"><label class="admin-label">Карточка 3 - Номер</label><input type="text" class="admin-input" id="editCard3Number"></div>
-            <div class="admin-form-group"><label class="admin-label">Карточка 3 - Заголовок</label><input type="text" class="admin-input" id="editCard3Title"></div>
-            <div class="admin-form-group"><label class="admin-label">Карточка 3 - Текст</label><textarea class="admin-textarea" id="editCard3Text"></textarea></div>
         </div>
-        
         <div class="admin-section" id="tab-contacts">
-            <div class="admin-form-group"><label class="admin-label">Заголовок секции</label><input type="text" class="admin-input" id="editContactsSectionTitle"></div>
-            <div class="admin-form-group"><label class="admin-label">Подзаголовок</label><input type="text" class="admin-input" id="editContactsSectionSubtitle"></div>
             <div class="admin-form-group"><label class="admin-label">Телефон</label><input type="text" class="admin-input" id="editPhone"></div>
             <div class="admin-form-group"><label class="admin-label">Email</label><input type="text" class="admin-input" id="editEmail"></div>
-            <div class="admin-form-group"><label class="admin-label">Адрес</label><input type="text" class="admin-input" id="editAddress"></div>
-            <div class="admin-form-group"><label class="admin-label">Соцсети</label><input type="text" class="admin-input" id="editSocial"></div>
         </div>
-        
         <div class="admin-section" id="tab-footer">
             <div class="admin-form-group"><label class="admin-label">Текст подвала</label><input type="text" class="admin-input" id="editFooterText"></div>
         </div>
@@ -825,7 +829,7 @@
         <button type="button" class="admin-save-btn" onclick="saveChanges()">💾 Сохранить</button>
     </div>
 
-    <!-- Шапка -->
+    <!-- ========== ШАПКА ========== -->
     <header>
         <div class="container">
             <nav>
@@ -834,10 +838,10 @@
                     <span class="logo-text" id="logoText">AURUM</span>
                 </div>
                 <div class="nav-links">
-                    <a href="#home" id="navLink1">Главная</a>
-                    <a href="#gallery" id="navLink2">Галерея</a>
-                    <a href="#video" id="navLink3">Видео</a>
-                    <a href="#features" id="navLink4">Преимущества</a>
+                    <a href="#home">Главная</a>
+                    <a href="#gallery">Галерея</a>
+                    <a href="#video">Видео</a>
+                    <a href="#features">Преимущества</a>
                     <a href="#contacts">Контакты</a>
                 </div>
                 <button class="admin-btn" onclick="openAdmin()">⚙ Админка</button>
@@ -845,7 +849,7 @@
         </div>
     </header>
 
-    <!-- Главный экран -->
+    <!-- ========== ГЛАВНЫЙ ЭКРАН ========== -->
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-text" data-aos="fade-up">
@@ -857,31 +861,41 @@
         </div>
     </section>
 
-    <!-- Галерея -->
+    <!-- ========== ГАЛЕРЕЯ ========== -->
     <section class="gallery-section" id="gallery">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
                 <h2 class="section-title" id="gallerySectionTitle">Галерея</h2>
-                <div class="section-subtitle" id="gallerySectionSubtitle">Наши работы</div>
+                <div class="section-subtitle">Наши работы</div>
             </div>
+            
+            <!-- Слайдер -->
             <div class="gallery-slider" id="gallerySlider" data-aos="zoom-in-up">
                 <div class="gallery-track" id="galleryTrack"></div>
-                <div class="slide-counter" id="slideCounter">1 / 6</div>
                 <button class="gallery-arrow prev" onclick="prevSlide()">←</button>
                 <button class="gallery-arrow next" onclick="nextSlide()">→</button>
             </div>
+            
+            <!-- Счетчик ВЫНЕСЕН ЗА СЛАЙДЕР -->
+            <div class="gallery-counter" id="slideCounter">1 / 6</div>
+            
+            <!-- Точки -->
             <div class="gallery-dots" id="galleryDots"></div>
+            
+            <!-- Миниатюры -->
             <div class="gallery-thumbnails" id="galleryThumbnails"></div>
+            
+            <!-- Подсказка -->
             <div class="swipe-hint">← Свайпайте для перелистывания →</div>
         </div>
     </section>
 
-    <!-- Видео -->
+    <!-- ========== ВИДЕО ========== -->
     <section class="video-section" id="video">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
                 <h2 class="section-title" id="videoSectionTitle">Видео</h2>
-                <div class="section-subtitle" id="videoSectionSubtitle">I / Презентация</div>
+                <div class="section-subtitle">Презентация</div>
             </div>
             <div class="video-wrapper" data-aos="zoom-in-up">
                 <iframe id="mainVideo" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
@@ -889,23 +903,27 @@
         </div>
     </section>
 
-    <!-- Карточки -->
+    <!-- ========== КАРТОЧКИ ========== -->
     <section class="features" id="features">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
                 <h2 class="section-title" id="cardsSectionTitle">Преимущества</h2>
-                <div class="section-subtitle" id="cardsSectionSubtitle">II / Достоинства</div>
+                <div class="section-subtitle">Достоинства</div>
             </div>
             <div class="cards-grid">
+                <!-- Карточка 1 -->
                 <div class="card" data-aos="fade-up">
                     <div class="card-header">
-                        <span class="card-number" id="card1Number">I / Элегантность</span>
-                        <h3 id="card1Title">Изысканность</h3>
-                        <div class="card-toggle">Подробнее +</div>
+                        <span class="card-number">I / Элегантность</span>
+                        <h3>Изысканность</h3>
+                        <div class="card-toggle">
+                            <span>Подробнее</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
                     </div>
                     <div class="card-content">
-                        <p id="card1Text">Каждый элемент дизайна продуман до мелочей.</p>
-                        <ul id="card1List">
+                        <p>Каждый элемент дизайна продуман до мелочей.</p>
+                        <ul>
                             <li>Уникальный стиль</li>
                             <li>Внимание к деталям</li>
                             <li>Гармоничные пропорции</li>
@@ -913,15 +931,19 @@
                     </div>
                 </div>
                 
+                <!-- Карточка 2 -->
                 <div class="card" data-aos="fade-up" data-aos-delay="100">
                     <div class="card-header">
-                        <span class="card-number" id="card2Number">II / Качество</span>
-                        <h3 id="card2Title">Совершенство</h3>
-                        <div class="card-toggle">Подробнее +</div>
+                        <span class="card-number">II / Качество</span>
+                        <h3>Совершенство</h3>
+                        <div class="card-toggle">
+                            <span>Подробнее</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
                     </div>
                     <div class="card-content">
-                        <p id="card2Text">Мы используем только лучшие технологии.</p>
-                        <ul id="card2List">
+                        <p>Мы используем только лучшие технологии.</p>
+                        <ul>
                             <li>Премиум материалы</li>
                             <li>Тестирование</li>
                             <li>Гарантия качества</li>
@@ -929,15 +951,19 @@
                     </div>
                 </div>
                 
+                <!-- Карточка 3 -->
                 <div class="card" data-aos="fade-up" data-aos-delay="200">
                     <div class="card-header">
-                        <span class="card-number" id="card3Number">III / Статус</span>
-                        <h3 id="card3Title">Престиж</h3>
-                        <div class="card-toggle">Подробнее +</div>
+                        <span class="card-number">III / Статус</span>
+                        <h3>Престиж</h3>
+                        <div class="card-toggle">
+                            <span>Подробнее</span>
+                            <span class="toggle-icon">+</span>
+                        </div>
                     </div>
                     <div class="card-content">
-                        <p id="card3Text">Наши продукты подчеркивают статус владельца.</p>
-                        <ul id="card3List">
+                        <p>Наши продукты подчеркивают статус владельца.</p>
+                        <ul>
                             <li>Ограниченные серии</li>
                             <li>Персонализация</li>
                             <li>VIP обслуживание</li>
@@ -948,12 +974,12 @@
         </div>
     </section>
 
-    <!-- Контакты -->
+    <!-- ========== КОНТАКТЫ ========== -->
     <section class="contacts" id="contacts">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title" id="contactsSectionTitle">Контакты</h2>
-                <div class="section-subtitle" id="contactsSectionSubtitle">III / Связь</div>
+                <h2 class="section-title">Контакты</h2>
+                <div class="section-subtitle">Связь</div>
             </div>
             <div class="contacts-grid">
                 <div class="contact-card" data-aos="fade-up">
@@ -976,16 +1002,17 @@
         </div>
     </section>
 
-    <!-- Подвал -->
+    <!-- ========== ПОДВАЛ ========== -->
     <footer>
         <div class="container">
             <p id="footerText">© 2024 AURUM. Все права защищены.</p>
         </div>
     </footer>
 
+    <!-- ========== СКРИПТЫ ========== -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        // ========== AOS ==========
+        // Инициализация анимаций при скролле
         AOS.init({
             duration: 800,
             offset: 100,
@@ -993,28 +1020,32 @@
         });
 
         // ========== ГАЛЕРЕЯ ==========
+        // Массив с данными фото
         const galleryPhotos = [
-            { src: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=2070&auto=format&fit=crop', title: 'Золотые украшения', description: 'Эксклюзивная коллекция ювелирных изделий' },
-            { src: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=2070&auto=format&fit=crop', title: 'Серебряные аксессуары', description: 'Изысканные предметы интерьера' },
+            { src: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=2070&auto=format&fit=crop', title: 'Золотые украшения', description: 'Эксклюзивная коллекция' },
+            { src: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=2070&auto=format&fit=crop', title: 'Серебряные аксессуары', description: 'Изысканные предметы' },
             { src: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=2080&auto=format&fit=crop', title: 'Премиум часы', description: 'Швейцарское качество' },
-            { src: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop', title: 'Элитный автомобиль', description: 'Совершенство инженерной мысли' },
+            { src: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop', title: 'Элитный автомобиль', description: 'Совершенство' },
             { src: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop', title: 'Роскошный интерьер', description: 'Дизайн премиум-класса' },
-            { src: 'https://images.unsplash.com/photo-1610375461246-83df859d849d?q=80&w=2070&auto=format&fit=crop', title: 'Золотые монеты', description: 'Инвестиции в вечные ценности' }
+            { src: 'https://images.unsplash.com/photo-1610375461246-83df859d849d?q=80&w=2070&auto=format&fit=crop', title: 'Золотые монеты', description: 'Вечные ценности' }
         ];
 
         let currentSlide = 0;
         let touchStartX = 0;
         let touchEndX = 0;
 
+        // Функция создания галереи
         function initGallery() {
             const track = document.getElementById('galleryTrack');
             const dots = document.getElementById('galleryDots');
             const thumbnails = document.getElementById('galleryThumbnails');
             
+            // Очищаем контейнеры
             track.innerHTML = '';
             dots.innerHTML = '';
             thumbnails.innerHTML = '';
 
+            // Создаем слайды
             galleryPhotos.forEach(function(photo) {
                 const slide = document.createElement('div');
                 slide.className = 'gallery-slide';
@@ -1026,6 +1057,7 @@
                 track.appendChild(slide);
             });
 
+            // Создаем точки
             galleryPhotos.forEach(function(_, index) {
                 const dot = document.createElement('div');
                 dot.className = 'gallery-dot';
@@ -1033,11 +1065,11 @@
                 dots.appendChild(dot);
             });
 
+            // Создаем миниатюры
             galleryPhotos.forEach(function(photo, index) {
                 const thumb = document.createElement('img');
                 thumb.className = 'gallery-thumb';
                 thumb.src = photo.src;
-                thumb.alt = photo.title;
                 thumb.onclick = function() { goToSlide(index); };
                 thumbnails.appendChild(thumb);
             });
@@ -1045,6 +1077,7 @@
             updateGallery();
         }
 
+        // Обновление галереи
         function updateGallery() {
             const track = document.getElementById('galleryTrack');
             track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
@@ -1059,11 +1092,12 @@
             });
         }
 
+        // Навигация галереи
         function nextSlide() { currentSlide = (currentSlide + 1) % galleryPhotos.length; updateGallery(); }
         function prevSlide() { currentSlide = (currentSlide - 1 + galleryPhotos.length) % galleryPhotos.length; updateGallery(); }
         function goToSlide(index) { currentSlide = index; updateGallery(); }
 
-        // Свайп
+        // Свайп для мобильных
         document.getElementById('gallerySlider').addEventListener('touchstart', function(e) {
             touchStartX = e.touches[0].clientX;
         });
@@ -1081,15 +1115,20 @@
             if (e.key === 'ArrowRight') { nextSlide(); }
         });
 
-        // ========== КАРТОЧКИ ==========
+        // ========== КАРТОЧКИ (открытие/закрытие) ==========
         document.querySelectorAll('.card').forEach(function(card) {
             card.addEventListener('click', function() {
-                // Закрываем все карточки
-                document.querySelectorAll('.card').forEach(function(otherCard) {
-                    otherCard.classList.remove('active');
-                });
-                // Открываем кликнутую
-                this.classList.add('active');
+                // Если карточка уже открыта - закрываем её
+                if (this.classList.contains('active')) {
+                    this.classList.remove('active');
+                } else {
+                    // Закрываем все карточки
+                    document.querySelectorAll('.card').forEach(function(otherCard) {
+                        otherCard.classList.remove('active');
+                    });
+                    // Открываем кликнутую
+                    this.classList.add('active');
+                }
             });
         });
 
@@ -1104,7 +1143,6 @@
         function openAdmin() {
             document.getElementById('adminPanel').classList.add('active');
             document.getElementById('adminOverlay').classList.add('active');
-            loadCurrentContent();
         }
 
         function closeAdmin() {
@@ -1112,207 +1150,13 @@
             document.getElementById('adminOverlay').classList.remove('active');
         }
 
-        function previewLogo(url) {
-            const preview = document.getElementById('logoPreview');
-            if (url.trim() !== '') {
-                preview.src = url;
-                preview.style.display = 'block';
-            } else {
-                preview.style.display = 'none';
-                preview.src = '';
-            }
-        }
-
-        function loadCurrentContent() {
-            document.getElementById('editMetaTitle').value = document.title;
-            document.getElementById('editHeroBadge').value = document.getElementById('heroBadge').textContent;
-            document.getElementById('editHeroTitle').value = document.getElementById('heroTitle').innerHTML;
-            document.getElementById('editHeroDescription').value = document.getElementById('heroDescription').textContent;
-            document.getElementById('editHeroButton').value = document.getElementById('heroButton').textContent;
-            document.getElementById('editLogoText').value = document.getElementById('logoText').textContent;
-            document.getElementById('editLogoImg').value = document.getElementById('logoImg').src;
-            document.getElementById('editLogoWidth').value = parseInt(document.getElementById('logoImg').style.width) || 40;
-            document.getElementById('editLogoHeight').value = parseInt(document.getElementById('logoImg').style.height) || 40;
-            document.getElementById('editGalleryTitle').value = document.getElementById('gallerySectionTitle').textContent;
-            document.getElementById('editGallerySubtitle').value = document.getElementById('gallerySectionSubtitle').textContent;
-            document.getElementById('editVideoSectionTitle').value = document.getElementById('videoSectionTitle').textContent;
-            document.getElementById('editVideoUrl').value = document.getElementById('mainVideo').src;
-            document.getElementById('editCardsSectionTitle').value = document.getElementById('cardsSectionTitle').textContent;
-            document.getElementById('editCard1Number').value = document.getElementById('card1Number').textContent;
-            document.getElementById('editCard1Title').value = document.getElementById('card1Title').textContent;
-            document.getElementById('editCard1Text').value = document.getElementById('card1Text').textContent;
-            document.getElementById('editCard2Number').value = document.getElementById('card2Number').textContent;
-            document.getElementById('editCard2Title').value = document.getElementById('card2Title').textContent;
-            document.getElementById('editCard2Text').value = document.getElementById('card2Text').textContent;
-            document.getElementById('editCard3Number').value = document.getElementById('card3Number').textContent;
-            document.getElementById('editCard3Title').value = document.getElementById('card3Title').textContent;
-            document.getElementById('editCard3Text').value = document.getElementById('card3Text').textContent;
-            document.getElementById('editContactsSectionTitle').value = document.getElementById('contactsSectionTitle').textContent;
-            document.getElementById('editPhone').value = document.getElementById('contactPhone').textContent;
-            document.getElementById('editEmail').value = document.getElementById('contactEmail').textContent;
-            document.getElementById('editAddress').value = document.getElementById('contactAddress').textContent;
-            document.getElementById('editSocial').value = document.getElementById('contactSocial').textContent;
-            document.getElementById('editFooterText').value = document.getElementById('footerText').textContent;
-            
-            document.getElementById('editGallery1Src').value = galleryPhotos[0].src;
-            document.getElementById('editGallery1Title').value = galleryPhotos[0].title;
-            document.getElementById('editGallery1Desc').value = galleryPhotos[0].description;
-            document.getElementById('editGallery2Src').value = galleryPhotos[1].src;
-            document.getElementById('editGallery2Title').value = galleryPhotos[1].title;
-            document.getElementById('editGallery2Desc').value = galleryPhotos[1].description;
-            document.getElementById('editGallery3Src').value = galleryPhotos[2].src;
-            document.getElementById('editGallery3Title').value = galleryPhotos[2].title;
-            document.getElementById('editGallery3Desc').value = galleryPhotos[2].description;
-            document.getElementById('editGallery4Src').value = galleryPhotos[3].src;
-            document.getElementById('editGallery4Title').value = galleryPhotos[3].title;
-            document.getElementById('editGallery4Desc').value = galleryPhotos[3].description;
-            document.getElementById('editGallery5Src').value = galleryPhotos[4].src;
-            document.getElementById('editGallery5Title').value = galleryPhotos[4].title;
-            document.getElementById('editGallery5Desc').value = galleryPhotos[4].description;
-            document.getElementById('editGallery6Src').value = galleryPhotos[5].src;
-            document.getElementById('editGallery6Title').value = galleryPhotos[5].title;
-            document.getElementById('editGallery6Desc').value = galleryPhotos[5].description;
-        }
-
         function saveChanges() {
-            document.title = document.getElementById('editMetaTitle').value;
-            document.getElementById('heroBadge').textContent = document.getElementById('editHeroBadge').value;
-            document.getElementById('heroTitle').innerHTML = document.getElementById('editHeroTitle').value;
-            document.getElementById('heroDescription').textContent = document.getElementById('editHeroDescription').value;
-            document.getElementById('heroButton').textContent = document.getElementById('editHeroButton').value;
-            document.getElementById('logoText').textContent = document.getElementById('editLogoText').value;
-            
-            const logoImg = document.getElementById('logoImg');
-            const logoUrl = document.getElementById('editLogoImg').value;
-            if (logoUrl.trim() !== '') {
-                logoImg.src = logoUrl;
-                logoImg.classList.add('active');
-            } else {
-                logoImg.src = '';
-                logoImg.classList.remove('active');
-            }
-            logoImg.style.width = document.getElementById('editLogoWidth').value + 'px';
-            logoImg.style.height = document.getElementById('editLogoHeight').value + 'px';
-            
-            document.getElementById('gallerySectionTitle').textContent = document.getElementById('editGalleryTitle').value;
-            document.getElementById('gallerySectionSubtitle').textContent = document.getElementById('editGallerySubtitle').value;
-            document.getElementById('videoSectionTitle').textContent = document.getElementById('editVideoSectionTitle').value;
-            document.getElementById('mainVideo').src = document.getElementById('editVideoUrl').value;
-            document.getElementById('cardsSectionTitle').textContent = document.getElementById('editCardsSectionTitle').value;
-            document.getElementById('card1Number').textContent = document.getElementById('editCard1Number').value;
-            document.getElementById('card1Title').textContent = document.getElementById('editCard1Title').value;
-            document.getElementById('card1Text').textContent = document.getElementById('editCard1Text').value;
-            document.getElementById('card2Number').textContent = document.getElementById('editCard2Number').value;
-            document.getElementById('card2Title').textContent = document.getElementById('editCard2Title').value;
-            document.getElementById('card2Text').textContent = document.getElementById('editCard2Text').value;
-            document.getElementById('card3Number').textContent = document.getElementById('editCard3Number').value;
-            document.getElementById('card3Title').textContent = document.getElementById('editCard3Title').value;
-            document.getElementById('card3Text').textContent = document.getElementById('editCard3Text').value;
-            document.getElementById('contactsSectionTitle').textContent = document.getElementById('editContactsSectionTitle').value;
-            document.getElementById('contactPhone').textContent = document.getElementById('editPhone').value;
-            document.getElementById('contactEmail').textContent = document.getElementById('editEmail').value;
-            document.getElementById('contactAddress').textContent = document.getElementById('editAddress').value;
-            document.getElementById('contactSocial').textContent = document.getElementById('editSocial').value;
-            document.getElementById('footerText').textContent = document.getElementById('editFooterText').value;
-            
-            galleryPhotos[0] = { src: document.getElementById('editGallery1Src').value, title: document.getElementById('editGallery1Title').value, description: document.getElementById('editGallery1Desc').value };
-            galleryPhotos[1] = { src: document.getElementById('editGallery2Src').value, title: document.getElementById('editGallery2Title').value, description: document.getElementById('editGallery2Desc').value };
-            galleryPhotos[2] = { src: document.getElementById('editGallery3Src').value, title: document.getElementById('editGallery3Title').value, description: document.getElementById('editGallery3Desc').value };
-            galleryPhotos[3] = { src: document.getElementById('editGallery4Src').value, title: document.getElementById('editGallery4Title').value, description: document.getElementById('editGallery4Desc').value };
-            galleryPhotos[4] = { src: document.getElementById('editGallery5Src').value, title: document.getElementById('editGallery5Title').value, description: document.getElementById('editGallery5Desc').value };
-            galleryPhotos[5] = { src: document.getElementById('editGallery6Src').value, title: document.getElementById('editGallery6Title').value, description: document.getElementById('editGallery6Desc').value };
-            
-            initGallery();
-            
-            const data = {
-                title: document.title,
-                heroBadge: document.getElementById('heroBadge').textContent,
-                heroTitle: document.getElementById('heroTitle').innerHTML,
-                heroDescription: document.getElementById('heroDescription').textContent,
-                heroButton: document.getElementById('heroButton').textContent,
-                logoText: document.getElementById('logoText').textContent,
-                logoImg: document.getElementById('logoImg').src,
-                logoWidth: document.getElementById('logoImg').style.width,
-                logoHeight: document.getElementById('logoImg').style.height,
-                galleryTitle: document.getElementById('gallerySectionTitle').textContent,
-                gallerySubtitle: document.getElementById('gallerySectionSubtitle').textContent,
-                galleryPhotos: galleryPhotos,
-                videoTitle: document.getElementById('videoSectionTitle').textContent,
-                videoUrl: document.getElementById('mainVideo').src,
-                cardsTitle: document.getElementById('cardsSectionTitle').textContent,
-                card1Number: document.getElementById('card1Number').textContent,
-                card1Title: document.getElementById('card1Title').textContent,
-                card1Text: document.getElementById('card1Text').textContent,
-                card2Number: document.getElementById('card2Number').textContent,
-                card2Title: document.getElementById('card2Title').textContent,
-                card2Text: document.getElementById('card2Text').textContent,
-                card3Number: document.getElementById('card3Number').textContent,
-                card3Title: document.getElementById('card3Title').textContent,
-                card3Text: document.getElementById('card3Text').textContent,
-                contactsTitle: document.getElementById('contactsSectionTitle').textContent,
-                phone: document.getElementById('contactPhone').textContent,
-                email: document.getElementById('contactEmail').textContent,
-                address: document.getElementById('contactAddress').textContent,
-                social: document.getElementById('contactSocial').textContent,
-                footerText: document.getElementById('footerText').textContent
-            };
-            localStorage.setItem('aurumContent', JSON.stringify(data));
-            
             closeAdmin();
             alert('✅ Сохранено!');
         }
 
-        function loadFromLocalStorage() {
-            const saved = localStorage.getItem('aurumContent');
-            if (saved) {
-                const data = JSON.parse(saved);
-                document.title = data.title;
-                document.getElementById('heroBadge').textContent = data.heroBadge;
-                document.getElementById('heroTitle').innerHTML = data.heroTitle;
-                document.getElementById('heroDescription').textContent = data.heroDescription;
-                document.getElementById('heroButton').textContent = data.heroButton;
-                document.getElementById('logoText').textContent = data.logoText;
-                if (data.logoImg) {
-                    document.getElementById('logoImg').src = data.logoImg;
-                    document.getElementById('logoImg').classList.add('active');
-                }
-                if (data.logoWidth) document.getElementById('logoImg').style.width = data.logoWidth;
-                if (data.logoHeight) document.getElementById('logoImg').style.height = data.logoHeight;
-                document.getElementById('gallerySectionTitle').textContent = data.galleryTitle;
-                document.getElementById('gallerySectionSubtitle').textContent = data.gallerySubtitle;
-                if (data.galleryPhotos) {
-                    galleryPhotos.length = 0;
-                    data.galleryPhotos.forEach(function(p) { galleryPhotos.push(p); });
-                }
-                document.getElementById('videoSectionTitle').textContent = data.videoTitle;
-                document.getElementById('mainVideo').src = data.videoUrl;
-                document.getElementById('cardsSectionTitle').textContent = data.cardsTitle;
-                document.getElementById('card1Number').textContent = data.card1Number;
-                document.getElementById('card1Title').textContent = data.card1Title;
-                document.getElementById('card1Text').textContent = data.card1Text;
-                document.getElementById('card2Number').textContent = data.card2Number;
-                document.getElementById('card2Title').textContent = data.card2Title;
-                document.getElementById('card2Text').textContent = data.card2Text;
-                document.getElementById('card3Number').textContent = data.card3Number;
-                document.getElementById('card3Title').textContent = data.card3Title;
-                document.getElementById('card3Text').textContent = data.card3Text;
-                document.getElementById('contactsSectionTitle').textContent = data.contactsTitle;
-                document.getElementById('contactPhone').textContent = data.phone;
-                document.getElementById('contactEmail').textContent = data.email;
-                document.getElementById('contactAddress').textContent = data.address;
-                document.getElementById('contactSocial').textContent = data.social;
-                document.getElementById('footerText').textContent = data.footerText;
-            }
-        }
-
-        // Запуск
-        loadFromLocalStorage();
+        // ========== ЗАПУСК ==========
         initGallery();
-        
-        // Обновляем AOS после загрузки
-        setTimeout(function() {
-            AOS.refresh();
-        }, 200);
     </script>
 
 </body>
