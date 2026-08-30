@@ -947,16 +947,16 @@
                             <li>Премиум материалы</li>
                             <li>Тестирование</li>
                             <li>Гарантия качества</li>
-							 <li>Премиум материалы 33 </li>
+							 <li>Премиум материалы 55 </li>
                             <li>Тестирование</li>
                             <li>Гарантия качества</li>
-							 <li>Премиум материалы 33</li>
+							 <li>Премиум материалы 55</li>
                             <li>Тестирование</li>
                             <li>Гарантия качества</li>
-							 <li>Премиум материалы 33</li>
+							 <li>Премиум материалы 55</li>
                             <li>Тестирование</li>
                             <li>Гарантия качества</li>
-							 <li>Премиум материалы 33</li>
+							 <li>Премиум материалы 55</li>
                             <li>Тестирование</li>
                             <li>Гарантия качества</li>
                         </ul>
@@ -1129,15 +1129,7 @@ document.addEventListener('keydown', function(e) {
 // ========== ФУНКЦИЯ КАРТОЧЕК ==========
 
 // ========== КАРТОЧКИ ==========
-window.toggleCard = function(card) {
-    // Закрываем все карточки
-    document.querySelectorAll('.card').forEach(function(c) {
-        c.classList.remove('active');
-    });
-    
-    // Открываем кликнутую
-    card.classList.add('active');
-};
+
 
 // ========== АДМИНКА ==========
 function switchTab(event, tabName) {
@@ -1323,6 +1315,15 @@ function loadFromLocalStorage() {
 loadFromLocalStorage();
 initGallery();
     </script>
-
+<script>
+    // Явно привязываем функцию к window
+    window.toggleCard = function(card) {
+        document.querySelectorAll('.card').forEach(function(c) {
+            c.classList.remove('active');
+        });
+        card.classList.add('active');
+    };
+</script>
+</body>
 </body>
 </html>
