@@ -1114,11 +1114,11 @@ document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowRight') { nextSlide(); }
 });
 
-// ========== КАРТОЧКИ (ИСПРАВЛЕНО) ==========
-// Назначаем обработчик клика на каждую карточку
+// ========== КАРТОЧКИ (ИСПРАВЛЕНО ДЛЯ ДЕСКТОПА) ==========
+// Удаляем все предыдущие обработчики и добавляем новые
 document.querySelectorAll('.card').forEach(function(card) {
-    card.addEventListener('click', function(e) {
-        // Проверяем, открыта ли уже эта карточка
+    card.addEventListener('click', function() {
+        // Проверяем, была ли эта карточка уже открыта
         const isActive = this.classList.contains('active');
         
         // Закрываем ВСЕ карточки
@@ -1127,10 +1127,10 @@ document.querySelectorAll('.card').forEach(function(card) {
         });
         
         // Если карточка НЕ была открыта - открываем её
+        // Если была открыта - оставляем закрытой
         if (!isActive) {
             this.classList.add('active');
         }
-        // Если была открыта - оставляем закрытой
     });
 });
 
