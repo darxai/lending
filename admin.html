@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>AURUM — Админ-панель</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --bg: #0a0a0f;
+        --surface: #12121a;
+        --text: #f5f5f5;
+        --text-secondary: #a0a0b0;
+        --gold: #d4af37;
+        --gold-dark: #a08020;
+        --silver: #c0c0c0;
+        --border: rgba(212, 175, 55, 0.15);
+        --border-silver: rgba(192, 192, 192, 0.1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        background-color: var(--bg);
+        font-family: 'Montserrat', sans-serif;
+        color: var(--text);
+        min-height: 100vh;
+        line-height: 1.6;
+        background-image:
+            radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, rgba(192, 192, 192, 0.04) 0%, transparent 50%),
+            linear-gradient(135deg, #0a0a0f 0%, #0f0f15 50%, #0a0a0f 100%);
+    }
+
+    .admin-wrap { max-width: 640px; margin: 0 auto; padding: 40px 24px 100px; }
+
+    .admin-topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .admin-page-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.6rem;
+        color: var(--gold);
+    }
+
+    .admin-topbar a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border: 1px solid var(--border-silver);
+        padding: 8px 15px;
+        border-radius: 2px;
+        transition: all 0.3s;
+        white-space: nowrap;
+    }
+
+    .admin-topbar a:hover { border-color: var(--gold); color: var(--gold); }
+
+    .admin-panel {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 30px;
+    }
+
+    .admin-tabs { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+
+    .admin-tab {
+        padding: 10px 15px;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--border-silver);
+        color: var(--text-secondary);
+        cursor: pointer;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-radius: 2px;
+        transition: all 0.3s;
+    }
+
+    .admin-tab.active {
+        border-color: var(--gold);
+        color: var(--gold);
+        background: rgba(212, 175, 55, 0.05);
+    }
+
+    .admin-section { display: none; }
+    .admin-section.active { display: block; }
+
+    .admin-form-group { margin-bottom: 20px; }
+
+    .admin-label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--silver);
+    }
+
+    .admin-input, .admin-textarea {
+        width: 100%;
+        padding: 10px 15px;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--border-silver);
+        color: var(--text);
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.85rem;
+        border-radius: 2px;
+    }
+
+    .admin-input:focus, .admin-textarea:focus { border-color: var(--gold); outline: none; }
+
+    .admin-textarea { min-height: 80px; resize: vertical; }
+
+    .logo-preview { object-fit: contain; margin-top: 10px; }
+
+    .admin-save-btn {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+        color: #0a0a0f;
+        border: none;
+        border-radius: 2px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .admin-status { margin-top: 14px; font-size: 0.85rem; text-align: center; min-height: 1.2em; }
+    .admin-status.ok { color: var(--gold); }
+    .admin-status.err { color: #e07a7a; }
+
+    hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+    @media (max-width: 640px) {
+        .admin-input, .admin-textarea { font-size: 16px; }
+    }
+</style>
+</head>
+<body>
+
+<div class="admin-wrap" id="loginGate" style="max-width: 360px; padding-top: 120px;">
+    <div class="admin-page-title" style="text-align: center; margin-bottom: 20px;">⚙ AURUM — Админ-панель</div>
+    <div class="admin-panel">
+        <div class="admin-form-group">
+            <label class="admin-label">Пароль</label>
+            <input type="password" class="admin-input" id="gatePassword" autocomplete="current-password" onkeydown="if (event.key === 'Enter') tryUnlock();">
+        </div>
+        <button type="button" class="admin-save-btn" onclick="tryUnlock()">Войти</button>
+        <div class="admin-status" id="gateStatus"></div>
+    </div>
+</div>
+
+<div class="admin-wrap" id="adminContent" style="display: none;">
+    <div class="admin-topbar">
+        <span class="admin-page-title">⚙ AURUM — Админ-панель</span>
+        <a href="index.html">← Открыть сайт</a>
+    </div>
+
+    <div class="admin-panel" style="margin-bottom: 20px;">
+        <div class="admin-form-group"><label class="admin-label">GitHub токен (Contents: Read & Write, только для этого репо)</label><input type="password" class="admin-input" id="ghToken" placeholder="github_pat_..."></div>
+        <div style="display:flex; gap:16px; flex-wrap:wrap;">
+            <div class="admin-form-group" style="flex:1; min-width:140px;"><label class="admin-label">Владелец / организация</label><input type="text" class="admin-input" id="ghOwner" placeholder="username"></div>
+            <div class="admin-form-group" style="flex:1; min-width:140px;"><label class="admin-label">Репозиторий</label><input type="text" class="admin-input" id="ghRepo" placeholder="aurum-site"></div>
+        </div>
+        <div style="display:flex; gap:16px; flex-wrap:wrap;">
+            <div class="admin-form-group" style="flex:1; min-width:140px;"><label class="admin-label">Ветка</label><input type="text" class="admin-input" id="ghBranch" value="main"></div>
+            <div class="admin-form-group" style="flex:1; min-width:140px;"><label class="admin-label">Путь к data.json</label><input type="text" class="admin-input" id="ghPath" value="data.json"></div>
+        </div>
+        <button type="button" class="admin-tab" onclick="clearGithubConfig()" style="margin-top:14px;">Очистить поле токена</button>
+    </div>
+
+    <div class="admin-panel">
+        <div class="admin-tabs">
+            <button type="button" class="admin-tab active" onclick="switchTab(event, 'metadata')">Метаданные</button>
+            <button type="button" class="admin-tab" onclick="switchTab(event, 'hero')">Главный экран</button>
+            <button type="button" class="admin-tab" onclick="switchTab(event, 'navigation')">Навигация</button>
+            <button type="button" class="admin-tab" onclick="switchTab(event, 'gallery')">Галерея</button>
+            <button type="button" class="admin-tab" onclick="switchTab(event, 'video')">Видео</button>
+            <button type="button" class="admin-tab" onclick="switchTab(event, 'cards')">Карточки</button>
+            <button type="button" class="admin-tab" onclick="switchTab(event, 'contacts')">Контакты</button>
+            <button type="button" class="admin-tab" onclick="switchTab(event, 'footer')">Подвал</button>
+        </div>
+
+        <div class="admin-section active" id="tab-metadata">
+            <div class="admin-form-group"><label class="admin-label">Title</label><input type="text" class="admin-input" id="editMetaTitle"></div>
+            <div class="admin-form-group"><label class="admin-label">Meta Description</label><textarea class="admin-textarea" id="editMetaDescription"></textarea></div>
+        </div>
+
+        <div class="admin-section" id="tab-hero">
+            <div class="admin-form-group"><label class="admin-label">Бейдж</label><input type="text" class="admin-input" id="editHeroBadge"></div>
+            <div class="admin-form-group"><label class="admin-label">Заголовок</label><textarea class="admin-textarea" id="editHeroTitle"></textarea></div>
+            <div class="admin-form-group"><label class="admin-label">Описание</label><textarea class="admin-textarea" id="editHeroDescription"></textarea></div>
+            <div class="admin-form-group"><label class="admin-label">Текст кнопки</label><input type="text" class="admin-input" id="editHeroButton"></div>
+        </div>
+
+        <div class="admin-section" id="tab-navigation">
+            <div class="admin-form-group"><label class="admin-label">Текст логотипа</label><input type="text" class="admin-input" id="editLogoText"></div>
+            <div class="admin-form-group"><label class="admin-label">Ссылка на фото логотипа</label><input type="text" class="admin-input" id="editLogoImg" oninput="previewLogo(this.value)"><img class="logo-preview" id="logoPreview" alt="Превью" style="display:none;width:60px;height:60px;"></div>
+            <div class="admin-form-group"><label class="admin-label">Ширина логотипа (px)</label><input type="number" class="admin-input" id="editLogoWidth" min="10" max="200" value="40"></div>
+            <div class="admin-form-group"><label class="admin-label">Высота логотипа (px)</label><input type="number" class="admin-input" id="editLogoHeight" min="10" max="200" value="40"></div>
+        </div>
+
+        <div class="admin-section" id="tab-gallery">
+            <div class="admin-form-group"><label class="admin-label">Заголовок секции</label><input type="text" class="admin-input" id="editGalleryTitle"></div>
+            <div class="admin-form-group"><label class="admin-label">Подзаголовок</label><input type="text" class="admin-input" id="editGallerySubtitle"></div>
+            <hr>
+            <div id="galleryPhotosList"></div>
+            <button type="button" class="admin-tab" onclick="addGalleryPhoto()">+ Добавить фото</button>
+        </div>
+
+        <div class="admin-section" id="tab-video">
+            <div class="admin-form-group"><label class="admin-label">Заголовок секции</label><input type="text" class="admin-input" id="editVideoSectionTitle"></div>
+            <div class="admin-form-group"><label class="admin-label">Подзаголовок</label><input type="text" class="admin-input" id="editVideoSectionSubtitle"></div>
+            <div class="admin-form-group"><label class="admin-label">Ссылка на YouTube</label><input type="text" class="admin-input" id="editVideoUrl"></div>
+        </div>
+
+        <div class="admin-section" id="tab-cards">
+            <div class="admin-form-group"><label class="admin-label">Заголовок секции</label><input type="text" class="admin-input" id="editCardsSectionTitle"></div>
+            <div class="admin-form-group"><label class="admin-label">Подзаголовок</label><input type="text" class="admin-input" id="editCardsSectionSubtitle"></div>
+            <hr>
+            <div id="cardsList"></div>
+            <button type="button" class="admin-tab" onclick="addCard()">+ Добавить карточку</button>
+        </div>
+
+        <div class="admin-section" id="tab-contacts">
+            <div class="admin-form-group"><label class="admin-label">Заголовок секции</label><input type="text" class="admin-input" id="editContactsSectionTitle"></div>
+            <div class="admin-form-group"><label class="admin-label">Подзаголовок</label><input type="text" class="admin-input" id="editContactsSectionSubtitle"></div>
+            <div class="admin-form-group"><label class="admin-label">Телефон</label><input type="text" class="admin-input" id="editPhone"></div>
+            <div class="admin-form-group"><label class="admin-label">Email</label><input type="text" class="admin-input" id="editEmail"></div>
+            <div class="admin-form-group"><label class="admin-label">Адрес</label><input type="text" class="admin-input" id="editAddress"></div>
+            <div class="admin-form-group"><label class="admin-label">Соцсети</label><input type="text" class="admin-input" id="editSocial"></div>
+        </div>
+
+        <div class="admin-section" id="tab-footer">
+            <div class="admin-form-group"><label class="admin-label">Текст подвала</label><input type="text" class="admin-input" id="editFooterText"></div>
+        </div>
+
+        <button type="button" class="admin-save-btn" onclick="saveChanges()">💾 Сохранить</button>
+        <div class="admin-status" id="adminStatus"></div>
+    </div>
+</div>
+
+<script>
+    let galleryPhotos = [];
+    let cardsData = [];
+
+    function switchTab(event, tabName) {
+        document.querySelectorAll('.admin-tab').forEach(function(tab) { tab.classList.remove('active'); });
+        event.target.classList.add('active');
+        document.querySelectorAll('.admin-section').forEach(function(section) { section.classList.remove('active'); });
+        document.getElementById('tab-' + tabName).classList.add('active');
+    }
+
+    function previewLogo(url) {
+        const preview = document.getElementById('logoPreview');
+        if (url && url.trim() !== '') {
+            preview.src = url;
+            preview.style.display = 'block';
+        } else {
+            preview.style.display = 'none';
+            preview.src = '';
+        }
+    }
+
+    function setStatus(msg, ok) {
+        const el = document.getElementById('adminStatus');
+        el.textContent = msg;
+        el.className = 'admin-status ' + (ok ? 'ok' : 'err');
+    }
+
+    function fillForm(data) {
+        document.getElementById('editMetaTitle').value = data.title || '';
+        document.getElementById('editMetaDescription').value = data.metaDescription || '';
+        document.getElementById('editHeroBadge').value = data.heroBadge || '';
+        document.getElementById('editHeroTitle').value = data.heroTitle || '';
+        document.getElementById('editHeroDescription').value = data.heroDescription || '';
+        document.getElementById('editHeroButton').value = data.heroButton || '';
+        document.getElementById('editLogoText').value = data.logoText || '';
+        document.getElementById('editLogoImg').value = data.logoImg || '';
+        previewLogo(data.logoImg || '');
+        document.getElementById('editLogoWidth').value = parseInt(data.logoWidth) || 40;
+        document.getElementById('editLogoHeight').value = parseInt(data.logoHeight) || 40;
+        document.getElementById('editGalleryTitle').value = data.galleryTitle || '';
+        document.getElementById('editGallerySubtitle').value = data.gallerySubtitle || '';
+        document.getElementById('editVideoSectionTitle').value = data.videoTitle || '';
+        document.getElementById('editVideoSectionSubtitle').value = data.videoSubtitle || '';
+        document.getElementById('editVideoUrl').value = data.videoUrl || '';
+        document.getElementById('editCardsSectionTitle').value = data.cardsTitle || '';
+        document.getElementById('editCardsSectionSubtitle').value = data.cardsSubtitle || '';
+        document.getElementById('editContactsSectionTitle').value = data.contactsTitle || '';
+        document.getElementById('editContactsSectionSubtitle').value = data.contactsSubtitle || '';
+        document.getElementById('editPhone').value = data.phone || '';
+        document.getElementById('editEmail').value = data.email || '';
+        document.getElementById('editAddress').value = data.address || '';
+        document.getElementById('editSocial').value = data.social || '';
+        document.getElementById('editFooterText').value = data.footerText || '';
+
+        galleryPhotos = (data.galleryPhotos || []).map(function(p) {
+            return { src: p.src || '', title: p.title || '', description: p.description || '' };
+        });
+        renderGalleryList();
+
+        cardsData = (data.cards || []).map(function(c) {
+            return { number: c.number || '', title: c.title || '', text: c.text || '', list: c.list || '' };
+        });
+        renderCardsList();
+    }
+
+    function renderGalleryList() {
+        const wrap = document.getElementById('galleryPhotosList');
+        wrap.innerHTML = '';
+        galleryPhotos.forEach(function(photo, i) {
+            const block = document.createElement('div');
+            block.innerHTML =
+                '<div class="admin-form-group"><label class="admin-label">Фото ' + (i + 1) + ' - Ссылка</label>' +
+                '<input type="text" class="admin-input" data-field="src" value="' + escapeAttr(photo.src) + '"></div>' +
+                '<div class="admin-form-group"><label class="admin-label">Фото ' + (i + 1) + ' - Название</label>' +
+                '<input type="text" class="admin-input" data-field="title" value="' + escapeAttr(photo.title) + '"></div>' +
+                '<div class="admin-form-group"><label class="admin-label">Фото ' + (i + 1) + ' - Описание</label>' +
+                '<textarea class="admin-textarea" data-field="description">' + escapeHtml(photo.description) + '</textarea></div>' +
+                '<button type="button" class="admin-tab" style="color:#e07a7a; border-color:rgba(224,122,122,0.3);">Удалить фото</button><hr>';
+
+            block.querySelectorAll('[data-field]').forEach(function(input) {
+                input.addEventListener('input', function() {
+                    galleryPhotos[i][input.getAttribute('data-field')] = input.value;
+                });
+            });
+            block.querySelector('button').addEventListener('click', function() {
+                galleryPhotos.splice(i, 1);
+                renderGalleryList();
+            });
+
+            wrap.appendChild(block);
+        });
+    }
+
+    function addGalleryPhoto() {
+        galleryPhotos.push({ src: '', title: '', description: '' });
+        renderGalleryList();
+    }
+
+    function renderCardsList() {
+        const wrap = document.getElementById('cardsList');
+        wrap.innerHTML = '';
+        cardsData.forEach(function(card, i) {
+            const block = document.createElement('div');
+            block.innerHTML =
+                '<div class="admin-form-group"><label class="admin-label">Карточка ' + (i + 1) + ' - Номер</label>' +
+                '<input type="text" class="admin-input" data-field="number" value="' + escapeAttr(card.number) + '"></div>' +
+                '<div class="admin-form-group"><label class="admin-label">Карточка ' + (i + 1) + ' - Заголовок</label>' +
+                '<input type="text" class="admin-input" data-field="title" value="' + escapeAttr(card.title) + '"></div>' +
+                '<div class="admin-form-group"><label class="admin-label">Карточка ' + (i + 1) + ' - Текст</label>' +
+                '<textarea class="admin-textarea" data-field="text">' + escapeHtml(card.text) + '</textarea></div>' +
+                '<div class="admin-form-group"><label class="admin-label">Карточка ' + (i + 1) + ' - Список (по пункту на строку)</label>' +
+                '<textarea class="admin-textarea" data-field="list">' + escapeHtml(card.list) + '</textarea></div>' +
+                '<button type="button" class="admin-tab" style="color:#e07a7a; border-color:rgba(224,122,122,0.3);">Удалить карточку</button><hr>';
+
+            block.querySelectorAll('[data-field]').forEach(function(input) {
+                input.addEventListener('input', function() {
+                    cardsData[i][input.getAttribute('data-field')] = input.value;
+                });
+            });
+            block.querySelector('button').addEventListener('click', function() {
+                cardsData.splice(i, 1);
+                renderCardsList();
+            });
+
+            wrap.appendChild(block);
+        });
+    }
+
+    function addCard() {
+        cardsData.push({ number: '', title: '', text: '', list: '' });
+        renderCardsList();
+    }
+
+    function escapeAttr(str) {
+        return String(str || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function escapeHtml(str) {
+        return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function collectForm() {
+        return {
+            title: document.getElementById('editMetaTitle').value,
+            metaDescription: document.getElementById('editMetaDescription').value,
+            heroBadge: document.getElementById('editHeroBadge').value,
+            heroTitle: document.getElementById('editHeroTitle').value,
+            heroDescription: document.getElementById('editHeroDescription').value,
+            heroButton: document.getElementById('editHeroButton').value,
+            logoText: document.getElementById('editLogoText').value,
+            logoImg: document.getElementById('editLogoImg').value,
+            logoWidth: document.getElementById('editLogoWidth').value + 'px',
+            logoHeight: document.getElementById('editLogoHeight').value + 'px',
+            galleryTitle: document.getElementById('editGalleryTitle').value,
+            gallerySubtitle: document.getElementById('editGallerySubtitle').value,
+            galleryPhotos: galleryPhotos,
+            videoTitle: document.getElementById('editVideoSectionTitle').value,
+            videoSubtitle: document.getElementById('editVideoSectionSubtitle').value,
+            videoUrl: document.getElementById('editVideoUrl').value,
+            cardsTitle: document.getElementById('editCardsSectionTitle').value,
+            cardsSubtitle: document.getElementById('editCardsSectionSubtitle').value,
+            cards: cardsData,
+            contactsTitle: document.getElementById('editContactsSectionTitle').value,
+            contactsSubtitle: document.getElementById('editContactsSectionSubtitle').value,
+            phone: document.getElementById('editPhone').value,
+            email: document.getElementById('editEmail').value,
+            address: document.getElementById('editAddress').value,
+            social: document.getElementById('editSocial').value,
+            footerText: document.getElementById('editFooterText').value
+        };
+    }
+
+    function getGithubConfig() {
+        return {
+            token: document.getElementById('ghToken').value.trim(),
+            owner: document.getElementById('ghOwner').value.trim(),
+            repo: document.getElementById('ghRepo').value.trim(),
+            branch: document.getElementById('ghBranch').value.trim() || 'main',
+            path: document.getElementById('ghPath').value.trim() || 'data.json'
+        };
+    }
+
+    function clearGithubConfig() {
+        document.getElementById('ghToken').value = '';
+        setStatus('Поле токена очищено', true);
+    }
+
+    function utf8ToBase64(str) {
+        const bytes = new TextEncoder().encode(str);
+        let binary = '';
+        bytes.forEach(function(b) { binary += String.fromCharCode(b); });
+        return btoa(binary);
+    }
+
+    function saveChanges() {
+        const cfg = getGithubConfig();
+        if (!cfg.token || !cfg.owner || !cfg.repo) {
+            setStatus('❌ Заполните токен, владельца и репозиторий вверху формы', false);
+            return;
+        }
+
+        const data = collectForm();
+        const content = JSON.stringify(data, null, 4);
+        const apiUrl = 'https://api.github.com/repos/' + cfg.owner + '/' + cfg.repo + '/contents/' + cfg.path;
+        const headers = {
+            'Authorization': 'token ' + cfg.token,
+            'Accept': 'application/vnd.github+json'
+        };
+
+        setStatus('Сохранение…', true);
+
+        fetch(apiUrl + '?ref=' + encodeURIComponent(cfg.branch), { headers: headers })
+            .then(function(r) {
+                if (!r.ok) throw new Error('не удалось прочитать текущий файл (' + r.status + ')');
+                return r.json();
+            })
+            .then(function(fileInfo) {
+                return fetch(apiUrl, {
+                    method: 'PUT',
+                    headers: Object.assign({ 'Content-Type': 'application/json' }, headers),
+                    body: JSON.stringify({
+                        message: 'Обновление контента сайта через админ-панель',
+                        content: utf8ToBase64(content),
+                        sha: fileInfo.sha,
+                        branch: cfg.branch
+                    })
+                });
+            })
+            .then(function(r) {
+                if (!r.ok) return r.json().then(function(body) { throw new Error((body && body.message) || ('статус ' + r.status)); });
+                return r.json();
+            })
+            .then(function() {
+                setStatus('✅ Закоммичено в GitHub — сайт обновится за 30–60 секунд', true);
+            })
+            .catch(function(err) {
+                setStatus('❌ Ошибка: ' + err.message, false);
+            });
+    }
+
+    // ЗАМЕНИТЕ на свой хэш — см. пояснение в чате/README.
+    // Это не полноценная защита (пароль всё равно проверяется в браузере,
+    // код виден через "просмотр кода страницы"), а барьер от случайных
+    // посетителей и поисковых роботов. Настоящая граница безопасности —
+    // GitHub-токен, которого в коде нет и который вводится вручную.
+    const ADMIN_PASSWORD_HASH = 'e2186dbdb1bb4193608605e84f33208765b5693b55edd4f730a719a100eeea6f'; // временный пароль: change-me
+
+    async function sha256Hex(str) {
+        const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+        return Array.from(new Uint8Array(buf)).map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+    }
+
+    async function tryUnlock() {
+        const pass = document.getElementById('gatePassword').value;
+        const hash = await sha256Hex(pass);
+        const statusEl = document.getElementById('gateStatus');
+        if (hash === ADMIN_PASSWORD_HASH) {
+            document.getElementById('loginGate').style.display = 'none';
+            document.getElementById('adminContent').style.display = 'block';
+            initAdmin();
+        } else {
+            statusEl.textContent = '❌ Неверный пароль';
+            statusEl.className = 'admin-status err';
+        }
+    }
+
+    function initAdmin() {
+        fetch('data.json', { cache: 'no-store' })
+            .then(function(r) { if (!r.ok) throw new Error('no data.json'); return r.json(); })
+            .then(fillForm)
+            .catch(function() {
+                setStatus('Не удалось загрузить data.json — заполняю форму вручную не получится, но сохранить можно, форма пустая', false);
+            });
+    }
+</script>
+
+</body>
+</html>

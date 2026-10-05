@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Эксклюзивный лендинг с золотыми и серебряными акцентами">
+    <meta name="keywords" content="премиум, золото, серебро, лендинг">
+    <meta name="author" content="AURUM">
+    <meta property="og:title" content="AURUM - Искусство Совершенства">
+    <meta property="og:description" content="Эксклюзивный лендинг с золотыми и серебряными акцентами">
+    <meta property="og:type" content="website">
+    <title>AURUM - Искусство Совершенства</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --surface-hover: #1a1a25;
+            --text: #f5f5f5;
+            --text-secondary: #a0a0b0;
+            --gold: #d4af37;
+            --gold-light: #f0d060;
+            --gold-dark: #a08020;
+            --silver: #c0c0c0;
+            --silver-light: #e0e0e0;
+            --silver-dark: #808080;
+            --border: rgba(212, 175, 55, 0.15);
+            --border-silver: rgba(192, 192, 192, 0.1);
+            --glow-gold: rgba(212, 175, 55, 0.3);
+            --glow-silver: rgba(192, 192, 192, 0.2);
+            --logo-width: 40px;
+            --logo-height: 40px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.7;
+            position: relative;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(192, 192, 192, 0.04) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0a0f 0%, #0f0f15 50%, #0a0a0f 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+
+        .logo-img {
+            width: var(--logo-width);
+            height: var(--logo-height);
+            object-fit: contain;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .logo-img.active {
+            display: block;
+        }
+
+        .logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            letter-spacing: 4px;
+            font-size: 1.4rem;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold-light);
+        }
+
+        .hero {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            color: var(--gold);
+            margin-bottom: 35px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero-text h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.6rem, 1.79rem + 3.62vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--silver));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p {
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-weight: 300;
+            font-size: 1rem;
+            max-width: 550px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 35px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: #0a0a0f;
+            text-decoration: none;
+            border-radius: 2px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            border: 1px solid var(--gold);
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--glow-gold);
+        }
+
+        .gallery-section, .video-section, .features, .contacts {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 50px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-silver);
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--gold), var(--silver));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .gallery-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            touch-action: pan-y;
+            cursor: grab;
+        }
+
+        .gallery-slider:active {
+            cursor: grabbing;
+        }
+
+        .gallery-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .gallery-slide {
+            min-width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-slide img {
+            width: 100%;
+            aspect-ratio: 16/10;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slide-info {
+            padding: 20px 6px 18px;
+        }
+
+        .slide-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            background: linear-gradient(100deg, var(--gold-light) 0%, var(--gold) 25%, var(--silver-light) 50%, var(--gold) 75%, var(--gold-light) 100%);
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+            animation: goldShimmer 5s linear infinite;
+        }
+
+        .slide-title::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            margin-top: 10px;
+            background: linear-gradient(90deg, var(--gold), var(--silver));
+            transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.2s;
+        }
+
+        .slide-info.is-active .slide-title {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-info.is-active .slide-title::after {
+            width: 56px;
+        }
+
+        @keyframes goldShimmer {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 250% 50%; }
+        }
+
+        .slide-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 300;
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s;
+        }
+
+        .slide-info.is-active .slide-description {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .slide-title { animation: none; opacity: 1; transform: none; transition: none; }
+            .slide-description { opacity: 1; transform: none; transition: none; }
+            .slide-title::after { transition: none; width: 56px; }
+        }
+
+        .slide-counter {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 2;
+            color: var(--silver);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            background: rgba(10,10,15,0.7);
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .gallery-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(10,10,15,0.7);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            color: var(--gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .gallery-arrow:hover {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: var(--gold);
+            box-shadow: 0 0 20px var(--glow-gold);
+        }
+
+        .gallery-arrow.prev { left: 15px; }
+        .gallery-arrow.next { right: 15px; }
+
+        .gallery-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .gallery-dot {
+            position: relative;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--silver);
+            opacity: 0.3;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid var(--silver);
+        }
+
+        .gallery-dot::before {
+            content: '';
+            position: absolute;
+            inset: -9px;
+        }
+
+        .gallery-dot.active {
+            opacity: 1;
+            background: var(--gold);
+            border-color: var(--gold);
+            box-shadow: 0 0 15px var(--glow-gold);
+            transform: scale(1.3);
+        }
+
+        .gallery-thumbnails {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .gallery-thumb {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            opacity: 0.5;
+        }
+
+        .gallery-thumb:hover { opacity: 0.8; }
+
+        .gallery-thumb.active {
+            border-color: var(--gold);
+            opacity: 1;
+            box-shadow: 0 0 15px var(--glow-gold);
+        }
+
+        .swipe-hint {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            margin-top: 15px;
+            animation: hintPulse 2s ease-in-out infinite;
+            display: none;
+        }
+
+        @keyframes hintPulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            overflow: hidden;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            background: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+            gap: 25px;
+            align-items: start;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.4s;
+        }
+
+        .card:hover {
+            background: var(--surface-hover);
+            border-color: rgba(212, 175, 55, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px var(--glow-gold);
+        }
+
+        .card.active {
+            background: var(--surface-hover);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 15px 40px var(--glow-gold);
+        }
+
+        .card-header {
+            padding: 35px;
+        }
+
+        .card-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            background: linear-gradient(135deg, var(--gold), var(--silver));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+            color: var(--text);
+        }
+
+        /* Знак + / x */
+        .card-toggle {
+            color: var(--gold);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+		
+		/* Поворот знака + в × */
+        .toggle-icon {
+            display: inline-block;
+            transition: transform 0.3s;
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        .card-content {
+            display: none;
+            padding: 0 35px 35px;
+        }
+
+        .card.active .card-content {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+		
+        .card.active .toggle-icon {
+            transform: rotate(45deg);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-content p {
+            color: var(--text-secondary);
+            font-weight: 300;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .card-content ul {
+            list-style: none;
+        }
+
+        .card-content ul li {
+            padding: 12px 0;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-silver);
+        }
+
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+            gap: 25px;
+        }
+
+        .contact-card {
+            background: var(--surface);
+            border: 1px solid var(--border-silver);
+            border-radius: 4px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            border-color: var(--silver);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--glow-silver);
+        }
+
+        .contact-label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border-silver);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 1024px) {
+            .nav-links { gap: 20px; }
+            .nav-links a { font-size: 0.72rem; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .logo-text { font-size: 1rem; }
+            .gallery-arrow { display: none; }
+            .gallery-thumbnails { display: none; }
+            .swipe-hint { display: block; }
+            .slide-info { padding: 20px; }
+            .slide-title { font-size: 1.4rem; }
+            .slide-description { font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo-container">
+                    <img class="logo-img" id="logoImg" src="" alt="Логотип">
+                    <span class="logo-text" id="logoText">AURUM</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#home" id="navLink1">Главная</a>
+                    <a href="#gallery" id="navLink2">Галерея</a>
+                    <a href="#video" id="navLink3">Видео</a>
+                    <a href="#features" id="navLink4">Преимущества</a>
+                    <a href="#contacts">Контакты</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Главный экран -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-text" data-aos="fade-up">
+                <div class="hero-badge" id="heroBadge">✦ Премиум качество</div>
+                <h1 id="heroTitle">Искусство<br>Совершенства</h1>
+                <p id="heroDescription">Эксклюзивный лендинг с золотыми и серебряными акцентами, созданный для тех, кто ценит роскошь и качество.</p>
+                <a href="#contacts" class="btn" id="heroButton">Начать проект</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Галерея -->
+    <section class="gallery-section" id="gallery">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title" id="gallerySectionTitle">Галерея</h2>
+                <div class="section-subtitle" id="gallerySectionSubtitle">Наши работы</div>
+            </div>
+            <div class="gallery-slider" id="gallerySlider" data-aos="zoom-in-up">
+                <div class="gallery-track" id="galleryTrack"></div>
+                <div class="slide-counter" id="slideCounter">1 / 6</div>
+                <button class="gallery-arrow prev" onclick="prevSlide()">←</button>
+                <button class="gallery-arrow next" onclick="nextSlide()">→</button>
+            </div>
+            <div class="gallery-dots" id="galleryDots"></div>
+            <div class="gallery-thumbnails" id="galleryThumbnails"></div>
+            <div class="swipe-hint">← Свайпайте для перелистывания →</div>
+        </div>
+    </section>
+
+    <!-- Видео -->
+    <section class="video-section" id="video">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title" id="videoSectionTitle">Видео</h2>
+                <div class="section-subtitle" id="videoSectionSubtitle">I / Презентация</div>
+            </div>
+            <div class="video-wrapper" data-aos="zoom-in-up">
+                <iframe id="mainVideo" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Карточки -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title" id="cardsSectionTitle">Преимущества</h2>
+                <div class="section-subtitle" id="cardsSectionSubtitle">II / Достоинства</div>
+            </div>
+            <div class="cards-grid" id="cardsGrid"></div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section class="contacts" id="contacts">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title" id="contactsSectionTitle">Контакты</h2>
+                <div class="section-subtitle" id="contactsSectionSubtitle">III / Связь</div>
+            </div>
+            <div class="contacts-grid">
+                <div class="contact-card" data-aos="fade-up">
+                    <div class="contact-label">Телефон</div>
+                    <div id="contactPhone">+7 (900) 123-45-67</div>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="contact-label">Email</div>
+                    <div id="contactEmail">info@aurum.space</div>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="contact-label">Адрес</div>
+                    <div id="contactAddress">г. Москва, ул. Золотая, 1</div>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="contact-label">Соцсети</div>
+                    <div id="contactSocial">TG | VK | WA</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <p id="footerText">© 2024 AURUM. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // ========== AOS ==========
+        AOS.init({
+            duration: 800,
+            offset: 100,
+            once: false
+        });
+
+        // ========== ГАЛЕРЕЯ ==========
+        const galleryPhotos = [
+            { src: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=2070&auto=format&fit=crop', title: 'Золотые украшения', description: 'Эксклюзивная коллекция ювелирных изделий' },
+            { src: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=2070&auto=format&fit=crop', title: 'Серебряные аксессуары', description: 'Изысканные предметы интерьера' },
+            { src: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=2080&auto=format&fit=crop', title: 'Премиум часы', description: 'Швейцарское качество' },
+            { src: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop', title: 'Элитный автомобиль', description: 'Совершенство инженерной мысли' },
+            { src: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop', title: 'Роскошный интерьер', description: 'Дизайн премиум-класса' },
+            { src: 'https://images.unsplash.com/photo-1610375461246-83df859d849d?q=80&w=2070&auto=format&fit=crop', title: 'Золотые монеты', description: 'Инвестиции в вечные ценности' }
+        ];
+
+        let currentSlide = 0;
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        // ========== КАРТОЧКИ-ПРЕИМУЩЕСТВА ==========
+        const cardsData = [
+            { number: 'I / Элегантность', title: 'Изысканность', text: 'Каждый элемент дизайна продуман до мелочей.', list: 'Уникальный стиль\nВнимание к деталям\nГармоничные пропорции' },
+            { number: 'II / Качество', title: 'Совершенство', text: 'Мы используем только лучшие технологии.', list: 'Премиум материалы\nТестирование\nГарантия качества' },
+            { number: 'III / Статус', title: 'Престиж', text: 'Наши продукты подчеркивают статус владельца.', list: 'Ограниченные серии\nПерсонализация\nVIP обслуживание' }
+        ];
+
+        function initCards() {
+            const grid = document.getElementById('cardsGrid');
+            grid.innerHTML = '';
+
+            cardsData.forEach(function(card, index) {
+                const el = document.createElement('div');
+                el.className = 'card';
+                el.setAttribute('data-aos', 'fade-up');
+                el.setAttribute('data-aos-delay', String(index * 100));
+
+                const listItems = (card.list || '')
+                    .split('\n')
+                    .map(function(s) { return s.trim(); })
+                    .filter(function(s) { return s.length > 0; });
+                const listHtml = listItems.length
+                    ? '<ul>' + listItems.map(function(li) { return '<li>' + li + '</li>'; }).join('') + '</ul>'
+                    : '';
+
+                el.innerHTML = '<div class="card-header">' +
+                    '<span class="card-number">' + (card.number || '') + '</span>' +
+                    '<h3>' + (card.title || '') + '</h3>' +
+                    '<div class="card-toggle"><span>Подробнее</span><span class="toggle-icon">+</span></div>' +
+                    '</div>' +
+                    '<div class="card-content">' +
+                    '<p>' + (card.text || '') + '</p>' +
+                    listHtml +
+                    '</div>';
+
+                grid.appendChild(el);
+            });
+        }
+
+        function initGallery() {
+            const track = document.getElementById('galleryTrack');
+            const dots = document.getElementById('galleryDots');
+            const thumbnails = document.getElementById('galleryThumbnails');
+            
+            track.innerHTML = '';
+            dots.innerHTML = '';
+            thumbnails.innerHTML = '';
+
+            galleryPhotos.forEach(function(photo) {
+                const slide = document.createElement('div');
+                slide.className = 'gallery-slide';
+                slide.innerHTML = '<div class="slide-info">' +
+                    '<div class="slide-title">' + photo.title + '</div>' +
+                    '<div class="slide-description">' + photo.description + '</div>' +
+                    '</div>' +
+                    '<img src="' + photo.src + '" alt="' + photo.title + '">';
+                track.appendChild(slide);
+            });
+
+            galleryPhotos.forEach(function(_, index) {
+                const dot = document.createElement('div');
+                dot.className = 'gallery-dot';
+                dot.onclick = function() { goToSlide(index); };
+                dots.appendChild(dot);
+            });
+
+            galleryPhotos.forEach(function(photo, index) {
+                const thumb = document.createElement('img');
+                thumb.className = 'gallery-thumb';
+                thumb.src = photo.src;
+                thumb.alt = photo.title;
+                thumb.onclick = function() { goToSlide(index); };
+                thumbnails.appendChild(thumb);
+            });
+
+            updateGallery();
+        }
+
+        function updateGallery() {
+            const track = document.getElementById('galleryTrack');
+            track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+            document.getElementById('slideCounter').textContent = (currentSlide + 1) + ' / ' + galleryPhotos.length;
+
+            document.querySelectorAll('.gallery-dot').forEach(function(dot, index) {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+
+            document.querySelectorAll('.gallery-thumb').forEach(function(thumb, index) {
+                thumb.classList.toggle('active', index === currentSlide);
+            });
+
+            document.querySelectorAll('.slide-info').forEach(function(info, index) {
+                info.classList.remove('is-active');
+                if (index === currentSlide) {
+                    void info.offsetWidth; // форсируем reflow, чтобы transition перезапустился
+                    info.classList.add('is-active');
+                }
+            });
+        }
+
+        function nextSlide() { currentSlide = (currentSlide + 1) % galleryPhotos.length; updateGallery(); }
+        function prevSlide() { currentSlide = (currentSlide - 1 + galleryPhotos.length) % galleryPhotos.length; updateGallery(); }
+        function goToSlide(index) { currentSlide = index; updateGallery(); }
+
+        // Свайп
+        document.getElementById('gallerySlider').addEventListener('touchstart', function(e) {
+            touchStartX = e.touches[0].clientX;
+        });
+        document.getElementById('gallerySlider').addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].clientX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) { nextSlide(); } else { prevSlide(); }
+            }
+        });
+
+        // Клавиатура
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') { prevSlide(); }
+            if (e.key === 'ArrowRight') { nextSlide(); }
+        });
+ 
+
+	
+
+        // ========== КОНТЕНТ ИЗ data.json ==========
+        // Правки вносятся через admin.html — он пишет в data.json на сервере.
+        // Здесь этот файл просто читается, поэтому изменения видят все посетители,
+        // а не только тот, кто редактировал.
+        function applyContent(data) {
+            if (data.title) document.title = data.title;
+            const metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc && data.metaDescription) metaDesc.setAttribute('content', data.metaDescription);
+            document.getElementById('heroBadge').textContent = data.heroBadge;
+            document.getElementById('heroTitle').innerHTML = data.heroTitle;
+            document.getElementById('heroDescription').textContent = data.heroDescription;
+            document.getElementById('heroButton').textContent = data.heroButton;
+            document.getElementById('logoText').textContent = data.logoText;
+            if (data.logoImg) {
+                document.getElementById('logoImg').src = data.logoImg;
+                document.getElementById('logoImg').classList.add('active');
+            }
+            if (data.logoWidth) document.getElementById('logoImg').style.width = data.logoWidth;
+            if (data.logoHeight) document.getElementById('logoImg').style.height = data.logoHeight;
+            document.getElementById('gallerySectionTitle').textContent = data.galleryTitle;
+            document.getElementById('gallerySectionSubtitle').textContent = data.gallerySubtitle;
+            if (data.galleryPhotos && data.galleryPhotos.length) {
+                galleryPhotos.length = 0;
+                data.galleryPhotos.forEach(function(p) { galleryPhotos.push(p); });
+            }
+            document.getElementById('videoSectionTitle').textContent = data.videoTitle;
+            if (data.videoSubtitle) document.getElementById('videoSectionSubtitle').textContent = data.videoSubtitle;
+            document.getElementById('mainVideo').src = data.videoUrl;
+            document.getElementById('cardsSectionTitle').textContent = data.cardsTitle;
+            if (data.cardsSubtitle) document.getElementById('cardsSectionSubtitle').textContent = data.cardsSubtitle;
+            if (data.cards && data.cards.length) {
+                cardsData.length = 0;
+                data.cards.forEach(function(c) { cardsData.push(c); });
+            }
+            document.getElementById('contactsSectionTitle').textContent = data.contactsTitle;
+            if (data.contactsSubtitle) document.getElementById('contactsSectionSubtitle').textContent = data.contactsSubtitle;
+            document.getElementById('contactPhone').textContent = data.phone;
+            document.getElementById('contactEmail').textContent = data.email;
+            document.getElementById('contactAddress').textContent = data.address;
+            document.getElementById('contactSocial').textContent = data.social;
+            document.getElementById('footerText').textContent = data.footerText;
+        }
+
+        // Запуск: сразу рисуем то, что зашито в HTML (на случай если data.json недоступен),
+        // затем подтягиваем актуальный контент с сервера.
+        initGallery();
+        initCards();
+        setTimeout(function() {
+            AOS.refresh();
+        }, 200);
+
+        fetch('data.json', { cache: 'no-store' })
+            .then(function(r) { if (!r.ok) throw new Error('data.json not found'); return r.json(); })
+            .then(function(data) {
+                applyContent(data);
+                initGallery();
+                initCards();
+                AOS.refresh();
+            })
+            .catch(function() {
+                // data.json недоступен (например, страница открыта как файл, а не через сервер) —
+                // остаёмся на содержимом по умолчанию из HTML.
+            });
+
+        // Раскрытие карточек: делегирование через контейнер,
+        // т.к. карточки создаются динамически (initCards может перерисовать их).
+        document.getElementById('cardsGrid').addEventListener('click', function(e) {
+            const card = e.target.closest('.card');
+            if (!card) return;
+            document.querySelectorAll('.card').forEach(function(otherCard) {
+                if (otherCard !== card && otherCard.classList.contains('active')) {
+                    otherCard.classList.remove('active');
+                }
+            });
+            card.classList.toggle('active');
+        });
+		
+    </script>
+
+</body>
+</html>
