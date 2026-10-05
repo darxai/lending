@@ -7,17 +7,41 @@
     "heroButton": "Начать проект",
     "logoText": "AURUM",
     "logoImg": "logo.png",
-    "logoWidth": "",
-    "logoHeight": "",
+    "logoWidth": "100px",
+    "logoHeight": "80px",
     "galleryTitle": "Галерея",
     "gallerySubtitle": "Наши работы",
     "galleryPhotos": [
-        { "src": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=2070&auto=format&fit=crop", "title": "Золотые украшения", "description": "Эксклюзивная коллекция ювелирных изделий" },
-        { "src": "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=2070&auto=format&fit=crop", "title": "Серебряные аксессуары", "description": "Изысканные предметы интерьера" },
-        { "src": "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=2080&auto=format&fit=crop", "title": "Премиум часы", "description": "Швейцарское качество" },
-        { "src": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop", "title": "Элитный автомобиль", "description": "Совершенство инженерной мысли" },
-        { "src": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop", "title": "Роскошный интерьер", "description": "Дизайн премиум-класса" },
-        { "src": "https://images.unsplash.com/photo-1610375461246-83df859d849d?q=80&w=2070&auto=format&fit=crop", "title": "Золотые монеты", "description": "Инвестиции в вечные ценности" }
+        {
+            "src": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=2070&auto=format&fit=crop",
+            "title": "Золотые украшения",
+            "description": "Эксклюзивная коллекция ювелирных изделий"
+        },
+        {
+            "src": "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=2070&auto=format&fit=crop",
+            "title": "Серебряные аксессуары",
+            "description": "Изысканные предметы интерьера"
+        },
+        {
+            "src": "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=2080&auto=format&fit=crop",
+            "title": "Премиум часы",
+            "description": "Швейцарское качество"
+        },
+        {
+            "src": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop",
+            "title": "Элитный автомобиль",
+            "description": "Совершенство инженерной мысли"
+        },
+        {
+            "src": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop",
+            "title": "Роскошный интерьер",
+            "description": "Дизайн премиум-класса"
+        },
+        {
+            "src": "https://images.unsplash.com/photo-1610375461246-83df859d849d?q=80&w=2070&auto=format&fit=crop",
+            "title": "Золотые монеты",
+            "description": "Инвестиции в вечные ценности"
+        }
     ],
     "videoTitle": "Видео",
     "videoSubtitle": "I / Презентация",
@@ -25,9 +49,24 @@
     "cardsTitle": "Преимущества",
     "cardsSubtitle": "II / Достоинства",
     "cards": [
-        { "number": "I / Элегантность", "title": "Изысканность", "text": "Каждый элемент дизайна продуман до мелочей.", "list": "Уникальный стиль\nВнимание к деталям\nГармоничные пропорции" },
-        { "number": "II / Качество", "title": "Совершенство", "text": "Мы используем только лучшие технологии.", "list": "Премиум материалы\nТестирование\nГарантия качества" },
-        { "number": "III / Статус", "title": "Престиж", "text": "Наши продукты подчеркивают статус владельца.", "list": "Ограниченные серии\nПерсонализация\nVIP обслуживание" }
+        {
+            "number": "I / Элегантность",
+            "title": "Изысканность",
+            "text": "Каждый элемент дизайна продуман до мелочей.",
+            "list": "Уникальный стиль\nВнимание к деталям\nГармоничные пропорции"
+        },
+        {
+            "number": "II / Качество",
+            "title": "Совершенство",
+            "text": "Мы используем только лучшие технологии.",
+            "list": "Премиум материалы\nТестирование\nГарантия качества"
+        },
+        {
+            "number": "III / Статус",
+            "title": "Престиж",
+            "text": "Наши продукты подчеркивают статус владельца.",
+            "list": "Ограниченные серии\nПерсонализация\nVIP обслуживание"
+        }
     ],
     "contactsTitle": "Контакты",
     "contactsSubtitle": "III / Связь",
