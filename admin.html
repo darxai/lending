@@ -548,7 +548,7 @@
     // код виден через "просмотр кода страницы"), а барьер от случайных
     // посетителей и поисковых роботов. Настоящая граница безопасности —
     // GitHub-токен, которого в коде нет и который вводится вручную.
-    const ADMIN_PASSWORD_HASH = 'e2186dbdb1bb4193608605e84f33208765b5693b55edd4f730a719a100eeea6f'; // временный пароль: change-me
+    const ADMIN_PASSWORD_HASH = 'fb84d4e6d62ef081caef72565782467412d21b0ad51f393f073272188921d13c'; // временный пароль: change-me
 
     async function sha256Hex(str) {
         const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
